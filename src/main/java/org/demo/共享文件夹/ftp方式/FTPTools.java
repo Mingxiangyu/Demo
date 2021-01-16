@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 
 /** 通过FTP上传文件 @Author lvhaibao @Date 2018/2/11 21:43 */
 public class FTPTools {
-  // 用于打印日志
   private static final Logger log = LoggerFactory.getLogger(FTPTools.class);
 
   /* 解决文件夹和文件名乱码*/
@@ -60,6 +59,7 @@ public class FTPTools {
         // 2 检查工作目录是否存在
         if (!ftpClient.changeWorkingDirectory(workingPath)) {
           // 如果目录不存在则创建目录
+          // 因为ftp只支持一级级创建，固拆分后一级级创建
           String[] dirs = workingPath.split("/");
           String tempPath = "";
           for (String dir : dirs) {
@@ -80,10 +80,8 @@ public class FTPTools {
         }
         // 3 检查是否上传成功
         flag = storeFile(ftpClient, saveName, inputStream);
-
       } catch (IOException e) {
-        log.error("工作目录不存在");
-        e.printStackTrace();
+        log.error("工作目录不存在", e);
       } finally {
         disconnect(ftpClient);
       }
@@ -95,16 +93,14 @@ public class FTPTools {
    * 断开连接
    *
    * @param ftpClient
-   * @throws Exception
    */
   public static void disconnect(FTPClient ftpClient) {
     if (ftpClient.isConnected()) {
       try {
         ftpClient.disconnect();
-        log.error("已关闭连接");
+        log.info("已关闭连接");
       } catch (IOException e) {
-        log.error("没有关闭连接");
-        e.printStackTrace();
+        log.error("没有关闭连接", e);
       }
     }
   }
@@ -131,21 +127,16 @@ public class FTPTools {
       }
       ftpClient.setControlEncoding(LOCAL_CHARSET);
       if (ftpClient.login(username, password)) {
-        //设置文件类型必须放到登录后才生效，否则上传上去的文件内容依然乱码
-      ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
+        // 设置文件类型必须放到登录后才生效，否则上传上去的文件内容依然乱码
+        ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
         log.info("连接ftp成功");
         flag = true;
       } else {
-        log.error("连接ftp失败，可能用户名或密码错误");
-        try {
-          disconnect(ftpClient);
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
+        disconnect(ftpClient);
+        throw new RuntimeException("登录FTP失败，报告未生成！可能FTP用户名或密码错误！");
       }
     } catch (IOException e) {
-      log.error("连接失败，可能ip或端口错误");
-      e.printStackTrace();
+      log.error("连接失败，可能ip或端口错误", e);
     }
     return flag;
   }
@@ -163,31 +154,29 @@ public class FTPTools {
     boolean flag = false;
     try {
       ftpClient.setFileTransferMode(FTPClient.BINARY_FILE_TYPE);
+      // 将缓存区变大，提升上传效果
+      ftpClient.setBufferSize(1024 * 1024 * 10);
       flag = ftpClient.storeFile(saveName, fileInputStream);
-      log.error("上传成功");
+      log.info("上传成功");
     } catch (IOException e) {
-      log.error("上传失败");
-      e.printStackTrace();
+      log.error("上传失败", e);
     } finally {
       disconnect(ftpClient);
     }
     return flag;
   }
 
-  /** @Author lvhaibao @Date 2018/2/11 22:20 */
   public static void main(String[] args) throws FileNotFoundException {
     String hostname = "192.168.0.134";
     int port = 21;
     String username = "ceshi";
     String password = "test";
     String workingPath = "/test";
-//    String str = "C:\\Users\\T480S\\Desktop\\TS文档.docx";
     String str = "C:\\Users\\T480S\\Desktop\\DF-5B-test-DF-5B-001-test.pdf";
     InputStream fileInputStream = new FileInputStream(new File(str));
-//    String saveName = "/test/TS文档.docx";
-    String saveName = "/test/DF-5B-test-DF-5B-001-test.pdf";
+        String saveName = "TS文档.docx";
     try {
-      // 如果名称支持UTF8则Local字符集修改为UTF8，否则使用GBK
+      // 上传文件时，文件名称需要做编码转换
       saveName = new String(saveName.getBytes(LOCAL_CHARSET), SERVER_CHARSET);
     } catch (UnsupportedEncodingException e) {
       e.printStackTrace();
