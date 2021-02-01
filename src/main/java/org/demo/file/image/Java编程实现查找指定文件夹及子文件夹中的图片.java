@@ -5,7 +5,7 @@ package org.demo.file.image;
  *作者:郑翰林
  */
 import java.io.File;
-public class FileDemo {
+public class Java编程实现查找指定文件夹及子文件夹中的图片 {
   public final static void  picture(File dir) {
     if (dir.isFile()) {
       throw new IllegalArgumentException("不是文件夹");
