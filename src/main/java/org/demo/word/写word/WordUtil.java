@@ -1,12 +1,18 @@
 package org.demo.word.写word;
 
 import java.awt.image.BufferedImage;
-import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigInteger;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import javax.imageio.ImageIO;
 import org.apache.poi.POIXMLDocument;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -14,20 +20,13 @@ import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.util.Units;
 import org.apache.poi.xwpf.converter.pdf.PdfConverter;
 import org.apache.poi.xwpf.converter.pdf.PdfOptions;
-import org.apache.poi.xwpf.usermodel.*;
-import org.apache.xmlbeans.XmlException;
-import org.apache.xmlbeans.XmlToken;
-import org.openxmlformats.schemas.drawingml.x2006.main.CTNonVisualDrawingProps;
-import org.openxmlformats.schemas.drawingml.x2006.main.CTPositiveSize2D;
-import org.openxmlformats.schemas.drawingml.x2006.wordprocessingDrawing.CTInline;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
+import org.apache.poi.xwpf.usermodel.LineSpacingRule;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
+import org.apache.poi.xwpf.usermodel.XWPFTable;
+import org.apache.poi.xwpf.usermodel.XWPFTableCell;
+import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTPPr;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTSpacing;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.STLineSpacingRule;
@@ -223,42 +222,42 @@ public class WordUtil {
    * @throws InvalidFormatException
    * @throws FileNotFoundException
    */
-  private static void insertPicture(
-      XWPFDocument document,
-      InputStream filePath,
-      CTInline inline,
-      int width,
-      int height,
-      int imgType)
-      throws InvalidFormatException, FileNotFoundException {
-    // 通过流获取图片，因本人项目中，是通过流获取
-    document.addPictureData(filePath, imgType);
-    //    document.addPictureData(new FileInputStream(filePath),imgType);
-    int id = document.getAllPictures().size() - 1;
-    final int EMU = 9525;
-    width *= EMU;
-    height *= EMU;
-    String blipId = document.getAllPictures().get(id).getPackageRelationship().getId();
-    String picXml = getPicXml(blipId, width, height);
-    XmlToken xmlToken = null;
-    try {
-      xmlToken = XmlToken.Factory.parse(picXml);
-    } catch (XmlException xe) {
-      xe.printStackTrace();
-    }
-    inline.set(xmlToken);
-    inline.setDistT(0);
-    inline.setDistB(0);
-    inline.setDistL(0);
-    inline.setDistR(0);
-    CTPositiveSize2D extent = inline.addNewExtent();
-    extent.setCx(width);
-    extent.setCy(height);
-    CTNonVisualDrawingProps docPr = inline.addNewDocPr();
-    docPr.setId(id);
-    docPr.setName("IMG_" + id);
-    docPr.setDescr("IMG_" + id);
-  }
+//  private static void insertPicture(
+//      XWPFDocument document,
+//      InputStream filePath,
+//      CTInline inline,
+//      int width,
+//      int height,
+//      int imgType)
+//      throws InvalidFormatException, FileNotFoundException {
+//    // 通过流获取图片，因本人项目中，是通过流获取
+//    document.addPictureData(filePath, imgType);
+//    //    document.addPictureData(new FileInputStream(filePath),imgType);
+//    int id = document.getAllPictures().size() - 1;
+//    final int EMU = 9525;
+//    width *= EMU;
+//    height *= EMU;
+//    String blipId = document.getAllPictures().get(id).getPackageRelationship().getId();
+//    String picXml = getPicXml(blipId, width, height);
+//    XmlToken xmlToken = null;
+//    try {
+//      xmlToken = XmlToken.Factory.parse(picXml);
+//    } catch (XmlException xe) {
+//      xe.printStackTrace();
+//    }
+//    inline.set(xmlToken);
+//    inline.setDistT(0);
+//    inline.setDistB(0);
+//    inline.setDistL(0);
+//    inline.setDistR(0);
+//    CTPositiveSize2D extent = inline.addNewExtent();
+//    extent.setCx(width);
+//    extent.setCy(height);
+//    CTNonVisualDrawingProps docPr = inline.addNewDocPr();
+//    docPr.setId(id);
+//    docPr.setName("IMG_" + id);
+//    docPr.setDescr("IMG_" + id);
+//  }
 
   /**
    * get the xml of the picture
