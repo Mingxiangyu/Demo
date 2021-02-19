@@ -1,4 +1,4 @@
-package org.demo.file.image;
+package org.demo.图片;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -6,19 +6,20 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 
+public class 将图片文件返回给前台 {
 
-public class FileDemo2 {
-  //通过Value注解将存储路径注入，参数起别名为importPath
-  @Value("${import.file.savePath}")
-  private String importPath;
-
+  /**
+   * 将图片文件返回给前台
+   *
+   * @param response 响应流
+   * @param importPath 存储路径
+   * @throws IOException
+   */
   @GetMapping("/GetFile")
-  public void getFile(HttpServletRequest request, HttpServletResponse response) throws IOException {
+  public void getFile(HttpServletResponse response, String importPath) throws IOException {
     // 读取路径下面的文件
     File file = new File(importPath);
     File picFile = null;

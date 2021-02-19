@@ -1,4 +1,4 @@
-package org.demo;
+package org.demo.图片.tif;
 
 import java.awt.image.Raster;
 import java.awt.image.RenderedImage;

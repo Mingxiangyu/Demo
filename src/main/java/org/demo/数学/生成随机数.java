@@ -25,4 +25,5 @@ public class 生成随机数 {
     int ran2 = (int) (Math.random() * (max - min) + min);
     System.out.println(ran2);
   }
+
 }

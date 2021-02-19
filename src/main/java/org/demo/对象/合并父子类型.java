@@ -1,4 +1,4 @@
-package org.demo;
+package org.demo.对象;
 
 import static java.util.Comparator.comparing;
 

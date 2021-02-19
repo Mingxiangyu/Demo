@@ -1,4 +1,4 @@
-package org.demo;
+package org.demo.图片.tif;
 
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.imaging.ImageProcessingException;

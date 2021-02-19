@@ -1,9 +1,8 @@
-package org.demo.图片;
+package org.demo.图片.tif;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
