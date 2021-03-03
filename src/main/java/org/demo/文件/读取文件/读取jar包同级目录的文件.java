@@ -1,4 +1,4 @@
-package org.demo.file.读取文件;
+package org.demo.文件.读取文件;
 
 public class 读取jar包同级目录的文件 {
   /**

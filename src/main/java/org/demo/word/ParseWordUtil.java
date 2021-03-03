@@ -12,17 +12,22 @@ import java.io.OutputStream;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.poi.POIXMLProperties;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.model.PicturesTable;
 import org.apache.poi.hwpf.model.StyleDescription;
 import org.apache.poi.hwpf.model.StyleSheet;
 import org.apache.poi.hwpf.usermodel.Paragraph;
 import org.apache.poi.hwpf.usermodel.Range;
+import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.apache.poi.xwpf.usermodel.XWPFStyle;
 import org.apache.poi.xwpf.usermodel.XWPFStyles;
+import org.apache.poi.xwpf.usermodel.XWPFTable;
+import org.apache.poi.xwpf.usermodel.XWPFTableCell;
+import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 import org.apache.xmlbeans.XmlException;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTDecimalNumber;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTOnOff;
@@ -42,11 +47,9 @@ public class ParseWordUtil {
   private static CTStyles wordStyles = null;
 
   public static void main(String[] args) {
-    String filePath =
-        //        "E:\\Deploy-七里渠\\相关\\脱\\tb\\kb\\xxxxxxxxxxxxxxxxxxxxxxx.doc";
-        "E:\\Deploy-七里渠\\相关\\脱\\tb\\tb\\doc+若干pic.doc";
+    String docFilePath = "C:\\Users\\T480S\\Desktop\\航天\\doc若干pic.doc";
     try {
-      getWordText(filePath);
+      getWordText(docFilePath);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -198,15 +201,16 @@ public class ParseWordUtil {
       }
     }
 
-    /*XWPFWordExtractor extractor = new XWPFWordExtractor(doc);
+//    /*
+    XWPFWordExtractor extractor = new XWPFWordExtractor(doc);
     String text = extractor.getText();
-    // System.out.println(text);
+     System.out.println(text);
     POIXMLProperties.CoreProperties coreProps = extractor.getCoreProperties();
     String title = coreProps.getTitle();
-    System.out.println(title);*/
+    System.out.println(title);
 
     // 获取文档中所有的表格
-    /*List<XWPFTable> tables = doc.getTables();
+    List<XWPFTable> tables = doc.getTables();
     List<XWPFTableRow> rows;
     List<XWPFTableCell> cells;
     for (XWPFTable table : tables) {
@@ -221,7 +225,8 @@ public class ParseWordUtil {
                 System.out.println(cell.getText());;
             }
         }
-    }*/
+    }
+//    */
     close(is);
 
     return list;
