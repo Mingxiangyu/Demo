@@ -10,11 +10,13 @@ public class 时间解析 {
   public static void main(String args[]) {
     Date newTime = new Date();
     // 设置时间格式
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     SimpleDateFormat sdf1 = new SimpleDateFormat("y-M-d h:m:s a E");
     SimpleDateFormat sdf2 = new SimpleDateFormat("yy-MM-dd hh:mm:ss a E");
     SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MMM-ddd hhh:mmm:sss a E");
-    SimpleDateFormat sdf4 = new SimpleDateFormat("yyyyy-MMMM-dddd hhhh:mmmm:ssss a E");
+    SimpleDateFormat sdf4 = new SimpleDateFormat("yyyy-MMMM-dddd hhhh:mmmm:ssss a E");
     SimpleDateFormat sdf5 = new SimpleDateFormat("yyyyMMdd");
+    //    SimpleDateFormat sdf6 = new SimpleDateFormat("yyyyy年MMMM月dddd日"); 不能解析年月日间隔的时间串
 
     // 获取的时间，是本机的时间
     String formatDate1 = sdf1.format(newTime);
@@ -22,24 +24,32 @@ public class 时间解析 {
     String formatDate3 = sdf3.format(newTime);
     String formatDate4 = sdf4.format(newTime);
 
+    System.out.println("formatDate1：" + formatDate1);
+    System.out.println("formatDate2：" + formatDate2);
+    System.out.println("formatDate3：" + formatDate3);
+    System.out.println("formatDate4：" + formatDate4);
+
     try {
-      Date parse = sdf5.parse("20210205");
-      int year = parse.getYear();
-      String format = sdf2.format(parse);
+      String source = "2020年10月21日";
+      source = source.replace("年", "-");
+      source = source.replace("月", "-");
+      source = source.replace("日", "");
+      Date parse = sdf.parse(source);
+      int parseYear = parse.getYear();//该方法输出的为1900开始的年份(详见源码),需要修改为Calendar获取当前年份
+      System.out.println("parseYear: "+parseYear);// 120
+      System.out.println("parse: "+parse);
+
+
+      String format = sdf.format(parse);
+      System.out.println(format);
       Calendar calendar = Calendar.getInstance();
       calendar.setTime(parse);
       int calendaryear = calendar.get(Calendar.YEAR);
-      System.out.println("year:"+calendaryear);
+      System.out.println("year:" + calendaryear);
 
-      System.out.println(year);
-      System.out.println(format);
     } catch (ParseException e) {
       e.printStackTrace();
     }
-    System.out.println(formatDate1);
-    System.out.println(formatDate2);
-    System.out.println(formatDate3);
-    System.out.println(formatDate4);
   }
   //  字符串"yyyy-MM-dd hh:mm:ss",其中:
 

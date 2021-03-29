@@ -2,8 +2,11 @@ package org.demo.word;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.usermodel.Paragraph;
 import org.apache.poi.hwpf.usermodel.Range;
@@ -27,8 +30,9 @@ public class 获取word中表格doc和docx通用 {
     获取word中表格doc和docx通用 test = new 获取word中表格doc和docx通用();
     //    String docFilePath = "C:\\Users\\T480S\\Desktop\\新建 DOC 文档.doc";
     String docFilePath = "C:\\Users\\T480S\\Desktop\\新建 DOCX 文档.docx";
+    int tableNum = 0;
 
-    test.testWord(docFilePath);
+    test.getTable(docFilePath, tableNum);
   }
 
   /**
@@ -36,103 +40,146 @@ public class 获取word中表格doc和docx通用 {
    *
    * @param filePath 文件路径
    */
-  public void testWord(String filePath) {
+  public void getTable(String filePath, int tableNum) {
+    List<Map<Integer, Map<Integer, String>>> tableByDoc = new ArrayList<>();
     try (FileInputStream in = new FileInputStream(filePath)) {
-      // 载入文档
-
       if (filePath.toLowerCase().endsWith("docx")) {
-        getTableByDocx(in);
+        tableByDoc = getTableByDocx(in, tableNum);
       } else {
-        getTableByDoc(in);
+        tableByDoc = getTableByDoc(in, tableNum);
       }
     } catch (Exception e) {
       e.printStackTrace();
     }
+    System.out.println(tableByDoc.toString());
   }
 
-  private void getTableByDoc(FileInputStream in) throws IOException {
-    // 处理doc格式 即office2003版本
+  /**
+   * 获取doc内表格 即office2003版本
+   *
+   * @param in 输入流
+   * @param tableNum 设置需要读取的第几个表格(从1开始算,如果为0证明读取所有表格)
+   * @throws IOException 异常
+   * @return 表集合<行数,<单元格数,值>>
+   */
+  private List<Map<Integer, Map<Integer, String>>> getTableByDoc(FileInputStream in, int tableNum)
+      throws IOException {
     POIFSFileSystem pfs = new POIFSFileSystem(in);
     HWPFDocument hwpf = new HWPFDocument(pfs);
-    Range range = hwpf.getRange(); // 得到文档的读取范围
+    // 得到文档的读取范围
+    Range range = hwpf.getRange();
     TableIterator it = new TableIterator(range);
-    // 迭代文档中的表格
-    // 如果有多个表格只读取需要的一个 set是设置需要读取的第几个表格，total是文件中表格的总数
-    int set = 1, total = 4;
-    int num = set;
-    for (int i = 0; i < set - 1; i++) {
-      it.hasNext();
-      it.next();
-    }
-    while (it.hasNext()) {
-      Table tb = (Table) it.next();
-      System.out.println("这是第" + num + "个表的数据");
-      // 迭代行，默认从0开始,可以依据需要设置i的值,改变起始行数，也可设置读取到那行，只需修改循环的判断条件即可
-      for (int i = 0; i < tb.numRows(); i++) {
-        TableRow tr = tb.getRow(i);
-        // 迭代列，默认从0开始
-        for (int j = 0; j < tr.numCells(); j++) {
-          TableCell td = tr.getCell(j); // 取得单元格
-          // 取得单元格的内容
-          for (int k = 0; k < td.numParagraphs(); k++) {
-            Paragraph para = td.getParagraph(k);
-            String s = para.text();
-            // 去除后面的特殊符号
-            if (null != s && !"".equals(s)) {
-              s = s.substring(0, s.length() - 1);
-            }
-            System.out.print(s + "\t");
-          }
-        }
-        System.out.println();
-      }
-      // 过滤多余的表格
-      while (num < total) {
+
+    // 过滤需要读取表格前的无用表格
+    if (0 != tableNum) {
+      for (int i = 0; i < tableNum - 1; i++) {
         it.hasNext();
         it.next();
-        num += 1;
       }
     }
+    List<Map<Integer, Map<Integer, String>>> tableList = new ArrayList<>();
+    while (it.hasNext()) {
+      Table tb = it.next();
+      System.out.println("这是第" + tableNum + "个表的数据");
+      // 迭代行，默认从0开始,TODO 可以依据需要设置i的值,改变起始行数，也可设置读取到那行，只需修改循环的判断条件即可
+      int row = 1;
+      Map<Integer, Map<Integer, String>> rowMap = new LinkedHashMap<>();
+      for (int i = 0; i < tb.numRows(); i++) {
+        TableRow tr = tb.getRow(i);
+        int cell = 1;
+        Map<Integer, String> cellMap = new LinkedHashMap<>();
+        // 迭代列，默认从0开始
+        for (int j = 0; j < tr.numCells(); j++) {
+          // 取得单元格
+          TableCell td = tr.getCell(j);
+          // 取得单元格的内容(单元格内每一行是一个numParagraphs)
+          String cellValue = "";
+          for (int k = 0; k < td.numParagraphs(); k++) {
+            Paragraph para = td.getParagraph(k);
+            // 去除后面的特殊符号
+            String text = para.text();
+            if (null != text && !"".equals(text)) {
+              cellValue = text.substring(0, text.length() - 1);
+              //              cellValue += text;
+            }
+            System.out.print(cellValue + "\t");
+            cellMap.put(cell, cellValue);
+            cell++;
+          }
+        }
+        rowMap.put(row, cellMap);
+        row++;
+        System.out.println();
+      }
+      // 过滤需要读取表格后的无用表格
+      if (0 != tableNum) {
+        while (it.hasNext()) {
+          it.next();
+          tableNum += 1;
+        }
+      }
+      tableList.add(rowMap);
+    }
+    return tableList;
   }
 
-  /**  处理docx格式 即office2007以后版本
+  /**
+   * 处理docx格式 即office2007以后版本
+   *
    * @param in 文件输入流
-   * @throws IOException
+   * @param tableNum 需要读取的第几个表格(从1开始算,如果为0证明读取所有表格)
+   * @throws IOException 异常
+   * @return 表集合<行数,<单元格数,值>>
    */
-  private void getTableByDocx(FileInputStream in) throws IOException {
+  private List<Map<Integer, Map<Integer, String>>> getTableByDocx(FileInputStream in, int tableNum)
+      throws IOException {
     // word 2007 图片不会被读取， 表格中的数据会被放在字符串的最后
-    XWPFDocument xwpf = new XWPFDocument(in); // 得到word文档的信息
-    Iterator<XWPFTable> it = xwpf.getTablesIterator(); // 得到word中的表格
-    int size = xwpf.getTables().size();
-    System.out.println("共有表格数量为："+size);
-    // 设置需要读取的表格  set是设置需要读取的第几个表格，total是文件中表格的总数
-    int set = 2, total = 4;
-    int num = set;
-    // 过滤前面不需要的表格
-    for (int i = 0; i < set - 1; i++) {
-      it.hasNext();
-      it.next();
+    XWPFDocument xwpf = new XWPFDocument(in);
+    // 得到word中的所有表格
+    Iterator<XWPFTable> it = xwpf.getTablesIterator();
+
+    // 过滤前面不需要的表格 如果为0证明读取所有表格
+    if (0 != tableNum) {
+      for (int i = 0; i < tableNum - 1; i++) {
+        if (it.hasNext()) {
+          it.next();
+        }
+      }
     }
+
+    List<Map<Integer, Map<Integer, String>>> tableList = new ArrayList<>();
     while (it.hasNext()) {
       XWPFTable table = it.next();
-      System.out.println("这是第" + num + "个表的数据");
+      System.out.println("这是第" + tableNum + "个表的数据");
       List<XWPFTableRow> rows = table.getRows();
-      // 读取每一行数据
+      int rowIndex = 1;
+      Map<Integer, Map<Integer, String>> rowMap = new LinkedHashMap<>();
+      // 读取每一行数据 TODO 可以依据需要设置i的值(修改为fori循环即可)
       for (XWPFTableRow row : rows) {
         // 读取每一列数据
+        int cellIndex = 1;
+        Map<Integer, String> cellMap = new LinkedHashMap<>();
         List<XWPFTableCell> cells = row.getTableCells();
         for (XWPFTableCell cell : cells) {
           // 输出当前的单元格的数据
-          System.out.print(cell.getText() + "\t");
+          String cellValue = cell.getText();
+          System.out.print(cellValue + "\t");
+          cellMap.put(cellIndex, cellValue);
+          cellIndex++;
         }
         System.out.println();
+        rowMap.put(rowIndex, cellMap);
+        rowIndex++;
       }
       // 过滤多余的表格
-      while (num < total) {
-        it.hasNext();
-        it.next();
-        num += 1;
+      if (0 != tableNum) {
+        while (it.hasNext()) {
+          it.next();
+          tableNum += 1;
+        }
       }
+      tableList.add(rowMap);
     }
+    return tableList;
   }
 }
