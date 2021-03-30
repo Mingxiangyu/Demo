@@ -1,4 +1,4 @@
-package org.demo.文件.读取文件;
+package org.demo.文件.读取Jar文件;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
