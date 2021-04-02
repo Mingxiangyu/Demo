@@ -242,6 +242,13 @@
       <version>3.0.0</version>
     </dependency>
 
+    <!--    Spire.PDF for Java-->
+    <dependency>
+      <groupId>e-iceblue</groupId>
+      <artifactId>spire.doc</artifactId>
+      <version>3.11.0</version>
+    </dependency>
+
     <!-- 阿里开源框架EasyExcel -->
     <dependency>
       <groupId>com.alibaba</groupId>
@@ -305,7 +312,13 @@
       <version>23.0</version>
     </dependency>
   </dependencies>
-
+  <repositories>
+    <repository>
+      <id>com.e-iceblue</id>
+      <name>e-iceblue</name>
+      <url>http://repo.e-iceblue.com/nexus/content/groups/public/</url>
+    </repository>
+  </repositories>
   <build>
     <plugins>
       <plugin>

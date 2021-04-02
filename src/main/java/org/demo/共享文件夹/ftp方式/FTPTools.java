@@ -26,6 +26,29 @@ public class FTPTools {
   // 设置私有不能实例化
   private FTPTools() {}
 
+
+
+  public static void main(String[] args) throws FileNotFoundException {
+    String hostname = "192.168.96.1";
+    int port = 21;
+    String username = "ceshi";
+    String password = "test";
+    String workingPath = "/test";
+    String str = "C:\\Users\\T480S\\Desktop\\文件检查结果_20210320130108.html";
+    InputStream fileInputStream = new FileInputStream(new File(str));
+    String saveName = "TS文档.html";
+    try {
+      // 上传文件时，文件名称需要做编码转换
+      saveName = new String(saveName.getBytes(LOCAL_CHARSET), SERVER_CHARSET);
+    } catch (UnsupportedEncodingException e) {
+      e.printStackTrace();
+    }
+
+    System.out.println(
+        FTPTools.upload(
+            hostname, port, username, password, workingPath, fileInputStream, saveName));
+  }
+
   /**
    * 上传
    *
@@ -164,26 +187,5 @@ public class FTPTools {
       disconnect(ftpClient);
     }
     return flag;
-  }
-
-  public static void main(String[] args) throws FileNotFoundException {
-    String hostname = "192.168.0.134";
-    int port = 21;
-    String username = "ceshi";
-    String password = "test";
-    String workingPath = "/test";
-    String str = "C:\\Users\\T480S\\Desktop\\DF-5B-test-DF-5B-001-test.pdf";
-    InputStream fileInputStream = new FileInputStream(new File(str));
-        String saveName = "TS文档.docx";
-    try {
-      // 上传文件时，文件名称需要做编码转换
-      saveName = new String(saveName.getBytes(LOCAL_CHARSET), SERVER_CHARSET);
-    } catch (UnsupportedEncodingException e) {
-      e.printStackTrace();
-    }
-
-    System.out.println(
-        FTPTools.upload(
-            hostname, port, username, password, workingPath, fileInputStream, saveName));
   }
 }
