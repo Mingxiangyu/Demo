@@ -1,4 +1,4 @@
-package org.demo.word;
+package org.demo.word.写word;
 
 import fr.opensagres.poi.xwpf.converter.core.BasicURIResolver;
 import fr.opensagres.poi.xwpf.converter.core.FileImageExtractor;

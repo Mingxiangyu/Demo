@@ -31,7 +31,7 @@ import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTPPr;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTSpacing;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.STLineSpacingRule;
 
-public class WordUtil {
+public class POI套打生成word {
   public static void main(String[] args) throws Exception {
     Map<String, Object> param = new HashMap<String, Object>();
     param.put("periodical", "1");
@@ -73,7 +73,7 @@ public class WordUtil {
     header.put("content", inputStream); // 图片路径
 
     param.put("tianjiImage", header);
-    XWPFDocument doc = WordUtil.generateWord(param, "E:\\DJDeploy\\打击效果评估报告.docx");
+    XWPFDocument doc = POI套打生成word.generateWord(param, "E:\\DJDeploy\\打击效果评估报告.docx");
     FileOutputStream fopts = new FileOutputStream("E:\\DJDeploy\\test.pdf");
     FileOutputStream foptdocs = new FileOutputStream("E:\\DJDeploy\\test.docx");
     PdfOptions options = PdfOptions.create();
@@ -142,7 +142,7 @@ public class WordUtil {
         for (XWPFRun run : runs) {
           run.setFontSize(16);
           run.setFontFamily("宋体");
-//          run.setBold(true);
+          //          run.setBold(true);
           String text = run.getText(0);
           if (text != null) {
             boolean isSetText = false;
@@ -166,12 +166,7 @@ public class WordUtil {
                   //                  CTInline inline = run.getCTR().addNewDrawing().addNewInline();
                   //                  insertPicture(doc, is, inline, width, height, picType);
                   try {
-                    run.addPicture(
-                        is,
-                        picType,
-                        "test",
-                        Units.toEMU(width),
-                        Units.toEMU(height));
+                    run.addPicture(is, picType, "test", Units.toEMU(width), Units.toEMU(height));
                   } catch (IOException e) {
                     e.printStackTrace();
                   }
@@ -222,42 +217,42 @@ public class WordUtil {
    * @throws InvalidFormatException
    * @throws FileNotFoundException
    */
-//  private static void insertPicture(
-//      XWPFDocument document,
-//      InputStream filePath,
-//      CTInline inline,
-//      int width,
-//      int height,
-//      int imgType)
-//      throws InvalidFormatException, FileNotFoundException {
-//    // 通过流获取图片，因本人项目中，是通过流获取
-//    document.addPictureData(filePath, imgType);
-//    //    document.addPictureData(new FileInputStream(filePath),imgType);
-//    int id = document.getAllPictures().size() - 1;
-//    final int EMU = 9525;
-//    width *= EMU;
-//    height *= EMU;
-//    String blipId = document.getAllPictures().get(id).getPackageRelationship().getId();
-//    String picXml = getPicXml(blipId, width, height);
-//    XmlToken xmlToken = null;
-//    try {
-//      xmlToken = XmlToken.Factory.parse(picXml);
-//    } catch (XmlException xe) {
-//      xe.printStackTrace();
-//    }
-//    inline.set(xmlToken);
-//    inline.setDistT(0);
-//    inline.setDistB(0);
-//    inline.setDistL(0);
-//    inline.setDistR(0);
-//    CTPositiveSize2D extent = inline.addNewExtent();
-//    extent.setCx(width);
-//    extent.setCy(height);
-//    CTNonVisualDrawingProps docPr = inline.addNewDocPr();
-//    docPr.setId(id);
-//    docPr.setName("IMG_" + id);
-//    docPr.setDescr("IMG_" + id);
-//  }
+  //  private static void insertPicture(
+  //      XWPFDocument document,
+  //      InputStream filePath,
+  //      CTInline inline,
+  //      int width,
+  //      int height,
+  //      int imgType)
+  //      throws InvalidFormatException, FileNotFoundException {
+  //    // 通过流获取图片，因本人项目中，是通过流获取
+  //    document.addPictureData(filePath, imgType);
+  //    //    document.addPictureData(new FileInputStream(filePath),imgType);
+  //    int id = document.getAllPictures().size() - 1;
+  //    final int EMU = 9525;
+  //    width *= EMU;
+  //    height *= EMU;
+  //    String blipId = document.getAllPictures().get(id).getPackageRelationship().getId();
+  //    String picXml = getPicXml(blipId, width, height);
+  //    XmlToken xmlToken = null;
+  //    try {
+  //      xmlToken = XmlToken.Factory.parse(picXml);
+  //    } catch (XmlException xe) {
+  //      xe.printStackTrace();
+  //    }
+  //    inline.set(xmlToken);
+  //    inline.setDistT(0);
+  //    inline.setDistB(0);
+  //    inline.setDistL(0);
+  //    inline.setDistR(0);
+  //    CTPositiveSize2D extent = inline.addNewExtent();
+  //    extent.setCx(width);
+  //    extent.setCy(height);
+  //    CTNonVisualDrawingProps docPr = inline.addNewDocPr();
+  //    docPr.setId(id);
+  //    docPr.setName("IMG_" + id);
+  //    docPr.setDescr("IMG_" + id);
+  //  }
 
   /**
    * get the xml of the picture
@@ -321,5 +316,19 @@ public class WordUtil {
     spacing.setBefore(BigInteger.valueOf(0));
     spacing.setLineRule(STLineSpacingRule.AUTO);
     spacing.setLine(BigInteger.valueOf(240));
+  }
+}
+
+class CustomXWPFDocument extends XWPFDocument {
+  public CustomXWPFDocument(InputStream in) throws IOException {
+    super(in);
+  }
+
+  public CustomXWPFDocument() {
+    super();
+  }
+
+  public CustomXWPFDocument(OPCPackage pkg) throws IOException {
+    super(pkg);
   }
 }

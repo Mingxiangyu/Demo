@@ -17,6 +17,8 @@
 
   <properties>
     <java.version>1.8</java.version>
+    <mybatis-plus.version>3.3.2</mybatis-plus.version>
+    <velocity.version>2.2</velocity.version>
   </properties>
 
   <dependencies>
@@ -316,6 +318,19 @@
       <groupId>org.geotools</groupId>
       <artifactId>gt-geotiff</artifactId>
       <version>23.0</version>
+    </dependency>
+
+    <!--MyBatis Plus 代码生成器-->
+    <dependency>
+      <groupId>com.baomidou</groupId>
+      <artifactId>mybatis-plus-generator</artifactId>
+      <version>${mybatis-plus.version}</version>
+    </dependency>
+    <!--Velocity模板引擎-->
+    <dependency>
+      <groupId>org.apache.velocity</groupId>
+      <artifactId>velocity-engine-core</artifactId>
+      <version>${velocity.version}</version>
     </dependency>
   </dependencies>
 

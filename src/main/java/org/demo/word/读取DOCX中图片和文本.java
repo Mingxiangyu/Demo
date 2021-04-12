@@ -8,7 +8,11 @@ import java.io.PrintStream;
 import java.util.List;
 import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFFooter;
+import org.apache.poi.xwpf.usermodel.XWPFHeader;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFPictureData;
+import org.apache.poi.xwpf.usermodel.XWPFTable;
 
 public class 读取DOCX中图片和文本 {
 
@@ -21,7 +25,7 @@ public class 读取DOCX中图片和文本 {
     readDocxTextAndImage();
   }
 
-  /** 读取DOCX中图片和文本  */
+  /** 读取DOCX中图片和文本 */
   public static void readDocxTextAndImage() {
 
     File file = new File(docPath);
@@ -29,6 +33,17 @@ public class 读取DOCX中图片和文本 {
       // 用XWPFWordExtractor来获取文字
       FileInputStream fis = new FileInputStream(file);
       XWPFDocument document = new XWPFDocument(fis);
+      // 段落
+      List<XWPFParagraph> paragraphs = document.getParagraphs();
+      // 表格
+      List<XWPFTable> tables = document.getTables();
+      // 图片
+      List<XWPFPictureData> allPictures = document.getAllPictures();
+      // 页眉
+      List<XWPFHeader> headerList = document.getHeaderList();
+      // 页脚
+      List<XWPFFooter> footerList = document.getFooterList();
+
       XWPFWordExtractor xwpfWordExtractor = new XWPFWordExtractor(document);
       String text = xwpfWordExtractor.getText();
       System.out.println(text);

@@ -12,7 +12,7 @@ import org.apache.poi.hwpf.extractor.WordExtractor;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 
-public class 读取word {
+public class 读取Doc {
   public static void main(String[] args) {
     String path = "C:\\Users\\T480S\\Desktop\\新建 DOCX 文档.docx";
     String[] strings = readWord(path);

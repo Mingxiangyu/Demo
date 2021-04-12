@@ -4,52 +4,19 @@ server:
   error:
     include-exception: true
     include-message: always
-#
-#spring:
-#  datasource:
-#    url: jdbc:postgresql://192.168.0.118:5432/ktkj2
-#    username: postgres
-#    password: postgres
-#    driver-class-name: org.postgresql.Driver
-#  servlet:
-#    multipart:
-#      max-file-size: 10MB
-#      max-request-size: 100MB
-#  jpa:
-#    open-in-view: true
-#    hibernate:
-#      ddl-auto: update
-#    properties:
-#      hibernate:
-#        enable_lazy_load_no_trans: true
-#        temp:
-#          use_jdbc_metadata_defaults: false
-#      dialect: org.hibernate.dialect.PostgreSQL82Dialect
-#    database: postgresql
-#url:
-#  user: http://192.168.3.95:8999/getUserCenter
-#  storage:
-#    add: http://192.168.0.124:8082/add/original/jsonmap
-#    visible:
-#      page: http://localhost:8082/query/original/visibleLight/query
-#      details: http://localhost:8082/query/original/visibleLight/details?id=
-#listenerfilepath:
-#  satellite: C:/listen/satellite/
-#  notification: C:/listen/notification/
-#  target: C:/listen/target/
-#rarUtilPath: C:/Program Files/WinRAR/Rar.exe
-#upload-location: C:/fileload/
-#upload-xml: C:/fileload/xml/
-#unrar: C:/WINRAR
-#receive: C:/recycle/
-##listenerfilepath:
-##  satellite: /data/listen/satellite/
-##  notification: /data/listen/notification/
-##  target: /data/listen/target/
-##socket:
-##  listen: /data/listen/socket/
-##  receive: /data/receive/
-##unrar: /data/unrar/
-##xml: /data/xml/
-##recycle: /data/recycle/
-##nginxpath: /static/scrk/
+
+
+#配置MySQL数据源
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/template?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: mingxy925871
+
+
+  data:
+    mongodb:
+      #      uri: mongodb://root:123456@127.0.0.1:27017/admin
+      uri: mongodb://root:123456@127.0.0.1:27017/dataway2
+
