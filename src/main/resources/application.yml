@@ -1,22 +1,71 @@
 server:
   port: 8378
+
   #自定义异常
   error:
     include-exception: true
     include-message: always
 
 
-#配置MySQL数据源
+#mybatis
+mybatis-plus:
+  mapper-locations: classpath:com/doubleskyline/gkly/qbzb/mapper/*.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.doubleskyline.gkly.qbzb.entity
+  global-config:
+    #数据库相关配置
+    db-config:
+      #主键类型  AUTO:"数据库ID自增", INPUT:"用户输入ID", ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
+      id-type: AUTO
+      #字段策略 IGNORED:"忽略判断",NOT_NULL:"非 NULL 判断"),NOT_EMPTY:"非空判断"
+      field-strategy: NOT_EMPTY
+      #驼峰下划线转换
+      column-underline: true
+      logic-delete-value: -1
+      logic-not-delete-value: 0
+    banner: false
+  #原生配置
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    call-setters-on-nulls: true
+    jdbc-type-for-null: 'null'
+  mybatis-refresh:
+    #是否开启刷新线程
+    enabled: true
+    #延迟启动刷新程序的秒数
+    delaySeconds: 60
+    #刷新扫描间隔的时长秒数
+    sleepSeconds: 3
+  sql-analyse: # SQL执行效率分析
+    show: true
+    format: true
+
 spring:
   datasource:
+    #配置MySQL数据源
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/template?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: root
     password: mingxy925871
-
-
+  #配置jpa自动建表
+  jpa:
+    hibernate:
+      ddl-auto: update #第一次建表create  后面用update，要不然每次重启都会新建表
+    show-sql: true #执行命令时是否打印sql
+  #配置文件上传大小限制
+  servlet:
+    multipart:
+      max-file-size: 10240MB
+      max-request-size: 10240MB
+  # 配置mongo数据库
   data:
     mongodb:
-      #      uri: mongodb://root:123456@127.0.0.1:27017/admin
       uri: mongodb://root:123456@127.0.0.1:27017/dataway2
 
+#配置日志文件相关
+logging:
+  config: classpath:logback/logback.xml
+  file:
+    path: log
+  level: debug

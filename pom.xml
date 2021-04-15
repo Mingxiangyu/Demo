@@ -55,12 +55,6 @@
       <artifactId>fastjson</artifactId>
       <version>1.1.23</version>
     </dependency>
-    <!--    <dependency>-->
-    <!--      <groupId>net.sf.json-lib</groupId>-->
-    <!--      <artifactId>json-lib</artifactId>-->
-    <!--      <version>2.4</version>-->
-    <!--      <classifier>jdk15</classifier>-->
-    <!--    </dependency>-->
 
     <!--    jpa所需-->
     <dependency>
@@ -89,33 +83,11 @@
       <artifactId>pdfbox</artifactId>
       <version>2.0.19</version>
     </dependency>
+
     <!--  ppt,xls,docx,pptx,xlsx-->
-    <!--    <dependency>-->
-    <!--      <groupId>org.apache.poi</groupId>-->
-    <!--      <artifactId>poi</artifactId>-->
-    <!--      &lt;!&ndash;      <version>3.9</version>&ndash;&gt;-->
-    <!--      &lt;!&ndash;      <version>4.1.1</version>&ndash;&gt;-->
-    <!--      <version>3.15</version>-->
-    <!--    </dependency>-->
-    <!--    <dependency>-->
-    <!--      <groupId>org.apache.poi</groupId>-->
-    <!--      <artifactId>poi-ooxml</artifactId>-->
-    <!--      &lt;!&ndash;      <version>3.9</version>&ndash;&gt;-->
-    <!--      &lt;!&ndash;      <version>4.1.1</version>&ndash;&gt;-->
-    <!--      <version>3.15</version>-->
-    <!--    </dependency>-->
-    <!--    <dependency>-->
-    <!--      <groupId>org.apache.poi</groupId>-->
-    <!--      <artifactId>poi-ooxml-schemas</artifactId>-->
-    <!--      &lt;!&ndash;      <version>3.9</version>&ndash;&gt;-->
-    <!--      &lt;!&ndash;      <version>4.1.1</version>&ndash;&gt;-->
-    <!--      <version>3.15</version>-->
-    <!--    </dependency>-->
     <dependency>
       <groupId>org.apache.poi</groupId>
       <artifactId>poi-scratchpad</artifactId>
-      <!--      <version>3.9</version>-->
-      <!--      <version>4.1.1</version>-->
       <version>3.17</version>
     </dependency>
     <dependency>
@@ -320,11 +292,31 @@
       <version>23.0</version>
     </dependency>
 
+    <!-- mysql -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+
+    <!-- mybatis 框架插件  http://mp.baomidou.com/ -->
+    <dependency>
+      <groupId>com.baomidou</groupId>
+      <artifactId>mybatis-plus-boot-starter</artifactId>
+      <version>3.1.1</version>
+      <exclusions>
+        <exclusion>
+          <groupId>com.baomidou</groupId>
+          <artifactId>mybatis-plus-generator</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
     <!--MyBatis Plus 代码生成器-->
     <dependency>
       <groupId>com.baomidou</groupId>
       <artifactId>mybatis-plus-generator</artifactId>
-      <version>${mybatis-plus.version}</version>
+      <version>3.1.1</version>
     </dependency>
     <!--Velocity模板引擎-->
     <dependency>
@@ -332,6 +324,14 @@
       <artifactId>velocity-engine-core</artifactId>
       <version>${velocity.version}</version>
     </dependency>
+
+
+    <!-- spring注解缓存模块 -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-cache</artifactId>
+    </dependency>
+
   </dependencies>
 
   <repositories>
