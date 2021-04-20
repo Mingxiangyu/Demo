@@ -12,7 +12,6 @@ import com.baomidou.mybatisplus.generator.config.GlobalConfig;
 import com.baomidou.mybatisplus.generator.config.PackageConfig;
 import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.TemplateConfig;
-import com.baomidou.mybatisplus.generator.config.po.LikeTable;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
@@ -128,7 +127,7 @@ public class MyBatisPlus生成器 {
         if (tableNames.length == 1 && tableNames[0].contains("*")) {
             String[] likeStr = tableNames[0].split("_");
             String likePrefix = likeStr[0] + "_";
-            strategyConfig.setLikeTable(new LikeTable(likePrefix));
+//            strategyConfig.setLikeTable(new LikeTable(likePrefix)); //报错,找不到LikeTable类,好像是jar包冲突了
         } else {
             strategyConfig.setInclude(tableNames);
         }

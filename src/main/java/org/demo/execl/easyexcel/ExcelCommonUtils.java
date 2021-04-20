@@ -1,4 +1,4 @@
-package org.demo.easyexcel;
+package org.demo.execl.easyexcel;
 
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.EasyExcelFactory;
@@ -18,8 +18,8 @@ import java.util.Objects;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.collections4.CollectionUtils;
-import org.demo.easyexcel.dto.AnalysisExcelDto;
-import org.demo.easyexcel.dto.ExportExcelDto;
+import org.demo.execl.easyexcel.dto.AnalysisExcelDto;
+import org.demo.execl.easyexcel.dto.ExportExcelDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

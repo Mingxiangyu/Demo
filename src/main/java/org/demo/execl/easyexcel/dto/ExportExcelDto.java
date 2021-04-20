@@ -1,4 +1,4 @@
-package org.demo.easyexcel.dto;
+package org.demo.execl.easyexcel.dto;
 
 import com.alibaba.excel.metadata.BaseRowModel;
 import java.util.List;
