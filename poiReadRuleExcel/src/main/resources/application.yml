@@ -1,0 +1,21 @@
+server:
+  port: 8088
+
+
+ftp:
+  startSheet: 1
+  cellLastIndex: 3
+  filePath: C:\Users\T480S\Desktop\模板数据结构.xlsx
+  row: false
+  cell: true
+  tableNameSql: Create Table :!{tableName} (
+  filedSql: :!{filedValue} :!{filedType} NULL ,
+  commentFiledSql: comment on column :!{tableName}.:!{filedValue} is ':!{filedComment}';
+  commentTableSql: COMMENT ON table :!{tableName} IS ':!{tableComment}';
+  endSql: );
+  outFilePath: E:\
+  tableNameFlag: true # true为表名中文注释在第一行,表名在第二行.为false相反
+
+logging:
+  file:
+    path: log
