@@ -12,6 +12,7 @@
     <modules>
         <module>poiReadRuleExcel</module>
         <module>varietyOfTools</module>
+        <module>japidocs-generate-apidoc</module>
     </modules>
 
 </project>

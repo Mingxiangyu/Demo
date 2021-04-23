@@ -1,4 +1,4 @@
-package org.demo.共享文件夹;
+package org.demo.共享文件夹.smb;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

@@ -1,4 +1,4 @@
-package org.demo.共享文件夹.ftp方式;
+package org.demo.共享文件夹.ftp;
 
 import java.io.File;
 import java.io.FileInputStream;
