@@ -7,7 +7,12 @@ import java.util.Date;
 
 public class 时间解析 {
 
-  public static void main(String args[]) {
+  public static void main(String[] args) {
+//    时间转换();
+    getTimeNowThroughCalendar();
+  }
+
+  private static void 时间转换() {
     Date newTime = new Date();
     // 设置时间格式
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -36,9 +41,8 @@ public class 时间解析 {
       source = source.replace("日", "");
       Date parse = sdf.parse(source);
       int parseYear = parse.getYear();//该方法输出的为1900开始的年份(详见源码),需要修改为Calendar获取当前年份
-      System.out.println("parseYear: "+parseYear);// 120
-      System.out.println("parse: "+parse);
-
+      System.out.println("parseYear: " + parseYear);// 120
+      System.out.println("parse: " + parse);
 
       String format = sdf.format(parse);
       System.out.println(format);
@@ -50,6 +54,31 @@ public class 时间解析 {
     } catch (ParseException e) {
       e.printStackTrace();
     }
+  }
+
+  /**
+   * 通过Calendar类获取 年月日
+   */
+  public static void getTimeNowThroughCalendar() {
+    //使用默认时区和语言环境获得一个日历。
+    Calendar rightNow = Calendar.getInstance();
+    //用Calendar的get(int field)方法返回给定日历字段的值。
+    Integer year = rightNow.get(Calendar.YEAR);
+    int month = rightNow.get(Calendar.MONTH) + 1; //第一个月从0开始，所以得到月份＋1
+    int day = rightNow.get(Calendar.DAY_OF_MONTH);
+    //HOUR 用于 12 小时制时钟 (0 - 11)，HOUR_OF_DAY 用于 24 小时制时钟。
+    int hour12 = rightNow.get(Calendar.HOUR);
+    int hour24 = rightNow.get(Calendar.HOUR_OF_DAY);
+    int minute = rightNow.get(Calendar.MINUTE);
+    int second = rightNow.get(Calendar.SECOND);
+    int millisecond = rightNow.get(Calendar.MILLISECOND);
+    String timeNow12 =
+        year + "-" + month + "-" + day + " " + hour12 + ":" + minute + ":" + second + ":"
+            + millisecond;
+    String timeNow24 =
+        year + "-" + month + "-" + day + " " + hour24 + ":" + minute + ":" + second + ":"
+            + millisecond;
+    System.out.println("日历：" + rightNow + "\n12小时制时钟：" + timeNow12 + "\n24小时制时钟：" + timeNow24);
   }
   //  字符串"yyyy-MM-dd hh:mm:ss",其中:
 

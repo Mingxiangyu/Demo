@@ -18,7 +18,7 @@ import jcifs.smb.SmbFileOutputStream;
  * <b>创建人：</b><a href="mailto:han_huayi@163.com">牧羊仒</a><br>
  * <b>创建时间：</b>2016年6月8日 下午3:29:09<br>
  */
-public class 递归拷贝共享文件夹下所有文件到另一个共享文件夹 {
+public class 相同层级递归拷贝共享文件夹下所有文件到另一个共享文件夹 {
 
   public static void main(String[] args) {
 

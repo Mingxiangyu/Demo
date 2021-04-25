@@ -149,7 +149,8 @@
     <dependency>
       <groupId>org.samba.jcifs</groupId>
       <artifactId>jcifs</artifactId>
-      <version>1.3.3</version>
+      <!--      1.3.3有问题,连接时会报错,1.3.17没这种情况-->
+      <version>1.3.17</version>
     </dependency>
 
     <!--    FTP共享文件夹所需依赖-->
