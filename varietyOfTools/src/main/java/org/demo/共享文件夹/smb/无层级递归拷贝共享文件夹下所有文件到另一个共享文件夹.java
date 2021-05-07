@@ -31,7 +31,8 @@ public class 无层级递归拷贝共享文件夹下所有文件到另一个共�
     String copypath = "/test1/"; // 远程服务器共享文件夹名称
 
     String remoteUrl =
-        "smb://" + username + ":" + password + "@" + host + path + (path.endsWith("/") ? "" : "/");
+//        "smb://" + username + ":" + password + "@" + host + path + (path.endsWith("/") ? "" : "/");
+        "smb://" + host + path + (path.endsWith("/") ? "" : "/");
     System.out.println(remoteUrl);
 
     String copyremoteUrl =

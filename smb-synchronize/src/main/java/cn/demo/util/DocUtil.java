@@ -1,4 +1,4 @@
-package cn.ruiyeclub.util;
+package cn.demo.util;
 
 import io.github.yedaxia.apidocs.Docs;
 import io.github.yedaxia.apidocs.DocsConfig;
@@ -13,14 +13,14 @@ public class DocUtil {
 	public static void main(String[] args) {
 		DocsConfig config = new DocsConfig();
     // 项目根目录
-    config.setProjectPath("F:\\ktWorkSpace\\springboot-mybatis-plus");
+    config.setProjectPath("C:\\Users\\T480S\\Desktop\\smb-synchronize");
 		// 项目名称
 		config.setProjectName("生成文档");
 		// 声明该API的版本
 		config.setApiVersion("V1.0.3");
 		//生成API 文档所在目录
-		config.setDocsPath("D:\\新建文件夹2");
-		// 配置自动生成//关闭自动生成config.setAutoGenerate(Boolean.FALSE)，使用@ApiDoc 来一个个接口导出排查问题。
+		config.setDocsPath("C:\\新建文件夹2");
+		// 配置自动生成
 		config.setAutoGenerate(Boolean.TRUE);
 		// 执行生成文档
 		config.addPlugin(new MarkdownDocPlugin());
