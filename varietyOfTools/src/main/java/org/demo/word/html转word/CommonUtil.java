@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import sun.misc.BASE64Encoder;
 
 public class CommonUtil {
   public static String urlToBase64(String imgUrl) {
@@ -49,8 +48,7 @@ public class CommonUtil {
       }
     }
     // 对字节数组Base64编码
-    String base64 = "data:image/png;base64," + new BASE64Encoder().encode(buffer);
-    return base64;
+    //    String base64 = "data:image/png;base64," + new BASE64Encoder().encode(buffer);
+    return null;
   }
-
 }
