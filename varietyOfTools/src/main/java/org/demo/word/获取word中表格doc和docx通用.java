@@ -29,7 +29,8 @@ public class 获取word中表格doc和docx通用 {
   public static void main(String[] args) {
     获取word中表格doc和docx通用 test = new 获取word中表格doc和docx通用();
     //    String docFilePath = "C:\\Users\\T480S\\Desktop\\新建 DOC 文档.doc";
-    String docFilePath = "C:\\Users\\T480S\\Desktop\\新建 DOCX 文档.docx";
+    //    String docFilePath = "C:\\Users\\T480S\\Desktop\\新建 DOCX 文档.docx";
+    String docFilePath = "C:\\\\Users\\\\T480S\\\\Desktop\\\\5-10开发计划.docx";
     int tableNum = 0;
 
     test.getTable(docFilePath, tableNum);

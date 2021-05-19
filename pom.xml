@@ -13,6 +13,8 @@
         <module>poiReadRuleExcel</module>
         <module>varietyOfTools</module>
         <module>japidocs-generate-apidoc</module>
+        <module>word-extractor</module>
+        <module>fileparse</module>
     </modules>
 
 </project>
