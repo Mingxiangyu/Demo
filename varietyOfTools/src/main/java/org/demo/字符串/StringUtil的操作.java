@@ -8,5 +8,7 @@ public class StringUtil的操作 {
     String s = "abc";
     boolean b = StringUtils.containsAny(s, "a", "d");
     System.out.println(b);// true
+
+
   }
 }
