@@ -55,7 +55,7 @@ public class SmbServiceImpl implements SmbService {
           continue;
         }
         // TODO 后续rar/zip/tar不跳过
-        if (path.endsWith(".rar") || path.endsWith(".zip") || path.contains(".tar")) {
+        if (path.endsWith(".rar") || path.contains(".tar")) {
           log.info("当前路径为: " + path + " 不符合,直接跳过");
           continue;
         }

@@ -14,10 +14,10 @@ spring:
     show-sql: false
 
 smb:
-  jobSourcePath: smb://T480S:ktkj123456@172.20.10.2/test/
-  sourcePath: smb://T480S:ktkj123456@172.20.10.2/test/
-  targetPath: smb://T480S:ktkj123456@172.20.10.2/test1/
-  sync_schedule:  "* */5 * * * ?"
+  jobSourcePath: smb://T480S:ktkj123456@172.20.10.3/test/
+  sourcePath: smb://T480S:ktkj123456@172.20.10.3/test/
+  targetPath: smb://T480S:ktkj123456@172.20.10.3/test1/
+  sync_schedule:  "* * * * * ?"
   clean_schedule: "0 0 2 1 * ?"
 logging:
   file:

@@ -1,6 +1,7 @@
 //package org.demo.解压;
 //
 //import java.io.File;
+//import java.io.FileInputStream;
 //import java.io.FileOutputStream;
 //import java.io.IOException;
 //import java.io.InputStream;
@@ -30,7 +31,7 @@
 //    FileOutputStream fos = null;
 //    System.out.println("Starting 开始解压...");
 //    try {
-//      archive = new Archive(sourceRar);
+//      archive = new Archive(new FileInputStream(sourceRar));
 //      FileHeader fh = archive.nextFileHeader();
 //      int count = 0;
 //      File destFileName = null;

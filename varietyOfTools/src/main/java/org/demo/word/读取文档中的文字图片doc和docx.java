@@ -37,12 +37,93 @@ public class 读取文档中的文字图片doc和docx {
   // 用来标记是否存在图片
   boolean hasPic = false;
   public static String textPath = "src/main/resources/test.txt";
-//  public static String docPath = "C:\\Users\\T480S\\Desktop\\新建 DOCX 文档.docx";
-    public static String docPath = "C:\\Users\\T480S\\Desktop\\新建 DOC 文档.doc";
+  //  public static String docPath = "C:\\Users\\T480S\\Desktop\\新建 DOCX 文档.docx";
+  public static String docPath = "C:\\Users\\T480S\\Desktop\\新建 DOC 文档.doc";
   public static String imagePath = "src/main/resources/";
 
   public static void main(String[] args) {
     readWordImage(docPath, imagePath);
+  }
+
+  public static void readWordImage(String file, String savePath) {
+    if (null == savePath) {
+      savePath = "";
+    }
+    if (file.endsWith(".doc")) {
+      readDocImage(file, savePath);
+    } else if (file.endsWith(".docx")) {
+      readDocxImage(file, savePath);
+    } else {
+      return;
+    }
+  }
+
+  private static String readDocxImage(String srcFile, String imageFile) {
+    String path = srcFile;
+    File file = new File(path);
+    try {
+      // 用XWPFWordExtractor来获取文字
+      FileInputStream fis = new FileInputStream(file);
+      XWPFDocument document = new XWPFDocument(fis);
+      XWPFWordExtractor xwpfWordExtractor = new XWPFWordExtractor(document);
+      String text = xwpfWordExtractor.getText();
+
+      System.out.println(text);
+      // 用XWPFDocument的getAllPictures来获取所有的图片
+      List<XWPFPictureData> picList = document.getAllPictures();
+      for (XWPFPictureData pic : picList) {
+        byte[] bytev = pic.getData();
+        // 大于300bites的图片我们才弄下来，消除word中莫名的小图片的影响
+        if (bytev.length > 300) {
+          FileOutputStream fos = new FileOutputStream(imageFile + "/" + pic.getFileName());
+          fos.write(bytev);
+        }
+      }
+      fis.close();
+      return text;
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  private static void readDocImage(String file, String savePath) {
+    读取文档中的文字图片doc和docx extr = new 读取文档中的文字图片doc和docx(file);
+    String str = extr.getAllText().trim();
+    extr.extractPictures();
+    int num = extr.numPictures();
+    String names[] = new String[num];
+    for (int i = 0; i < num; ++i) {
+      String imageType = pictsList.get(i).getMimeType().split("/")[1];
+      names[i] = "image" + i + "." + imageType;
+    }
+    System.out.println(str);
+    extr.writePictures(names, savePath);
+  }
+
+  /**
+   * 把提取的图片保存到用户指定的位置
+   *
+   * @param picNames， 图片要保存的路径,最好完整地写上图片类型
+   * @return
+   */
+  private boolean writePictures(String[] picNames, String savePath) {
+    int size = pictsList.size();
+    if (size == 0) {
+      return false;
+    }
+
+    for (int i = 0; i < size; ++i) {
+      Picture p = pictsList.get(i);
+      try {
+        p.writeImageContent(new FileOutputStream(savePath + "/" + picNames[i]));
+      } catch (FileNotFoundException e) {
+        e.printStackTrace();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+    return true;
   }
 
   /**
@@ -87,7 +168,6 @@ public class 读取文档中的文字图片doc和docx {
     }
     return ret.toString();
   }
-
   /**
    * 从word里面提取图片
    *
@@ -115,7 +195,6 @@ public class 读取文档中的文字图片doc和docx {
     }
     return hasPic;
   }
-
   /**
    * word文档里有几张图片，使用这个函数之前，
    * 必须先使用函数 extractPictures()
@@ -129,86 +208,7 @@ public class 读取文档中的文字图片doc和docx {
     return pictsList.size();
   }
 
-  /**
-   * 把提取的图片保存到用户指定的位置
-   *
-   * @param picNames， 图片要保存的路径,最好完整地写上图片类型
-   * @return
-   */
-  private boolean writePictures(String[] picNames, String savePath) {
-    int size = pictsList.size();
-    if (size == 0) {
-      return false;
-    }
-
-    for (int i = 0; i < size; ++i) {
-      Picture p = pictsList.get(i);
-      try {
-        p.writeImageContent(new FileOutputStream(savePath + "/" + picNames[i]));
-      } catch (FileNotFoundException e) {
-        e.printStackTrace();
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
-    return true;
-  }
-
   // 读取srcFile源word文件docx文字
+
   // 读取srcFile源word文件docx中的image图片并且存放在文件夹imageFile中
-  private static String readDocxImage(String srcFile, String imageFile) {
-    String path = srcFile;
-    File file = new File(path);
-    try {
-      // 用XWPFWordExtractor来获取文字
-      FileInputStream fis = new FileInputStream(file);
-      XWPFDocument document = new XWPFDocument(fis);
-      XWPFWordExtractor xwpfWordExtractor = new XWPFWordExtractor(document);
-      String text = xwpfWordExtractor.getText();
-
-      System.out.println(text);
-      // 用XWPFDocument的getAllPictures来获取所有的图片
-      List<XWPFPictureData> picList = document.getAllPictures();
-      for (XWPFPictureData pic : picList) {
-        byte[] bytev = pic.getData();
-        // 大于300bites的图片我们才弄下来，消除word中莫名的小图片的影响
-        if (bytev.length > 300) {
-          FileOutputStream fos = new FileOutputStream(imageFile + "/" + pic.getFileName());
-          fos.write(bytev);
-        }
-      }
-      fis.close();
-      return text;
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    return null;
-  }
-
-  private static void readDocImage(String file, String savePath) {
-    读取文档中的文字图片doc和docx extr = new 读取文档中的文字图片doc和docx(file);
-    String str = extr.getAllText().trim();
-    extr.extractPictures();
-    int num = extr.numPictures();
-    String names[] = new String[num];
-    for (int i = 0; i < num; ++i) {
-      String imageType = pictsList.get(i).getMimeType().split("/")[1];
-      names[i] = "image" + i + "." + imageType;
-    }
-    System.out.println(str);
-    extr.writePictures(names, savePath);
-  }
-
-  public static void readWordImage(String file, String savePath) {
-    if (null == savePath) {
-      savePath = "";
-    }
-    if (file.endsWith(".doc")) {
-      readDocImage(file, savePath);
-    } else if (file.endsWith(".docx")) {
-      readDocxImage(file, savePath);
-    } else {
-      return;
-    }
-  }
 }
