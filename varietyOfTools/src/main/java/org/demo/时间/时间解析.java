@@ -46,6 +46,8 @@ public class 时间解析 {
 
       String format = sdf.format(parse);
       System.out.println(format);
+
+      //Date转换为Calendar
       Calendar calendar = Calendar.getInstance();
       calendar.setTime(parse);
       int calendaryear = calendar.get(Calendar.YEAR);

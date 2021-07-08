@@ -1,4 +1,4 @@
-package org.demo.kml解析;
+package 地理.kml解析;
 
 import de.micromata.opengis.kml.v_2_2_0.Boundary;
 import de.micromata.opengis.kml.v_2_2_0.Coordinate;

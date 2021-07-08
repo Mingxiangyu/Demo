@@ -1,9 +1,9 @@
-package org.demo.kml解析;
+package 地理.kml解析;
 
 import de.micromata.opengis.kml.v_2_2_0.Coordinate;
 import java.util.List;
 
-public class KmlLine {
+public class KmlPoint {
   private List<Coordinate> points;
   private String name;
 

@@ -7,7 +7,7 @@ import java.io.InputStream;
 public final class java上传文件以流方式判断类型 {
 
   public static void main(String[] args) throws Exception {
-    String docFilePath = "F:\\ktWorkSpace\\Demo\\src\\main\\resources\\image0.jpeg";
+    String docFilePath = "C:\\Users\\T480S\\Desktop\\ParseWordUtil.doc";
 
     System.out.println(java上传文件以流方式判断类型.getType(docFilePath));
   }

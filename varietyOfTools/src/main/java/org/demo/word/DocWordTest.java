@@ -25,8 +25,8 @@ public class DocWordTest {
 
   public static void testReadByDoc() throws Exception {
     //    String docFilePath = "C:\\Users\\T480S\\Desktop\\航天\\doc若干pic.doc";
-//    String docFilePath = "E:\\Deploy-七里渠\\相关\\脱\\tb\\zk\\xxxxxxx.doc";
-    String docFilePath = "C:\\Users\\T480S\\Desktop\\新建 DOC 文档.doc";
+    //    String docFilePath = "E:\\Deploy-七里渠\\相关\\脱\\tb\\zk\\xxxxxxx.doc";
+    String docFilePath = "C:\\Users\\T480S\\Desktop\\ParseWordUtil.doc";
 
     InputStream is =
         new FileInputStream(docFilePath);

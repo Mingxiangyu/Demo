@@ -15,6 +15,8 @@
     <java.version>1.8</java.version>
     <mybatis-plus.version>3.3.2</mybatis-plus.version>
     <velocity.version>2.2</velocity.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <geotools.version>25-SNAPSHOT</geotools.version>
   </properties>
 
   <dependencies>
@@ -172,6 +174,14 @@
       <version>1.19</version>
     </dependency>
 
+    <!--    加解密-->
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+      <version>1.11</version>
+    </dependency>
+
+
     <!--    加密解密工具包-->
     <!-- https://mvnrepository.com/artifact/org.apache.directory.studio/org.apache.commons.codec -->
     <dependency>
@@ -258,28 +268,6 @@
     </dependency>
     <dependency>
       <groupId>org.geotools</groupId>
-      <artifactId>gt-opengis</artifactId>
-      <version>23.0</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.geotools</groupId>
-      <artifactId>gt-referencing</artifactId>
-      <version>23.0</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.geotools</groupId>
-      <artifactId>gt-shapefile</artifactId>
-      <version>23.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.geotools</groupId>
-      <artifactId>gt-swing</artifactId>
-      <version>23.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.geotools</groupId>
       <artifactId>gt-epsg-hsql</artifactId>
       <version>23.0</version>
     </dependency>
@@ -287,6 +275,65 @@
       <groupId>org.geotools</groupId>
       <artifactId>gt-geotiff</artifactId>
       <version>23.0</version>
+    </dependency>
+
+    <!-- for geotools begin -->
+    <dependency>
+      <groupId>org.geotools</groupId>
+      <artifactId>gt-geojson</artifactId>
+      <version>${geotools.version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.geotools/gt-main -->
+    <dependency>
+      <groupId>org.geotools</groupId>
+      <artifactId>gt-main</artifactId>
+      <version>${geotools.version}</version>
+    </dependency>
+<!--        <dependency>-->
+<!--          <groupId>org.geotools</groupId>-->
+<!--          <artifactId>gt-api</artifactId>-->
+<!--          <version>${geotools.version}</version>-->
+<!--        </dependency>-->
+    <dependency>
+      <groupId>org.geotools</groupId>
+      <artifactId>gt-opengis</artifactId>
+      <version>${geotools.version}</version>
+    </dependency>
+    <!--    <dependency>-->
+    <!--      <groupId>org.geotools</groupId>-->
+    <!--      <artifactId>gt-data</artifactId>-->
+    <!--      <version>${geotools.version}</version>-->
+    <!--    </dependency>-->
+    <dependency>
+      <groupId>org.geotools</groupId>
+      <artifactId>gt-referencing</artifactId>
+      <version>${geotools.version}</version>
+    </dependency>
+    <!--for geotools end-->
+    <!--    原文链接：https://blog.csdn.net/lnxyangruosong/article/details/77456735-->
+
+    <!-- jts处理Geometry -->
+    <dependency>
+      <groupId>com.vividsolutions</groupId>
+      <artifactId>jts</artifactId>
+      <version>1.13</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.googlecode.json-simple</groupId>
+      <artifactId>json-simple</artifactId>
+      <version>1.1.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.geotools</groupId>
+      <artifactId>gt-shapefile</artifactId>
+      <version>${geotools.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.geotools</groupId>
+      <artifactId>gt-swing</artifactId>
+      <version>${geotools.version}</version>
     </dependency>
 
     <!-- mysql -->
@@ -337,6 +384,29 @@
       <id>com.e-iceblue</id>
       <name>e-iceblue</name>
       <url>http://repo.e-iceblue.com/nexus/content/groups/public/</url>
+    </repository>
+    <!--    GeoTool所需仓库-->
+    <repository>
+      <id>osgeo</id>
+      <name>OSGeo Release Repository</name>
+      <url>https://repo.osgeo.org/repository/release/</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+    </repository>
+    <repository>
+      <id>osgeo-snapshot</id>
+      <name>OSGeo Snapshot Repository</name>
+      <url>https://repo.osgeo.org/repository/snapshot/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
     </repository>
   </repositories>
 

@@ -29,14 +29,14 @@ public class FTPTools {
 
 
   public static void main(String[] args) throws FileNotFoundException {
-    String hostname = "192.168.96.1";
+    String hostname = "172.20.10.3";
     int port = 21;
     String username = "ceshi";
     String password = "test";
     String workingPath = "/test";
-    String str = "C:\\Users\\T480S\\Desktop\\文件检查结果_20210320130108.html";
+    String str = "C:\\Users\\T480S\\Desktop\\模板数据结构.xlsx";
     InputStream fileInputStream = new FileInputStream(new File(str));
-    String saveName = "TS文档.html";
+    String saveName = "TS文档.xlsx";
     try {
       // 上传文件时，文件名称需要做编码转换
       saveName = new String(saveName.getBytes(LOCAL_CHARSET), SERVER_CHARSET);

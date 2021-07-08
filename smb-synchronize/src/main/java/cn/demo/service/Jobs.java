@@ -44,8 +44,12 @@ public class Jobs implements InitializingBean {
   public void scheduledClearMethod() {
     log.info("清除方法: 调用清除持久化文件名方法");
     Calendar rightNow = Calendar.getInstance();
-    int month = rightNow.get(Calendar.MONTH) + 1; // 第一个月从0开始，所以得到月份＋1
-    List<SmbLasttime> byMonth = smbDao.findByMonth(month);
+    int delMonth = rightNow.get(Calendar.MONTH);
+    if (delMonth == 0) {
+      delMonth = 12;
+    }
+
+    List<SmbLasttime> byMonth = smbDao.findByMonth(delMonth);
     log.info("清除方法: 清除数据量为: " + byMonth.size());
     smbDao.deleteInBatch(byMonth);
     log.info("清除方法: 清除完成");
