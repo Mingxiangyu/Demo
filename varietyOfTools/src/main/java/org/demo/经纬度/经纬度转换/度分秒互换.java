@@ -10,8 +10,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 class frame1 extends JFrame {
-  /** */
   private static final long serialVersionUID = 1L;
+
   // 输入输出框
   private JTextField textField1 = new JTextField(8);
   private JTextField textField2 = new JTextField(3);

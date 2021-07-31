@@ -15,7 +15,7 @@ public class 获取tif图片内信息 {
   public static void main(String[] args) {
     //    String filePath = "C:\\Users\\T480S\\Desktop\\未标题-1.tif";
     String filePath =
-//        "E:\\Deploy-DJ\\数据\\图片\\d3dc7d205c5496fd3919be725c6877a3_8aac14da1411c2451d0cb1de31a9d432_8.tif";
+//        "E:\\Deploy-DJ\\数据\\图片拼接\\d3dc7d205c5496fd3919be725c6877a3_8aac14da1411c2451d0cb1de31a9d432_8.tif";
         "E:\\Deploy-DJ\\数据\\天津Tif图片\\打击后\\Level15\\天津爆炸6.tif";
     Map<String, Object> imageExt = getImageExt(new File(filePath));
     System.out.println(imageExt);

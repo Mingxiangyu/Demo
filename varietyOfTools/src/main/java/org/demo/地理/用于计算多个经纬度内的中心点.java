@@ -1,4 +1,4 @@
-package 地理;
+package org.demo.地理;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

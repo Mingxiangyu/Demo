@@ -1,4 +1,4 @@
-//package 地理;
+//package org.demo.地理;
 //
 //import com.vividsolutions.jts.geom.Geometry;
 //import com.vividsolutions.jts.io.WKTReader;

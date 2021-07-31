@@ -92,7 +92,7 @@ import org.openxmlformats.schemas.drawingml.x2006.wordprocessingDrawing.CTInline
 
       CTNonVisualDrawingProps docPr = inline.addNewDocPr();
       docPr.setId(ind);
-      docPr.setName("图片" + ind);
+      docPr.setName("图片拼接" + ind);
       docPr.setDescr("测试");
     }
   }

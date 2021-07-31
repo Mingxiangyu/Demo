@@ -14,7 +14,7 @@ import org.apache.commons.io.FilenameUtils;
 
 public class tif转png {
   public static void main(String[] args) {
-    convertTiffToPng(new File("C:\\Users\\T480S\\Desktop\\KT-DJDeploy-2021\\数据\\图片\\天津爆炸后.tif"));
+    convertTiffToPng(new File("C:\\Users\\T480S\\Desktop\\KT-DJDeploy-2021\\数据\\图片拼接\\天津爆炸后.tif"));
   }
 
   public static void convertTiffToPng(File file) {

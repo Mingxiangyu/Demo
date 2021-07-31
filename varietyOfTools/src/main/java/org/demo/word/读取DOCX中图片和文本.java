@@ -37,7 +37,7 @@ public class 读取DOCX中图片和文本 {
       List<XWPFParagraph> paragraphs = document.getParagraphs();
       // 表格
       List<XWPFTable> tables = document.getTables();
-      // 图片
+      // 图片拼接
       List<XWPFPictureData> allPictures = document.getAllPictures();
       // 页眉
       List<XWPFHeader> headerList = document.getHeaderList();

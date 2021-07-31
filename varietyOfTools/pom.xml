@@ -336,6 +336,12 @@
       <version>${geotools.version}</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.gdal</groupId>
+      <artifactId>gdal</artifactId>
+      <version>3.2.0</version>
+    </dependency>
+
     <!-- mysql -->
     <dependency>
       <groupId>mysql</groupId>

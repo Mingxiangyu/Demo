@@ -1,4 +1,4 @@
-package 地理.kml解析;
+package org.demo.地理.kml解析;
 
 public class dd {
   public static void main(String[] args) {

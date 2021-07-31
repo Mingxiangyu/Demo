@@ -39,7 +39,7 @@ public class 获取tif内元数据信息有问题 {
     //    String demPath = "G:/weitu/download/xian/xian.tif";
 //    String demPath = "C:\\Users\\T480S\\Desktop\\未标题-1.tif";
     String demPath =
-        "E:\\Deploy-DJ\\数据\\图片\\d3dc7d205c5496fd3919be725c6877a3_8aac14da1411c2451d0cb1de31a9d432_8.tif";
+        "E:\\Deploy-DJ\\数据\\图片拼接\\d3dc7d205c5496fd3919be725c6877a3_8aac14da1411c2451d0cb1de31a9d432_8.tif";
 
 
     File file = new File(demPath);
