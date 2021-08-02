@@ -24,6 +24,23 @@ public class 经纬度范围与用户指定的瓦片层级计算需要下载的�
     System.out.println("谷歌数据瓦片数：" + tnum + "        图像尺寸：" + pixSize[0] + "*" + pixSize[1]);
   }
 
+  //  计算经纬度输出瓦片数量与待拼接图像像素尺寸
+  public int getGeodeticSize(
+      double minLon, double maxLon, double minLat, double maxLat, int zoom, int[] pixSize) {
+
+    int[] tminxy = new int[] {0, 0};
+    int[] tmaxxy = new int[] {0, 0};
+
+    LonLatToTile(minLon, minLat, zoom - 1, tminxy);
+    LonLatToTile(maxLon, maxLat, zoom - 1, tmaxxy);
+
+    pixSize[0] = (1 + Math.abs(tmaxxy[0] - tminxy[0])) * 256;
+    pixSize[1] = (1 + Math.abs(tmaxxy[1] - tminxy[1])) * 256;
+
+    int tnum = (1 + Math.abs(tmaxxy[0] - tminxy[0])) * (1 + Math.abs(tmaxxy[1] - tminxy[1]));
+
+    return tnum;
+  }
   private void LonLatToTile(double lon, double lat, int zoom, int[] txy) {
     double resFact = 180.0 / 256.0;
     double[] pxy = new double[] {0.0, 0.0};
@@ -57,23 +74,6 @@ public class 经纬度范围与用户指定的瓦片层级计算需要下载的�
     txy[1] = (int) (Math.ceil(py / (float) (256)) - 1);
   }
 
-  //  计算经纬度输出瓦片数量与待拼接图像像素尺寸
-  public int getGeodeticSize(
-      double minLon, double maxLon, double minLat, double maxLat, int zoom, int[] pixSize) {
-
-    int[] tminxy = new int[] {0, 0};
-    int[] tmaxxy = new int[] {0, 0};
-
-    LonLatToTile(minLon, minLat, zoom - 1, tminxy);
-    LonLatToTile(maxLon, maxLat, zoom - 1, tmaxxy);
-
-    pixSize[0] = (1 + Math.abs(tmaxxy[0] - tminxy[0])) * 256;
-    pixSize[1] = (1 + Math.abs(tmaxxy[1] - tminxy[1])) * 256;
-
-    int tnum = (1 + Math.abs(tmaxxy[0] - tminxy[0])) * (1 + Math.abs(tmaxxy[1] - tminxy[1]));
-
-    return tnum;
-  }
   //  计算谷歌投影输出瓦片数量与待拼接图像像素尺寸
   public int getMercatorSize(
       double minLon, double maxLon, double minLat, double maxLat, int zoom, int[] pixSize) {

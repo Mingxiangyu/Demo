@@ -83,36 +83,63 @@
     </dependency>
 
     <!--  ppt,xls,docx,pptx,xlsx-->
-    <dependency>
-      <groupId>org.apache.poi</groupId>
-      <artifactId>poi-scratchpad</artifactId>
-      <version>3.17</version>
-    </dependency>
-    <dependency>
-      <groupId>fr.opensagres.xdocreport</groupId>
-      <artifactId>org.apache.poi.xwpf.converter.pdf</artifactId>
-      <version>1.0.6</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.poi</groupId>
-      <artifactId>poi-ooxml</artifactId>
-      <version>3.17</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.poi</groupId>
-      <artifactId>poi-ooxml-schemas</artifactId>
-      <version>3.17</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.poi</groupId>
-      <artifactId>poi</artifactId>
-      <version>3.17</version>
-    </dependency>
-    <dependency>
-      <groupId>fr.opensagres.xdocreport</groupId>
-      <artifactId>xdocreport</artifactId>
-      <version>2.0.1</version>
-    </dependency>
+        <dependency>
+          <groupId>org.apache.poi</groupId>
+          <artifactId>poi-scratchpad</artifactId>
+          <version>3.17</version>
+        </dependency>
+        <dependency>
+          <groupId>fr.opensagres.xdocreport</groupId>
+          <artifactId>org.apache.poi.xwpf.converter.pdf</artifactId>
+          <version>1.0.6</version>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.poi</groupId>
+          <artifactId>poi-ooxml</artifactId>
+          <version>3.17</version>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.poi</groupId>
+          <artifactId>poi-ooxml-schemas</artifactId>
+          <version>3.17</version>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.poi</groupId>
+          <artifactId>poi</artifactId>
+          <version>3.17</version>
+        </dependency>
+        <dependency>
+          <groupId>fr.opensagres.xdocreport</groupId>
+          <artifactId>xdocreport</artifactId>
+          <version>2.0.1</version>
+        </dependency>
+
+    <!--    POI低版本-->
+<!--    <dependency>-->
+<!--      <groupId>org.apache.poi</groupId>-->
+<!--      <artifactId>poi</artifactId>-->
+<!--      <version>3.15</version>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>org.apache.poi</groupId>-->
+<!--      <artifactId>poi-ooxml</artifactId>-->
+<!--      <version>3.15</version>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>org.apache.poi</groupId>-->
+<!--      <artifactId>poi-ooxml-schemas</artifactId>-->
+<!--      <version>3.15</version>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>org.apache.poi</groupId>-->
+<!--      <artifactId>poi-scratchpad</artifactId>-->
+<!--      <version>3.15</version>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>fr.opensagres.xdocreport</groupId>-->
+<!--      <artifactId>org.apache.poi.xwpf.converter.pdf</artifactId>-->
+<!--      <version>1.0.6</version>-->
+<!--    </dependency>-->
 
 
     <dependency>
@@ -289,11 +316,11 @@
       <artifactId>gt-main</artifactId>
       <version>${geotools.version}</version>
     </dependency>
-<!--        <dependency>-->
-<!--          <groupId>org.geotools</groupId>-->
-<!--          <artifactId>gt-api</artifactId>-->
-<!--          <version>${geotools.version}</version>-->
-<!--        </dependency>-->
+    <!--        <dependency>-->
+    <!--          <groupId>org.geotools</groupId>-->
+    <!--          <artifactId>gt-api</artifactId>-->
+    <!--          <version>${geotools.version}</version>-->
+    <!--        </dependency>-->
     <dependency>
       <groupId>org.geotools</groupId>
       <artifactId>gt-opengis</artifactId>

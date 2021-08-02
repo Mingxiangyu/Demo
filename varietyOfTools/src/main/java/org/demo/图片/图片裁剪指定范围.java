@@ -13,6 +13,15 @@ import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 
 public class 图片裁剪指定范围 {
+
+
+  public static void main(String[] args) throws IOException {
+    String src = "C:\\Users\\T480S\\Desktop\\微信截图_20210729114433.png";
+    String dest = "C:\\Users\\T480S\\Desktop\\图标.png";
+    long start = System.currentTimeMillis();
+    new 图片裁剪指定范围().cutImage(src, dest, 90, 300, 900, 700);
+    System.out.println(System.currentTimeMillis() - start);
+  }
   /**
    * 图片裁剪通用接口
    *
@@ -39,13 +48,5 @@ public class 图片裁剪指定范围 {
     } catch (IOException e) {
       System.err.println("裁剪图片失败");
     }
-  }
-
-  public static void main(String[] args) throws IOException {
-    String src = "C:\\Users\\T480S\\Desktop\\微信截图_20210729114433.png";
-    String dest = "C:\\Users\\T480S\\Desktop\\图标.png";
-    long start = System.currentTimeMillis();
-    new 图片裁剪指定范围().cutImage(src, dest, 90, 300, 900, 700);
-    System.out.println(System.currentTimeMillis() - start);
   }
 }

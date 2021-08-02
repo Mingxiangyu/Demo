@@ -1,38 +1,15 @@
 package org.demo;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 public class ListUtils {
 
   public static void main(String[] arg) {
-    test();
-  }
-
-  /**
-   * 把一个List分割成多个小的List
-   * @param list 被分割的List
-   * @param subLength 分割后每个小List的长度
-   * @param <T> List集合类型
-   * @return List<List<T>>
-   */
-  public static <T> List<List<T>> groupList(List<T> list, int subLength) {
-    List<List<T>> listGroup = new ArrayList<>();
-    int size = list.size();
-    for (int i = 0; i < size; i += subLength) {
-      if (i + subLength > size) {
-        subLength = size - i;
-      }
-      List<T> newList = list.subList(i, i + subLength);
-      listGroup.add(newList);
-    }
-    return listGroup;
-  }
-
-
-  public static void test() {
     List<Integer> oldList =
         new ArrayList<Integer>() {
           {
@@ -51,6 +28,102 @@ public class ListUtils {
             add(6);
           }
         };
+    test(oldList, newList);
+    List<Integer> different = getDifferent(oldList, newList);
+    System.out.println(different);
+    Collection same = getSame(oldList, newList);
+    System.out.println(same);
+  }
+
+  /**
+   * 把一个List分割成多个小的List
+   *
+   * @param list 被分割的List
+   * @param subLength 分割后每个小List的长度
+   * @param <T> List集合类型
+   * @return List<List<T>>
+   */
+  public static <T> List<List<T>> groupList(List<T> list, int subLength) {
+    List<List<T>> listGroup = new ArrayList<>();
+    int size = list.size();
+    for (int i = 0; i < size; i += subLength) {
+      if (i + subLength > size) {
+        subLength = size - i;
+      }
+      List<T> newList = list.subList(i, i + subLength);
+      listGroup.add(newList);
+    }
+    return listGroup;
+  }
+
+  /**
+   * 找出两个集合中相同的元素
+   *
+   * @param collmax
+   * @param collmin
+   * @return
+   */
+  public static <T> List<T> getSame(List<T> collmax, List<T> collmin) {
+    // 使用LinkedList防止差异过大时,元素拷贝
+    List<T> csReturn = new LinkedList<>();
+    List<T> max = collmax;
+    List<T> min = collmin;
+    // 先比较大小,这样会减少后续map的if判断次数
+    if (collmax.size() < collmin.size()) {
+      max = collmin;
+      min = collmax;
+    }
+    // 直接指定大小,防止再散列
+    Map<Object, Integer> map = new HashMap<Object, Integer>(max.size());
+    for (Object object : max) {
+      map.put(object, 1);
+    }
+    for (Object object : min) {
+      if (map.get(object) != null) {
+        csReturn.add((T) object);
+      }
+    }
+    return csReturn;
+  }
+
+  /**
+   * 获取两个List中不同的元素
+   *
+   * @param list1
+   * @param list2
+   * @param <T>
+   * @return 不同的元素集合
+   */
+  public static <T> List<T> getDifferent(List<T> list1, List<T> list2) {
+    Map<T, Integer> map = new HashMap<>(list1.size() + list2.size());
+    List<T> diff = new ArrayList<>();
+    List<T> maxList = list1;
+    List<T> minList = list2;
+    if (list2.size() > list1.size()) {
+      maxList = list2;
+      minList = list1;
+    }
+    for (T i : maxList) {
+      map.put(i, 1);
+    }
+    for (T i : minList) {
+      Integer difValue = map.get(i);
+      if (difValue != null) {
+        map.put(i, ++difValue);
+        continue;
+      }
+      map.put(i, 1);
+    }
+    for (Map.Entry<T, Integer> entry : map.entrySet()) {
+      if (entry.getValue() == 1) {
+        diff.add(entry.getKey());
+      }
+    }
+    return diff;
+  }
+
+  public static void test(List<Integer> oldList, List<Integer> newList) {
+
     Map<Integer, Integer> map = new HashMap<>();
 
     for (Integer i : oldList) {
