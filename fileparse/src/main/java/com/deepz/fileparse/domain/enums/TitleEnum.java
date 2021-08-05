@@ -1,7 +1,7 @@
 package com.deepz.fileparse.domain.enums;
 
 /**
- * @author zhangdingping
+ * @author T480S
  * @description 标题枚举
  * @date 2019/7/26 11:32
  */
@@ -26,7 +26,7 @@ public enum TitleEnum {
     }
 
     /**
-     * @author zhangdingping
+     * @author T480S
      * @description 根据style获取相应枚举
      * @date 2019/7/26 11:20
      */

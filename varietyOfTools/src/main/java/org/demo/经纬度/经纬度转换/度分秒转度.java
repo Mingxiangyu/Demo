@@ -7,7 +7,7 @@ public class 度分秒转度 {
    * 经纬度转换 ，度分秒转度
    *
    * @param str 1
-   * @author Cai_YF
+   * @author T480S
    * @return
    */
   public static String Dms2D(String jwd) {

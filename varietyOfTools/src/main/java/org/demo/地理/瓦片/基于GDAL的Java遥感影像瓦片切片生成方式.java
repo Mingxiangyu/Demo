@@ -1,4 +1,4 @@
-package org.demo.地理;
+package org.demo.地理.瓦片;
 
 import java.io.File;
 import java.util.UUID;

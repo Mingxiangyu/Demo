@@ -32,8 +32,7 @@ import org.openxmlformats.schemas.presentationml.x2006.main.CTSlide;
 
   /**
    *
-   * @author yujian
-   * @date   2016年10月12日
+   * @author T480S
    * @version 0.0.1
    */
   public class POI读取各种文档方法 {

@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * 监听，解析excel返回集合
  *
- * @author tzhang
+ * @author T480S
  */
 public class EasyExcelListener extends AnalysisEventListener {
 
@@ -26,8 +26,7 @@ public class EasyExcelListener extends AnalysisEventListener {
    *
    * @param object
    * @param context
-   * @return void
-   * @author tzhang
+   * @author T480S
    * @date 2020/6/9 18:01
    */
   @Override

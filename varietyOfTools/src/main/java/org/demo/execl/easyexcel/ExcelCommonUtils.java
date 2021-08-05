@@ -23,7 +23,7 @@ import org.demo.execl.easyexcel.dto.ExportExcelDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/** @author tzhang */
+/* * @author T480S */
 public class ExcelCommonUtils {
 
   private static final Logger log = LoggerFactory.getLogger(ExcelCommonUtils.class);
@@ -36,7 +36,7 @@ public class ExcelCommonUtils {
    * @param stream excel的输入流
    * @param analysisExcelDtos 解析excel的参数
    * @return java.util.Map<java.lang.Integer,java.util.List<java.util.List<java.lang.String>>>
-   * @author tzhang
+   *     * @author T480S
    * @date 2020/6/9 18:08
    */
   public static Map<Integer, List<List<String>>> analysisExcel(
@@ -78,7 +78,7 @@ public class ExcelCommonUtils {
    * @param response
    * @param exportExcelDto 导出excel的参数dto
    * @return void
-   * @author tzhang
+   * @author T480S
    * @date 2020/6/9 18:31
    */
   public static void writExcel(HttpServletResponse response, ExportExcelDto exportExcelDto) {
@@ -124,7 +124,7 @@ public class ExcelCommonUtils {
    *
    * @param response 响应流
    * @param exportExcelDto 导出excel的参数dto
-   * @author tzhang
+   * @author T480S
    * @date 2020/6/9 18:35
    */
   public static void exportExcelByModel(

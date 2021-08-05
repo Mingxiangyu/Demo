@@ -16,7 +16,7 @@ public interface Parser<T> {
 
 
     /**
-     * @author zhangdingping
+     * @author T480S
      * @description 解析文件
      * @date 2019/7/25 18:09
      */

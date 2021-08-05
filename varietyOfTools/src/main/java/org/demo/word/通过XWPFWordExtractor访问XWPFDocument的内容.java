@@ -10,7 +10,7 @@ import org.apache.poi.xwpf.usermodel.XWPFDocument;
 public class 通过XWPFWordExtractor访问XWPFDocument的内容 {
   public static void main(String[] args) {
     try {
-      String pathname = "C:\\Users\\T480S\\Desktop\\ces.docx";
+      String pathname = "C:\\Users\\T480S\\Desktop\\spire获取word自动生产的序号.docx";
       testReadByExtractor(pathname);
     } catch (Exception e) {
       e.printStackTrace();

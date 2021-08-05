@@ -23,7 +23,7 @@ import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 /**
  * 读取word文档中表格数据，支持doc、docx
  *
- * @author Fise19
+ * @author T480S
  */
 public class 获取word中表格doc和docx通用 {
   public static void main(String[] args) {

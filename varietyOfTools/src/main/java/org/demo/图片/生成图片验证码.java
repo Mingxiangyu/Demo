@@ -305,7 +305,7 @@ public class 生成图片验证码 {
   /**
    * 验证码对象
    *
-   * @author zhou-baicheng
+   * @author T480S
    */
   public static class Verify {
 

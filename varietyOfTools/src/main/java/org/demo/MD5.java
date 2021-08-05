@@ -12,7 +12,7 @@ import java.security.NoSuchAlgorithmException;
 /**
  * MD5编码相关的类
  *
- * @author wangjingtao
+ * @author T480S
  */
 public class MD5 {
   // 首先初始化一个字符数组，用来存放每个16进制字符

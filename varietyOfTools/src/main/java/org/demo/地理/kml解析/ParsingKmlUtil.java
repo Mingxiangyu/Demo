@@ -21,7 +21,7 @@ import java.util.List;
  * @program: my_project
  * @description: KML文件解析：先获取kml文件的根节点，依次遍历当前节点的子节点的信息，
  * 如果遇到节点属于Folder、Document则继续解析其子节点；反之则解析PlaceMark节点（主要解析LineString、Point、Polygon）。
- * @author: Yue
+ * @author T480S
  * @create: 2018-12-01 12:39
  **/
 public class ParsingKmlUtil {

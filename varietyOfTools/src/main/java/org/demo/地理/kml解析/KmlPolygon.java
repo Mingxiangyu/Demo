@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * @program: ParseKMLForJava
  * @description:
- * @author: Mr.Yue
+ * @author T480S
  * @create: 2018-12-04 21:12
  **/
 public class KmlPolygon {

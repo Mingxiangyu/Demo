@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.apache.poi.xwpf.converter.core.utils.StringUtils;
@@ -74,7 +73,7 @@ public class WordToPDF {
 
   public static void main(String[] args) {
     //    String filepath = "E:\\DJDeploy\\打击效果评估报告.docx";
-    String filepath = "C:\\Users\\T480S\\Desktop\\ces.docx";
+    String filepath = "C:\\Users\\T480S\\Desktop\\spire获取word自动生产的序号.docx";
     String outpath = "C:\\Users\\T480S\\Desktop\\我是结果.pdf";
     //如果报org.apache.poi.POIXMLDocumentPart.getPackageRelationship()Lorg/apache/poi/openxml4j/opc/PackageRelationship;<br>
     //证明是poi版本太高

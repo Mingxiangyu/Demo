@@ -22,7 +22,7 @@ import org.apache.poi.xwpf.usermodel.XWPFPictureData;
  * 类 MsWordExtractor用来提取Microsoft Word 里面的文字和图片
  * 注意提取图片后，可以把图片放在由用户指定的路径下面
  *
- * @author Zhou Xiaolong
+ * @author T480S
  * @email shaolongchou@126.com
  */
 

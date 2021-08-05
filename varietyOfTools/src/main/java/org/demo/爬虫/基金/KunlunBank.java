@@ -32,7 +32,7 @@ import org.apache.http.util.EntityUtils;
 /**
  * **银行理财数据爬取
  *
- * @author ROCK
+ * @author T480S
  */
 public class KunlunBank {
   public static void main(String[] args)

@@ -12,7 +12,12 @@ import org.apache.commons.net.ftp.FTPReply;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/** 通过FTP上传文件 @Author lvhaibao @Date 2018/2/11 21:43 */
+/**
+ * 通过FTP上传文件
+ *
+ * @author T480S
+ * @date 2018/2/11 21:43
+ */
 public class FTPTools {
   private static final Logger log = LoggerFactory.getLogger(FTPTools.class);
 
@@ -25,8 +30,6 @@ public class FTPTools {
 
   // 设置私有不能实例化
   private FTPTools() {}
-
-
 
   public static void main(String[] args) throws FileNotFoundException {
     String hostname = "172.20.10.3";
@@ -143,12 +146,24 @@ public class FTPTools {
     boolean flag = false;
     try {
       ftpClient.enterLocalPassiveMode();
+      // 设置连接超时时间
+      ftpClient.setConnectTimeout(1000 * 120);
       ftpClient.connect(hostname, port);
       // 开启服务器对UTF-8的支持，如果服务器支持就用UTF-8编码，否则就使用本地编码（GBK）.
       if (FTPReply.isPositiveCompletion(ftpClient.sendCommand("OPTS UTF8", "ON"))) {
         LOCAL_CHARSET = "UTF-8";
       }
       ftpClient.setControlEncoding(LOCAL_CHARSET);
+      // 设置传输超时时间为120秒
+      ftpClient.setDataTimeout(1000 * 120);
+      // 设置超时
+      ftpClient.setSoTimeout(1000 * 120);
+      /*
+      出现这个报错信息：Host attempting data connection 192.168.90.151 is not same as server 192.168.90.12
+      添加下面代码
+      该代码段为取消服务器获取自身Ip地址和提交的host进行匹配，否则当不一致时报出以上异常。
+       */
+      ftpClient.setRemoteVerificationEnabled(false);
       if (ftpClient.login(username, password)) {
         // 设置文件类型必须放到登录后才生效，否则上传上去的文件内容依然乱码
         ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);

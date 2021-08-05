@@ -57,7 +57,7 @@ public class Poi生成Docx {
   public static void main(String[] args) throws IOException, InvalidFormatException {
 
     XWPFDocument document = new XWPFDocument();
-    String pathname = "C:\\Users\\T480S\\Desktop\\ces.docx";
+    String pathname = "C:\\Users\\T480S\\Desktop\\spire获取word自动生产的序号.docx";
     FileOutputStream out = new FileOutputStream(new File(pathname));
 
     // 添加标题

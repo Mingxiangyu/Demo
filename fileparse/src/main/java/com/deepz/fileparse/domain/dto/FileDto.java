@@ -3,7 +3,7 @@ package com.deepz.fileparse.domain.dto;
 import java.io.InputStream;
 
 /**
- * @author DeepSleeping
+ * @author T480S
  * @date 2019/7/29 11:34
  * @description
  */

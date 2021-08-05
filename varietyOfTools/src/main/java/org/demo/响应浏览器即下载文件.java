@@ -12,7 +12,7 @@ public class 响应浏览器即下载文件 {
   /**
    * 响应给浏览器
    *
-   * @param downloadPath 下载路径
+   * @param downloadPath 下载路径(即实体文件在本机路径）
    * @param response 响应
    * @param fileName 文件名
    */
@@ -21,7 +21,7 @@ public class 响应浏览器即下载文件 {
     fileName = new String(fileName.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
     response.setHeader("Content-disposition", "attachment; filename=" + fileName);
     try (BufferedInputStream inputStream =
-        new BufferedInputStream(new FileInputStream(downloadPath));
+            new BufferedInputStream(new FileInputStream(downloadPath));
         ServletOutputStream outputStream = response.getOutputStream()) {
 
       byte[] b = new byte[2048];

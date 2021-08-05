@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * @author DeepSleeping
+ * @author T480S
  * @date 2019/7/29 16:06
  * @description
  */
@@ -14,7 +14,7 @@ public class StreamUtils {
     /**
      * @return
      * @description 将输入流转换为字节流数组，方便输入流的复用(解决了 Stream Closed、Inpustream have must > 0 bytes异常)
-     * @author DeepSleeping
+     * @author T480S
      * @date 2019/7/29 16:05
      */
     public static byte[] inputToByteArray(InputStream inputStream) {
