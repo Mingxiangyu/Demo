@@ -14,40 +14,38 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-import javax.annotation.PostConstruct;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ListenComponent implements ApplicationRunner {
+//public class ListenComponent implements ApplicationRunner {
+public class ListenComponent  {
 
-  @Value("${listenerfilepath.satellite}")
+//  @Value("${listenerfilepath.satellite}")
   private String satellitePath;
 
-  @Value("${listenerfilepath.notification}")
+//  @Value("${listenerfilepath.notification}")
   private String notificationPath;
 
-  @Value("${listenerfilepath.target}")
+//  @Value("${listenerfilepath.target}")
   private String targetPath;
 
-  @Value("${socket.listen}")
+//  @Value("${socket.listen}")
   private String socketPath;
 
   private static ListenComponent listenController;
   private ThreadPoolExecutor fixedThreadPool =
       new ThreadPoolExecutor(3, 10, 50, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>(10));
 
-  @PostConstruct // 重新加载变量
+//  @PostConstruct // 重新加载变量
   public void init() {
     listenController = this;
     // 初使化时将已静态化的testService实例化
   }
 
   // 项目启动后执行的方法
-  @Override
+//  @Override
   public void run(ApplicationArguments applicationArguments) throws Exception {
     getFile(satellitePath);
     getFile(notificationPath);

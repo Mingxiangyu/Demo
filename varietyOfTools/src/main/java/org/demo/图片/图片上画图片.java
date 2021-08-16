@@ -1,14 +1,11 @@
 package org.demo.图片;
 
 import com.sun.image.codec.jpeg.ImageFormatException;
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageDecoder;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -17,6 +14,9 @@ import java.io.OutputStream;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+/**
+ * @author T480S
+ */
 public class 图片上画图片 {
   public static void main(String[] args) {
     String srcPath = "C:\\Users\\T480S\\Desktop\\微信截图_20210730102723.png";

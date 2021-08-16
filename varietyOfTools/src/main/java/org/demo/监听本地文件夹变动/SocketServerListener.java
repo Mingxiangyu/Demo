@@ -4,7 +4,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
@@ -26,10 +25,10 @@ public class SocketServerListener extends HttpServlet {
 
     public static String socket;
 
-    @Value("${socket.listen}")
-    public void setSocket(String socket){
-        this.socket = socket ;
-    }
+//    @Value("${socket.listen}")
+//    public void setSocket(String socket){
+//        this.socket = socket ;
+//    }
 
     //  初始化启动Socket服务
     @Override

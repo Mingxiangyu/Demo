@@ -15,7 +15,6 @@ import org.apache.commons.compress.compressors.gzip.GzipCompressorInputStream;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.tools.zip.ZipEntry;
 import org.apache.tools.zip.ZipFile;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -23,7 +22,7 @@ public class TarFileUtil {
 
     public static String rarFile;
 
-    @Value("${unrar}")
+//    @Value("${unrar}")
     public void setRarFile(String rarFile) {
         this.rarFile = rarFile;
     }

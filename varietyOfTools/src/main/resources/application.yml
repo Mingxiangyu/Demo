@@ -45,7 +45,7 @@ spring:
   datasource:
     #配置MySQL数据源
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/template?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: root
     password: mingxy925871
   #配置jpa自动建表
@@ -64,8 +64,8 @@ spring:
       uri: mongodb://root:123456@127.0.0.1:27017/dataway2
 
 #配置日志文件相关
-logging:
-  config: classpath:logback/logback.xml
-  file:
-    path: log
-  level: debug
+#logging:
+#  config: classpath:logback/logback.xml
+#  file:
+#    path: log
+#  level: debug
