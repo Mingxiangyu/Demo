@@ -14,13 +14,14 @@ import org.apache.commons.io.FilenameUtils;
 
 public class tif转png {
   public static void main(String[] args) {
-    convertTiffToPng(new File("C:\\Users\\T480S\\Desktop\\KT-DJDeploy-2021\\数据\\图片拼接\\天津爆炸后.tif"));
+    String pathname =
+        "C:\\Users\\T480S\\Documents\\WeChat Files\\aion_my_god\\FileStorage\\File\\2021-08\\GF1_PMS1_E114.0_N25.8_20191108_L1A0004375134-MSS1.tiff";
+    convertTiffToPng(new File(pathname));
   }
 
   public static void convertTiffToPng(File file) {
-    try {
-      try (InputStream is = new FileInputStream(file)) {
-        try (ImageInputStream imageInputStream = ImageIO.createImageInputStream(is)) {
+        try (InputStream is = new FileInputStream(file);
+            ImageInputStream imageInputStream = ImageIO.createImageInputStream(is)) {
           Iterator<ImageReader> iterator = ImageIO.getImageReaders(imageInputStream);
           if (iterator == null || !iterator.hasNext()) {
             throw new RuntimeException(
@@ -50,8 +51,6 @@ public class tif转png {
                       e.printStackTrace();
                     }
                   });
-        }
-      }
     } catch (IOException e) {
       e.printStackTrace();
     }

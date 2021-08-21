@@ -18,6 +18,8 @@ public class 响应浏览器即下载文件 {
    */
   public static void download(String downloadPath, HttpServletResponse response, String fileName) {
     response.setContentType("application/octet-stream;");
+    //response.setContentType("application/force-download");// 设置强制下载不打开
+
     fileName = new String(fileName.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
     response.setHeader("Content-disposition", "attachment; filename=" + fileName);
     try (BufferedInputStream inputStream =

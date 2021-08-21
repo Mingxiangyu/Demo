@@ -256,13 +256,6 @@
       <version>3.0.0</version>
     </dependency>
 
-    <!--    Spire.PDF for Java-->
-    <dependency>
-      <groupId>e-iceblue</groupId>
-      <artifactId>spire.doc</artifactId>
-      <version>3.11.0</version>
-    </dependency>
-
     <!-- 阿里开源框架EasyExcel -->
     <dependency>
       <groupId>com.alibaba</groupId>
@@ -426,6 +419,33 @@
       <artifactId>japidocs</artifactId>
       <version>1.4.3</version>
     </dependency>
+
+    <!--Es相关-->
+    <dependency>
+      <groupId>org.elasticsearch</groupId>
+      <artifactId>elasticsearch</artifactId>
+      <version>2.3.5</version>
+    </dependency>
+
+    <!--    Spire.DOC for Java-->
+    <dependency>
+      <groupId>e-iceblue</groupId>
+      <artifactId>spire.doc</artifactId>
+      <version>3.11.0</version>
+    </dependency>
+
+    <!--    Spire.PDF for Java-->
+    <dependency>
+      <groupId>e-iceblue</groupId>
+      <artifactId>spire.pdf.free</artifactId>
+      <version>2.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>e-iceblue</groupId>
+      <artifactId>spire.pdf.common.free</artifactId>
+      <version>2.0.0</version>
+    </dependency>
+
   </dependencies>
 
   <repositories>
@@ -435,6 +455,7 @@
       <name>e-iceblue</name>
       <url>http://repo.e-iceblue.com/nexus/content/groups/public/</url>
     </repository>
+
     <!--    GeoTool所需仓库-->
     <repository>
       <id>osgeo</id>

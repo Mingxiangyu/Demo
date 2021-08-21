@@ -1,6 +1,5 @@
 package org.demo.图片;
 
-import com.sun.image.codec.jpeg.ImageFormatException;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -67,7 +66,7 @@ public class 图片上画图片 {
 
       OutputStream os = new FileOutputStream(target);
       ImageIO.write(buffImg, "png", os);
-    } catch (IOException | ImageFormatException e) {
+    } catch (IOException e) {
       e.printStackTrace();
     }
   }
