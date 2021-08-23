@@ -1,6 +1,5 @@
 package org.demo.地理;
 
-
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
@@ -12,48 +11,72 @@ import java.util.Map.Entry;
 public class 生成geojson {
   public static void main(String[] args) {
     生成线();
-
     //
   }
 
+  String JSON =
+      "{\n"
+          + "    \"type\": \"Feature\", \n"
+          + "    \"properties\": { }, \n"
+          + "    \"geometry\": {\n"
+          + "        \"type\": \"LineString\", \n"
+          + "        \"coordinates\": [\n"
+          + "            [\n"
+          + "                119.30705698315252, \n"
+          + "                26.022566359436638\n"
+          + "            ], \n"
+          + "            [\n"
+          + "                119.30683284057635, \n"
+          + "                26.01467155980447\n"
+          + "            ], \n"
+          + "            [\n"
+          + "                119.30239979851157, \n"
+          + "                26.008320853475727\n"
+          + "            ]\n"
+          + "        ]\n"
+          + "    }\n"
+          + "}\n";
+
   private static void 生成点() {
-    Map<String,String> map = new HashMap<>();
+    Map<String, String> map = new HashMap<>();
     map.put("-94.149", "36.33");
     JSONObject featureCollection = new JSONObject();
     try {
-      featureCollection.put("type","FeatureCollection");
+      featureCollection.put("type", "FeatureCollection");
       JSONArray featureList = new JSONArray();
       // 遍历你的列表
       for (Entry<String, String> stringStringEntry : map.entrySet()) {
         // {"geometry":{"type":"Point","coordinates":[-94.149, 36.33]}
         JSONObject point = new JSONObject();
-        point.put("type","Point");
-        //从字符串构造JSONArray;也可以使用数组或列表
-        JSONArray coord = new JSONArray(Collections.singletonList(
-            "[" + stringStringEntry.getKey() + "," + stringStringEntry.getValue() + "]"));
-        point.put("coordinates",coord);
+        point.put("type", "Point");
+        // 从字符串构造JSONArray;也可以使用数组或列表
+        JSONArray coord =
+            new JSONArray(
+                Collections.singletonList(
+                    "[" + stringStringEntry.getKey() + "," + stringStringEntry.getValue() + "]"));
+        point.put("coordinates", coord);
         JSONObject feature = new JSONObject();
-        feature.put("geometry",point);
+        feature.put("geometry", point);
         featureList.add(feature);
-        featureCollection.put("features",featureList);
+        featureCollection.put("features", featureList);
       }
-    } catch(JSONException e){
+    } catch (JSONException e) {
       System.out.println("?????");
     }
-    //输出结果
-    System.out.println("featureCollection ="+ featureCollection.toString());
+    // 输出结果
+    System.out.println("featureCollection =" + featureCollection.toString());
   }
 
   private static void 生成线() {
-    Map<Double,Double> map = new HashMap<>();
+    Map<Double, Double> map = new HashMap<>();
     map.put(-94.149, 36.33);
     map.put(-95.149, 37.33);
     JSONObject featureCollection = new JSONObject();
     try {
-      featureCollection.put("type","Feature");
+      featureCollection.put("type", "Feature");
       featureCollection.put("properties", new JSONObject());
       JSONObject geometry = new JSONObject();
-      geometry.put("type","LineString");
+      geometry.put("type", "LineString");
       JSONArray coordinates = new JSONArray();
       // 遍历你的列表
       for (Entry<Double, Double> stringStringEntry : map.entrySet()) {
@@ -64,10 +87,10 @@ public class 生成geojson {
       }
       geometry.put("coordinates", coordinates);
       featureCollection.put("geometry", geometry);
-    } catch(JSONException e){
+    } catch (JSONException e) {
       System.out.println("?????");
     }
-    //输出结果
-    System.out.println("featureCollection ="+ featureCollection.toString());
+    // 输出结果
+    System.out.println("featureCollection =" + featureCollection.toString());
   }
 }
