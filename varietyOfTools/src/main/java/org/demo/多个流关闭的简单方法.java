@@ -9,7 +9,7 @@ import java.util.Objects;
 public class 多个流关闭的简单方法 {
 
   /** 多个流关闭的简单方法 */
-  private void close(Closeable... closeables) {
+  public static void close(Closeable... closeables) {
 
     // 空直接返回
     if (closeables == null || closeables.length == 0) {

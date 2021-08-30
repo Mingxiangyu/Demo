@@ -13,15 +13,13 @@ import java.io.OutputStream;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
-/**
- * @author T480S
- */
+/** @author T480S */
 public class 图片上画图片 {
   public static void main(String[] args) {
     String srcPath = "C:\\Users\\T480S\\Desktop\\微信截图_20210730102723.png";
     String destPath = "C:\\Users\\T480S\\Desktop\\微信截图_20210730102723-fuben.png";
     String targetPath = "C:\\Users\\T480S\\Desktop\\微信截图拼接.png";
-    exportImg(srcPath,destPath, targetPath);
+    exportImg(srcPath, destPath, targetPath);
   }
   /**
    * 图片上画图片
@@ -33,10 +31,10 @@ public class 图片上画图片 {
   public static void exportImg(String src, String dest, String target) {
     try {
       InputStream is = new FileInputStream(src);
-//      // 通过JPEG图象流创建JPEG数据流解码器
-//      JPEGImageDecoder jpegDecoder = JPEGCodec.createJPEGDecoder(is);
-//      // 解码当前JPEG数据流，返回BufferedImage对象
-//      BufferedImage buffImg = jpegDecoder.decodeAsBufferedImage();
+      //      // 通过JPEG图象流创建JPEG数据流解码器
+      //      JPEGImageDecoder jpegDecoder = JPEGCodec.createJPEGDecoder(is);
+      //      // 解码当前JPEG数据流，返回BufferedImage对象
+      //      BufferedImage buffImg = jpegDecoder.decodeAsBufferedImage();
       BufferedImage buffImg = ImageIO.read(is); // 读取图片
 
       // 得到画笔对象
@@ -49,7 +47,7 @@ public class 图片上画图片 {
 
       // 将小图片绘到大图片上。
       // 5,300 .表示你的小图片在大图片上的位置。
-      g.drawImage(img, 105, 405, null);
+      g.drawImage(img, 0, 0, null); // 0,0图片左上角
 
       // 设置颜色。
       g.setColor(Color.BLACK);

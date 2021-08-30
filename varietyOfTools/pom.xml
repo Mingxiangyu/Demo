@@ -329,6 +329,16 @@
       <artifactId>gt-referencing</artifactId>
       <version>${geotools.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.geotools</groupId>
+      <artifactId>gt-shapefile</artifactId>
+      <version>${geotools.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.geotools</groupId>
+      <artifactId>gt-swing</artifactId>
+      <version>${geotools.version}</version>
+    </dependency>
     <!--for geotools end-->
     <!--    原文链接：https://blog.csdn.net/lnxyangruosong/article/details/77456735-->
 
@@ -345,16 +355,6 @@
       <version>1.1.1</version>
     </dependency>
 
-    <dependency>
-      <groupId>org.geotools</groupId>
-      <artifactId>gt-shapefile</artifactId>
-      <version>${geotools.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.geotools</groupId>
-      <artifactId>gt-swing</artifactId>
-      <version>${geotools.version}</version>
-    </dependency>
 
     <dependency>
       <groupId>org.gdal</groupId>
@@ -434,21 +434,39 @@
       <version>3.11.0</version>
     </dependency>
 
-    <!--    Spire.PDF for Java-->
+    <!--    kettle相关-->
+    <!--    原文链接：https://blog.csdn.net/pingweicheng/article/details/103547943-->
     <dependency>
-      <groupId>e-iceblue</groupId>
-      <artifactId>spire.pdf.free</artifactId>
-      <version>2.0.0</version>
+      <groupId>pentaho-kettle</groupId>
+      <artifactId>kettle-core</artifactId>
+      <version>8.1.0.0-365</version>
     </dependency>
     <dependency>
-      <groupId>e-iceblue</groupId>
-      <artifactId>spire.pdf.common.free</artifactId>
-      <version>2.0.0</version>
+      <groupId>pentaho-kettle</groupId>
+      <artifactId>kettle-engine</artifactId>
+      <version>8.1.0.0-365</version>
+    </dependency>
+    <dependency>
+      <groupId>pentaho</groupId>
+      <artifactId>metastore</artifactId>
+      <version>8.1.0.0-365</version>
     </dependency>
 
+    <!--    redis相关-->
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-redis</artifactId>
+    </dependency>
   </dependencies>
 
   <repositories>
+    <!--    kettle依赖所在的仓库地址-->
+    <repository>
+      <id>pentaho-releases</id>
+      <name>kettle</name>
+      <url>https://nexus.pentaho.org/content/groups/omni/</url>
+    </repository>
+    <!--    原文链接：https://blog.csdn.net/pingweicheng/article/details/103547943-->
     <!--    Spire.PDF for Java所需仓库  -->
     <repository>
       <id>com.e-iceblue</id>

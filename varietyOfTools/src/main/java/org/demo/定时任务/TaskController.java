@@ -1,5 +1,7 @@
 package org.demo.定时任务;
 
+import javax.servlet.http.HttpServletRequest;
+import org.demo.http.获取请求IP地址;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,8 +15,11 @@ public class TaskController {
 
   @Autowired private CronTaskRegistrar cronTaskRegistrar;
 
+  @Autowired private HttpServletRequest request; // 测试获取当前请求
+
   @PostMapping("/addTask")
   public String addTask(SysJobPO sysJob) {
+    String ipAddr = 获取请求IP地址.getIpAddr(request); // 获取当前请求ip地址
     boolean success = sysJobMapper.addSysJob(sysJob);
     if (!success) {
       return "新增失败";

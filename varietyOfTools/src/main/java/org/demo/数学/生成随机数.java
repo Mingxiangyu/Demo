@@ -33,18 +33,18 @@ public class 生成随机数 {
   public static void randomString() {
     // 创建一个长度为64个字符的随机数字字符串.
     String result = RandomStringUtils.random(64, false, true);
-    System.out.println("random = " + result);
+    System.out.println("创建一个长度为64个字符的随机数字字符串 = " + result);
 
     // 创建长度为64个字符的随机字母字符串.
     result = RandomStringUtils.randomAlphabetic(64);
-    System.out.println("random = " + result);
+    System.out.println("创建长度为64个字符的随机字母字符串 = " + result);
 
     // 创建长度为32个字符的随机ascii字符串.
     result = RandomStringUtils.randomAscii(32);
-    System.out.println("random = " + result);
+    System.out.println("创建长度为32个字符的随机ascii字符串 = " + result);
 
     // 根据定义的数组创建一个32个字符的字符串长度字符，包括数字和字母字符.
     result = RandomStringUtils.random(32, 0, 20, true, true, "qw32rfHIJk9iQ8Ud7h0X".toCharArray());
-    System.out.println("random = " + result);
+    System.out.println("根据定义的数组创建一个32个字符的字符串长度字符 = " + result);
   }
 }
