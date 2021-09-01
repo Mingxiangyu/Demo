@@ -33,6 +33,8 @@ public class ListUtils {
     System.out.println(different);
     Collection same = getSame(oldList, newList);
     System.out.println(same);
+
+    两个list集合的差集();
   }
 
   /**
@@ -155,5 +157,27 @@ public class ListUtils {
     }
 
     System.out.println(map);
+  }
+
+  /**
+   * 两个list集合的差集
+   *
+   */
+  public static void 两个list集合的差集() {
+    List<String> list = new ArrayList<>(); // 作为总的list
+    List<String> existList = new ArrayList<>(); // 存在的list
+
+    list.add("oJkxxw8pYYKdC5HXtoiEImLNIqyk");
+    list.add("oJkxxw6krKGhZIuYHV6rPp4uvLNw");
+    list.add("oJkxxw9As9hHdLnfqRbfDHeF9WAU");
+    list.add("oJkxxw1RNeDaodn6Qgz6FI4b5bKk");
+
+    existList.add("oJkxxw1RNeDaodn6Qgz6FI4b5bKk");
+    existList.add("oJkxxw9As9hHdLnfqRbfDHeF9WAU");
+
+    list.removeAll(existList); // 将不存在的list，除掉存在的list，剩下的就是不存在的了
+
+    System.out.println(existList);
+    System.out.println(list);
   }
 }
