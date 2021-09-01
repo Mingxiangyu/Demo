@@ -25,7 +25,7 @@ IMAGE ID   镜像ID
 CREATED    创建时间
 SIZE			 镜像大小
 
-# 可添加参数
+# 参数说明
 -a -all    			#列出所有镜像
 -q --quiet 			# 只显示镜像ID
 ~~~
@@ -39,7 +39,7 @@ mysql                             MySQL is a widely used, open-source relation�
 mariadb                           MariaDB Server is a high performing open sou…   4311      [OK]
 mysql/mysql-server                Optimized MySQL Server Docker images. Create…   844                  [OK]
 
-# 可添加参数
+# 参数说明
 --filter=stars=3000 # 搜索stars数大于3000的
 ```
 
@@ -73,6 +73,45 @@ docker run [可选参数] 镜像ID
 	容器端口
 -P 													# 随机指定容器端口
 
-
+docker run -it 容器名称/id /bin/bash      # 启动并进入容器内部
+exit																  	# 从容器中退回主机
 ```
+
+列出所有运行的容器
+
+~~~shell
+docker ps 命令
+# 参数说明
+-a 						# 列出所有容器，包含正在运行的容器以及历史容器
+-n=? 					# 显示最近创建的容器
+-q 						# 只显示容器id
+~~~
+
+退出容器
+
+~~~shell
+exit  				# 直接退出容器
+Ctrl + P + Q  # 容器不停止退出
+~~~
+
+删除容器
+
+~~~shell
+docker rm 容器ID
+docker rm -f ${docker ps -aq} 		# 删除所有的容器
+docker ps -a -q|xargs docker rm   # 删除所有的容器
+~~~
+
+启动和停止容器
+
+~~~shell
+docker start 容器id
+docker restart 容器id
+docker stop 容器id
+docker kill 容器id    # 强制停止当前容器
+~~~
+
+
+
+
 
