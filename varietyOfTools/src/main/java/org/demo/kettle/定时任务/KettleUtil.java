@@ -1,4 +1,4 @@
-package org.demo.kettle;
+package org.demo.kettle.定时任务;
 
 import org.pentaho.di.core.KettleEnvironment;
 import org.pentaho.di.core.util.EnvUtil;
@@ -47,18 +47,22 @@ public class KettleUtil {
   /**
    * 调用job文件
    *
-   * @param jobName
+   * @param jobName 作业的绝对路径
    * @throws Exception
    */
   public static void callNativeJob(String jobName) throws Exception {
     // 初始化
     KettleEnvironment.init();
 
+    // 任务元对象  jobName为作业的绝对路径
     JobMeta jobMeta = new JobMeta(jobName, null);
+    // 任务
     Job job = new Job(null, jobMeta);
     // 向Job 脚本传递参数，脚本中获取参数值：${参数名}
     // job.setVariable(paraname, paravalue);
+    // 开始任务
     job.start();
+    // 等待任务结束
     job.waitUntilFinished();
     if (job.getErrors() > 0) {
       throw new Exception("There are errors during job exception!(执行job发生异常)");
