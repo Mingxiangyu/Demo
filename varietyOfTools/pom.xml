@@ -466,6 +466,7 @@
       <name>kettle</name>
       <url>https://nexus.pentaho.org/content/groups/omni/</url>
     </repository>
+
     <!--    原文链接：https://blog.csdn.net/pingweicheng/article/details/103547943-->
     <!--    Spire.PDF for Java所需仓库  -->
     <repository>

@@ -12,7 +12,7 @@ docker COMMAND --help # 查看所有帮助
 
 ### 镜像命令
 
-docker images  查看所有本地主机的镜像
+###### docker images  查看所有本地主机的镜像
 
 ~~~shell
 REPOSITORY                   TAG       IMAGE ID       CREATED        SIZE
@@ -30,7 +30,7 @@ SIZE			 镜像大小
 -q --quiet 			# 只显示镜像ID
 ~~~
 
-docker search 搜索镜像
+###### docker search 搜索镜像
 
 ```shell
 [root@iZ8vb3dwh9qaj9jt1nkz36Z ~]# docker search mysql
@@ -43,13 +43,13 @@ mysql/mysql-server                Optimized MySQL Server Docker images. Create�
 --filter=stars=3000 # 搜索stars数大于3000的
 ```
 
-docker pull 下载镜像
+###### docker pull 下载镜像
 
 ```shell
 docker pull 镜像名[:tag] #如果不写tag，默认就是latest
 ```
 
-docker rmi 删除镜像
+###### docker rmi 删除镜像
 
 ```shell
 docker rmi 镜像ID 							# 删除镜像
@@ -77,7 +77,7 @@ docker run -it 容器名称/id /bin/bash      # 启动并进入容器内部
 exit																  	# 从容器中退回主机
 ```
 
-列出所有运行的容器
+###### 列出所有运行的容器
 
 ~~~shell
 docker ps 命令
@@ -87,14 +87,14 @@ docker ps 命令
 -q 						# 只显示容器id
 ~~~
 
-退出容器
+###### 退出容器
 
 ~~~shell
 exit  				# 直接退出容器
 Ctrl + P + Q  # 容器不停止退出
 ~~~
 
-删除容器
+###### 删除容器
 
 ~~~shell
 docker rm 容器ID
@@ -102,13 +102,50 @@ docker rm -f ${docker ps -aq} 		# 删除所有的容器
 docker ps -a -q|xargs docker rm   # 删除所有的容器
 ~~~
 
-启动和停止容器
+###### 启动和停止容器
 
 ~~~shell
 docker start 容器id
 docker restart 容器id
 docker stop 容器id
 docker kill 容器id    # 强制停止当前容器
+~~~
+
+### 常用命令
+
+###### 查看日志
+
+~~~sh
+docker logs
+~~~
+
+###### 进入当前正在运行的容器
+
+~~~sh
+docker exec -it 容器id bashShell
+docker attach 容器id
+
+# docker exec 						进入容器后开启一个新的终端，可以在里面操作（常用）
+# docker attach 					进入容器正在执行的终端，不会启动新的进程
+~~~
+
+###### 从容器内拷贝文件到主机上
+
+~~~sh
+docker cp 容器id:容器内路径 目的地路径（如果为宿主机当前文件夹路径，可以直接.代替目的地路径）
+# 将容器文件拷贝到主机上
+#docker cp 402:/home/test.java .
+~~~
+
+
+
+~~~sh
+docker run -d --name nginx01 -p 5566:80 nginx
+
+# -d 后台运行
+# --name 指定的容器名称
+# -p 指定端口 宿主机端口:容器端口
+
 ~~~
 
 
