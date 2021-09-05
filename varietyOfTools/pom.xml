@@ -505,8 +505,8 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <configuration>
-          <!--          如果为True则该jar包不能外部修改-->
-          <executable>false</executable>
+          <executable>false</executable><!--          如果为True则该jar包不能外部修改-->
+          <includeSystemScope>true</includeSystemScope><!-- 加入该配置,maven在打包时才会引入外部jar包-->
         </configuration>
       </plugin>
       <plugin>

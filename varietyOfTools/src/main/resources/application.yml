@@ -1,12 +1,9 @@
 server:
   port: 8378
-
   #自定义异常
   error:
     include-exception: true
     include-message: always
-
-
 #mybatis
 mybatis-plus:
   mapper-locations: classpath:com/doubleskyline/gkly/qbzb/mapper/*.xml
