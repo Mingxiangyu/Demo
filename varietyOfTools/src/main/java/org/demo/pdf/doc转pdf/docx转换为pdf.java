@@ -1,8 +1,8 @@
 package org.demo.pdf.doc转pdf;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
@@ -17,7 +17,21 @@ import org.apache.poi.xwpf.usermodel.XWPFTable;
 import org.apache.poi.xwpf.usermodel.XWPFTableCell;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
-public class WordToPDF {
+public class docx转换为pdf {
+
+  public static void main(String[] args) {
+    String filepath = "C:\\Users\\T480S\\Desktop\\1.docx";
+    String outpath = "C:\\Users\\T480S\\Desktop\\我是结果.pdf";
+    // 如果报org.apache.poi.POIXMLDocumentPart.getPackageRelationship()Lorg/apache/poi/openxml4j/opc/PackageRelationship;<br>
+    // 证明是poi版本太高，3.15版poi可以正常使用
+    try (InputStream source = new FileInputStream(filepath);
+        OutputStream target = new FileOutputStream(outpath); ) {
+      PdfOptions options = PdfOptions.create();
+      wordConverterToPdf(source, target, options, null);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
 
   /**
    * 将word文档， 转换成pdf, 中间替换掉变量
@@ -43,7 +57,7 @@ public class WordToPDF {
    */
   public static void wordConverterToPdf(
       InputStream source, OutputStream target, PdfOptions options, Map<String, String> params)
-      throws Exception {
+      throws IOException {
     XWPFDocument doc = new XWPFDocument(source);
     paragraphReplace(doc.getParagraphs(), params);
     for (XWPFTable table : doc.getTables()) {
@@ -69,46 +83,5 @@ public class WordToPDF {
         }
       }
     }
-  }
-
-  public static void main(String[] args) {
-    //    String filepath = "E:\\DJDeploy\\打击效果评估报告.docx";
-    String filepath = "C:\\Users\\T480S\\Desktop\\spire获取word自动生产的序号.docx";
-    String outpath = "C:\\Users\\T480S\\Desktop\\我是结果.pdf";
-    //如果报org.apache.poi.POIXMLDocumentPart.getPackageRelationship()Lorg/apache/poi/openxml4j/opc/PackageRelationship;<br>
-    //证明是poi版本太高
-    try {
-      InputStream source;
-      OutputStream target;
-      source = new FileInputStream(filepath);
-      target = new FileOutputStream(outpath);
-      PdfOptions options = PdfOptions.create();
-      wordConverterToPdf(source, target, options, null);
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-//
-//    try {
-//
-//      Map<String, String> params = new HashMap<String, String>();
-//      params.put("periodical", "1");
-//      params.put("missileBatch", "missileBatch");
-//      params.put("height", "height == null ? null : height.toString()");
-//      params.put("longitude", "nuclearExplosion.getLongitude()");
-//      params.put("latitude", "nuclearExplosion.getLatitude()");
-//      // 吨转换为千吨
-//      String nuclearEquivalent = params.put("nuclearEquivalent", "nuclearEquivalent");
-//      // 冲击波
-//      PdfOptions options = PdfOptions.create();
-//      wordConverterToPdf(source, target, options, params);
-//    } catch (FileNotFoundException e) {
-//      // TODO Auto-generated catch block
-//      e.printStackTrace();
-//    } catch (Exception e) {
-//      // TODO Auto-generated catch block
-//      e.printStackTrace();
-//    }
   }
 }
