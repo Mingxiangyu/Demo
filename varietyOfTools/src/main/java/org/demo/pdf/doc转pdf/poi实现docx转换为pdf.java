@@ -17,7 +17,10 @@ import org.apache.poi.xwpf.usermodel.XWPFTable;
 import org.apache.poi.xwpf.usermodel.XWPFTableCell;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
-public class docx转换为pdf {
+/**
+ * @author T480S
+ */
+public class poi实现docx转换为pdf {
 
   public static void main(String[] args) {
     String filepath = "C:\\Users\\T480S\\Desktop\\1.docx";

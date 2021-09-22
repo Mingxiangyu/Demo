@@ -23,7 +23,9 @@ public class StreamUtils {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         while (true) {
             try {
-                if (!((len = inputStream.read(buffer)) > -1)) break;
+                if (!((len = inputStream.read(buffer)) > -1)) {
+                    break;
+                }
                 byte[] bytes = baos.toByteArray();
                 baos.write(buffer, 0, len);
                 baos.flush();

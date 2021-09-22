@@ -35,7 +35,7 @@ public class 字体工具类 {
       // createFont返回一个使用指定字体类型和输入数据的新 Font。<br>
       // 新 Font磅值为 1，样式为 PLAIN,注意 此方法不会关闭 InputStream
       definedFont = Font.createFont(Font.TRUETYPE_FONT, bis);
-      // 复制此 Font对象并应用新样式，创建一个指定磅值的新 Font对象。
+      // 复制此 Font对象并应用自定义样式，创建一个指定磅值的新 Font对象。
       definedFont = definedFont.deriveFont(style, size);
     } catch (FontFormatException | IOException e) {
       e.printStackTrace();

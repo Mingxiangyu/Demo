@@ -21,7 +21,8 @@ public class 对称加密 {
   /** 密钥 */
   private static final String KEY = "O17CcQAcxbPGVnyo";
 
-  /** 算法 */
+  /** 算法 <br>
+   * java 不支持PKCS7Padding，只支持PKCS5Padding(如果传过来的加密算法是PKCS7则无法解密）  */
   private static final String ALGORITHMSTR = "AES/ECB/PKCS5Padding";
 
   public static void main(String[] args) throws Exception {
