@@ -20,6 +20,7 @@ mybatis-plus:
       column-underline: true
       logic-delete-value: -1
       logic-not-delete-value: 0
+    #禁用掉启动时控制台打印mybatisPlus的banner
     banner: false
   #原生配置
   configuration:
@@ -59,6 +60,14 @@ spring:
   data:
     mongodb:
       uri: mongodb://root:123456@127.0.0.1:27017/dataway2
+  #springboot启动加载图形位置
+  banner:
+    location: banner/banner.txt
+  #控制台色彩打印
+  output:
+    ansi:
+      enabled:
+        ALWAYS
 
 #配置日志文件相关
 #logging:
