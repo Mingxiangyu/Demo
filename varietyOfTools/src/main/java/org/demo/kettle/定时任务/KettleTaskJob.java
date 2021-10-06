@@ -31,8 +31,7 @@ public class KettleTaskJob {
 
   public void runJob() throws Exception {
     log.info("*****kettle定时任务运行开始******");
-    String transFileName = "C:\\Users\\T480S\\Desktop\\syncdatabase.kjb";
-//    String transFileName = "C:\\Users\\T480S\\Desktop\\ceshijobs.kjb";
+    String transFileName = "C:\\Users\\T480S\\Desktop\\测试\\alldatabase.kjb";
     KettleUtil.callNativeJob(transFileName);
     log.info("*****kettle定时任务运行结束******");
   }

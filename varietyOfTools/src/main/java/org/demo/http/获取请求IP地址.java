@@ -54,8 +54,7 @@ public class 获取请求IP地址 {
         e.printStackTrace();
       }
     }
-
-    // 使用代理（nginx等），则获取第一个IP地址
+    // 对于通过多个代理的情况，第一个IP为客户端真实IP,多个IP按照','分割
     if (StringUtils.isNotEmpty(ip) && ip.length() > 15) {
       if (ip.indexOf(",") > 0) {
         ip = ip.substring(0, ip.indexOf(","));

@@ -12,8 +12,8 @@ public class 读取Jar包内resource下文件 {
 
   public static void main(String[] args) {
     String imageFileName =
-        File.separator + "image" + File.separator + "file1.jpg";
-    String outPath = "C:\\Users\\T480\\Desktop\\2021-3-22三院解决算法\\新建位图图像.jpg";
+        File.separator + "image" + "1.jpeg";
+    String outPath = "C:\\Users\\T480S\\Desktop\\新建位图图像.jpg";
 
     getJarContextFile(imageFileName, outPath);
 
