@@ -137,7 +137,7 @@ docker cp 容器id:容器内路径 目的地路径（如果为宿主机当前文
 #docker cp 402:/home/test.java .
 ~~~
 
-
+###### docker运行
 
 ~~~sh
 docker run -d --name nginx01 -p 5566:80 nginx
@@ -148,7 +148,99 @@ docker run -d --name nginx01 -p 5566:80 nginx
 
 ~~~
 
+###### 查看容器信息
 
+~~~sh
+docker inspect 容器id
+~~~
+
+
+
+~~~sh
+docker run -it --rm tomcat:9.0 # 测试时使用，用完即删
+~~~
+
+###### 查看CPU状态
+
+~~~sh
+docker stats  # 查看CPU状态
+~~~
+
+
+
+## 使用数据卷
+
+> 方法一：直接使用命令挂载 -v
+
+~~~sh
+docker run -it -v 主机地址：容器内目录
+~~~
+
+
+
+## 安装mysql
+
+~~~sh
+# 获取镜像
+docker pull mysql
+
+# 运行容器需要数据挂载 需要配置密码
+docker run -d -p 3307:3306 -v /data/mysql/conf:/etc/mysql/conf.d -v /data/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 mysql
+
+# 官方启动命令
+ docker run --name some-mysql -v /my/custom:/etc/mysql/conf.d -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag
+ 
+# 如果要将所有表的默认编码和排序规则更改为使用 UTF-8 ( utf8mb4)，只需运行以下命令：
+ docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+~~~
+
+
+
+## 具名和匿名挂载
+
+~~~sh
+# 匿名挂载 在-v的时候只写了容器内部的路径，没有写外部的路径
+-v 容器内路径
+docker run -d -P --name nginx01 -v /etc/nginx nginx
+
+# 查看所有的volume情况
+[root@iZ8vb3dwh9qaj9jt1nkz36Z data]# docker volume ls
+DRIVER    VOLUME NAME
+local     0e1eaf15e16bb7bd67c041cd50f517439c8d269a706cd18cfa49c5dc07c36ada
+
+#具名挂载 在-v的时候加上卷名和容器内部的路径 卷名不能用 / 开头，否则认为宿主机路径
+
+
+# 通过ocker volume inspect 卷名称可以查看该卷对应宿主机路径
+[root@iZ8vb3dwh9qaj9jt1nkz36Z ~]# docker volume inspect 79db5ab3c8f2d90773ea014bd5450ef25d9be7fc205fa607b976563ad20952cf
+~~~
+
+所有docker容器内的卷，在没有指定目录的情况下都是在<u>/var/lib/docker/volumes/</u>内
+
+通过具名挂载可以方便的找到卷，建议使用具名挂载
+
+~~~ 
+# 如何确定时具名挂载还是匿名挂载，还是指定路径挂载
+-v 容器路径       								  	# 匿名挂载
+-v 卷名（不能以/开头）：容器内路径			  #  具名挂载
+-v /宿主机路径：容器内路径							 # 指定路径挂载
+~~~
+
+
+
+## dockerFile
+
+构建dockerfile
+
+~~~sh
+FROM centos
+
+VOLUME ["volume01","volume02"]
+
+CMD echo "-----end-----"
+
+cmd /bin/bash
+~~~
 
 
 
