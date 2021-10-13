@@ -1,4 +1,4 @@
-package org.demo;
+package org.demo.数据库;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

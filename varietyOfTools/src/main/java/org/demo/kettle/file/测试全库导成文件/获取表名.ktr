@@ -440,7 +440,7 @@
     <server>localhost</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>boot_hello</database>
+    <database>osrdb</database>
     <port>3306</port>
     <username>root</username>
     <password>Encrypted 2be98afc807ce9c83b300f7228bcaf88b</password>
@@ -498,6 +498,16 @@
     </hop>
     <hop>
       <from>字段选择</from>
+      <to>将建表语句更新为判断表是否存在</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>将建表语句更新为判断表是否存在</from>
+      <to>去除无主键表异常</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>去除无主键表异常</from>
       <to>复制记录到结果</to>
       <enabled>Y</enabled>
     </hop>
@@ -522,7 +532,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>704</xloc>
+      <xloc>880</xloc>
       <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
@@ -543,6 +553,10 @@
         <name>tablename</name>
         <rename>TABLENAME</rename>
       </field>
+      <field>
+        <name>sql</name>
+        <rename>sql_result</rename>
+      </field>
       <select_unspecified>N</select_unspecified>
     </fields>
     <attributes/>
@@ -554,7 +568,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>448</xloc>
+      <xloc>288</xloc>
       <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
@@ -575,7 +589,7 @@
     <tablenamefieldname>tablename</tablenamefieldname>
     <objecttypefieldname/>
     <issystemobjectfieldname/>
-    <sqlcreationfieldname/>
+    <sqlcreationfieldname>sql</sqlcreationfieldname>
     <includeCatalog>N</includeCatalog>
     <includeSchema>N</includeSchema>
     <includeTable>Y</includeTable>
@@ -595,6 +609,84 @@
     </remotesteps>
     <GUI>
       <xloc>160</xloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>将建表语句更新为判断表是否存在</name>
+    <type>ReplaceString</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>sql_result</in_stream_name>
+        <out_stream_name>sql_result2</out_stream_name>
+        <use_regex>no</use_regex>
+        <replace_string>CREATE TABLE</replace_string>
+        <replace_by_string>CREATE TABLE IF NOT EXISTS</replace_by_string>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>448</xloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>去除无主键表异常</name>
+    <type>ReplaceString</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>sql_result2</in_stream_name>
+        <out_stream_name>sql_result3</out_stream_name>
+        <use_regex>no</use_regex>
+        <replace_string>, PRIMARY KEY ()</replace_string>
+        <replace_by_string/>
+        <set_empty_string>Y</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>656</xloc>
       <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>

@@ -440,7 +440,7 @@
     <server>localhost</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>boot_hello</database>
+    <database>osrdb</database>
     <port>3306</port>
     <username>root</username>
     <password>Encrypted 2be98afc807ce9c83b300f7228bcaf88b</password>
@@ -448,10 +448,6 @@
     <data_tablespace/>
     <index_tablespace/>
     <attributes>
-      <attribute>
-        <code>EXTRA_OPTION_MYSQL.characterEncoding</code>
-        <attribute>utf8</attribute>
-      </attribute>
       <attribute>
         <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
         <attribute>N</attribute>
@@ -477,10 +473,6 @@
         <attribute>N</attribute>
       </attribute>
       <attribute>
-        <code>SQL_CONNECT</code>
-        <attribute>set names utf8</attribute>
-      </attribute>
-      <attribute>
         <code>STREAM_RESULTS</code>
         <attribute>Y</attribute>
       </attribute>
@@ -502,6 +494,11 @@
     <hop>
       <from>表输入</from>
       <to>文本文件输出</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>文本文件输出</from>
+      <to>SQL 文件输出</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -530,7 +527,7 @@
     <fileNameField/>
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>${Internal.Entry.Current.Directory}/${TABLENAME}</name>
+      <name>${Internal.Entry.Current.Directory}/csv/csv_${TABLENAME}</name>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
       <extention>csv</extention>
@@ -591,6 +588,52 @@
     <GUI>
       <xloc>200</xloc>
       <yloc>100</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>SQL 文件输出</name>
+    <type>SQLFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>source</connection>
+    <schema/>
+    <table>${TABLENAME}</table>
+    <truncate>N</truncate>
+    <create>Y</create>
+    <encoding>UTF-8</encoding>
+    <dateformat/>
+    <addtoresult>N</addtoresult>
+    <startnewline>Y</startnewline>
+    <file>
+      <name>${Internal.Entry.Current.Directory}/sql/sql_${TABLENAME}</name>
+      <extention>sql</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <splitevery>0</splitevery>
+      <create_parent_folder>Y</create_parent_folder>
+      <DoNotOpenNewFileInit>Y</DoNotOpenNewFileInit>
+    </file>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>608</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
