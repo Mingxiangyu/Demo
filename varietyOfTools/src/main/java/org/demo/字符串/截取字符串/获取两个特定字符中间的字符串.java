@@ -1,4 +1,4 @@
-package org.demo.字符串;
+package org.demo.字符串.截取字符串;
 
 import static java.util.regex.Pattern.compile;
 
