@@ -1,4 +1,4 @@
-package org.demo;
+package org.demo.加解密;
 
 import org.apache.commons.lang.StringUtils;
 

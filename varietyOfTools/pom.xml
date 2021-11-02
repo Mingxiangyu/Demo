@@ -522,24 +522,17 @@
       <version>7.0.2</version>
     </dependency>
     <!--    minio end-->
+
+    <!--    配置文件脱敏 start-->
+    <dependency>
+      <groupId>com.github.ulisesbocchio</groupId>
+      <artifactId>jasypt-spring-boot-starter</artifactId>
+      <version>2.1.0</version>
+    </dependency>
+    <!--    配置文件脱敏 end-->
   </dependencies>
 
   <repositories>
-    <!--    kettle依赖所在的仓库地址-->
-    <repository>
-      <id>pentaho-releases</id>
-      <name>kettle</name>
-      <url>https://nexus.pentaho.org/content/groups/omni/</url>
-    </repository>
-
-    <!--    原文链接：https://blog.csdn.net/pingweicheng/article/details/103547943-->
-    <!--    Spire.PDF for Java所需仓库  -->
-    <repository>
-      <id>com.e-iceblue</id>
-      <name>e-iceblue</name>
-      <url>http://repo.e-iceblue.com/nexus/content/groups/public/</url>
-    </repository>
-
     <!--    GeoTool所需仓库-->
     <repository>
       <id>osgeo</id>
@@ -562,6 +555,21 @@
       <releases>
         <enabled>false</enabled>
       </releases>
+    </repository>
+
+    <!--    kettle依赖所在的仓库地址-->
+    <repository>
+      <id>pentaho-releases</id>
+      <name>kettle</name>
+      <url>https://nexus.pentaho.org/content/groups/omni/</url>
+    </repository>
+
+    <!--    原文链接：https://blog.csdn.net/pingweicheng/article/details/103547943-->
+    <!--    Spire.PDF for Java所需仓库  -->
+    <repository>
+      <id>com.e-iceblue</id>
+      <name>e-iceblue</name>
+      <url>http://repo.e-iceblue.com/nexus/content/groups/public/</url>
     </repository>
   </repositories>
 

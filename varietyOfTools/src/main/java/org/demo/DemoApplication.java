@@ -17,6 +17,13 @@ import springfox.documentation.spring.web.plugins.Docket;
 public class DemoApplication {
   public static void main(String[] args) {
     SpringApplication.run(DemoApplication.class, args);
+
+    // 启动方式二
+    //    ConfigurableApplicationContext context = new SpringApplicationBuilder()
+    //        .sources(DemoApplication.class)
+    //        .bannerMode(Banner.Mode.CONSOLE)
+    //        .run(args);
+    //    原文链接：https://blog.csdn.net/qq_32691791/article/details/113033007
   }
 
   /**

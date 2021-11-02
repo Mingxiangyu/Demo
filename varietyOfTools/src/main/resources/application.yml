@@ -68,6 +68,9 @@ spring:
     ansi:
       enabled:
         ALWAYS
+  main:
+    # springboot项目-启动logo开关控制。
+    banner-mode: console
 
 #配置日志文件相关
 #logging:
@@ -75,3 +78,8 @@ spring:
 #  file:
 #    path: log
 #  level: debug
+
+# 秘钥
+jasypt:
+  encryptor:
+    password: algorithm
