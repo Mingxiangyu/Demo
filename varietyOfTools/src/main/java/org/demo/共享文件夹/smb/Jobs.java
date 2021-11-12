@@ -21,7 +21,6 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -30,7 +29,8 @@ import org.springframework.stereotype.Component;
 /** @author T480S */
 @Component
 @Slf4j
-public class Jobs implements InitializingBean {
+//public class Jobs implements InitializingBean {
+public class Jobs{//注释了 InitializingBean 避免启动Application后调用
 
 //  @Value("${smb.jobSourcePath}")
   String jobSourcePath;
@@ -171,7 +171,7 @@ public class Jobs implements InitializingBean {
         (System.currentTimeMillis() - startTime) / 1000);
   }
 
-  @Override
+//  @Override
   public void afterPropertiesSet() {
     this.scheduledMethod();
   }

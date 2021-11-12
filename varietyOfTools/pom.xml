@@ -530,6 +530,13 @@
       <version>2.1.0</version>
     </dependency>
     <!--    配置文件脱敏 end-->
+
+    <!--    发送邮件 start-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-mail</artifactId>
+    </dependency>
+    <!--    发送邮件 end-->
   </dependencies>
 
   <repositories>

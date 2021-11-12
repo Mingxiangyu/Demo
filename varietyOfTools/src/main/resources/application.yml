@@ -71,6 +71,12 @@ spring:
   main:
     # springboot项目-启动logo开关控制。
     banner-mode: console
+  mail:
+    host: smtp.163.com #SMTP服务器地址
+    username: Mxiang_yu@163.com #登陆账号
+    password: RFGILJFAOWHQKULI #写邮箱的授权码！！
+    properties:
+      from: Mxiang_yu@163.com #邮件发信人（即真实邮箱）
 
 #配置日志文件相关
 #logging:
