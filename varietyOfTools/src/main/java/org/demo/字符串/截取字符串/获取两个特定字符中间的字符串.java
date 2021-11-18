@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class 获取两个特定字符中间的字符串 {
   public static void main(String[] args) {
-    String str = "测试1】";
+    String str = "【测试1】【测试2】";
     String regexPre = "【";
     String regexSuf = "】";
     List<String> data = getData(str, regexPre, regexSuf);
@@ -17,7 +17,10 @@ public class 获取两个特定字符中间的字符串 {
   }
 
   /**
-   * 获取两个特定字符中间的字符串
+   * 获取两个特定字符中间的字符串 <br>
+   * "【测试1】【测试2】" [测试1, 测试2] <br>
+   * "【测试1】" [测试1] <br>
+   * "测试1】" []
    *
    * @param str doc中文本文档
    * @param regexPre 前特定符号
@@ -36,6 +39,4 @@ public class 获取两个特定字符中间的字符串 {
     }
     return stringList;
   }
-
-
 }

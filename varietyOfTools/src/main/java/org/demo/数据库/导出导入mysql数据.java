@@ -73,7 +73,7 @@ public class 导出导入mysql数据 {
     String username = properties.getProperty("jdbc.username"); // 用户名
     String password = properties.getProperty("jdbc.password"); // 用户密码
     String exportDatabaseName = properties.getProperty("jdbc.exportDatabaseName"); // 需要导出的数据库名
-    String host = properties.getProperty("jdbc.host"); // 从哪个主机导出数据库，如果没有指定这个值，则默认取localhost
+    String host = properties.getProperty("jdbc.host"); // 从 哪个主机导出数据库，如果没有指定这个值，则默认取localhost
     String port = properties.getProperty("jdbc.port"); // 使用的端口号
     String exportPath = properties.getProperty("jdbc.exportPath"); // 导出路径
 
