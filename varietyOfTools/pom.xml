@@ -600,5 +600,24 @@
       </plugin>
     </plugins>
   </build>
-
+  <!-- 使用分发管理将本项目打成jar包，直接上传到指定服务器 -->
+  <!--  <distributionManagement>-->
+  <!--    &lt;!&ndash;正式版本&ndash;&gt;-->
+  <!--    <repository>-->
+  <!--      &lt;!&ndash; nexus服务器中用户名：在settings.xml中<server>的id&ndash;&gt;-->
+  <!--      <id>releases</id>-->
+  <!--      &lt;!&ndash; 这个名称自己定义 &ndash;&gt;-->
+  <!--      <name>Release repository</name>-->
+  <!--      <url>http://192.168.0.125:9081/repository/maven-releases-my/</url> -->
+  <!--    </repository>-->
+  <!--    &lt;!&ndash;快照&ndash;&gt;-->
+  <!--    <snapshotRepository>-->
+  <!--      &lt;!&ndash; nexus服务器中用户名：在settings.xml中<server>的id&ndash;&gt;-->
+  <!--      <id>snapshots</id>-->
+  <!--      &lt;!&ndash; 这个名称自己定义 &ndash;&gt;-->
+  <!--      <name>Snapshots repository</name>-->
+  <!--      <url>http://192.168.0.125:9081/repository/maven-snapshots-my/</url>-->
+  <!--    </snapshotRepository>-->
+  <!--  </distributionManagement>-->
+  <!--maven私服搭建  原文链接：https://blog.csdn.net/wc1695040842/article/details/102575686-->
 </project>
