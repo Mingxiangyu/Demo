@@ -13,7 +13,7 @@ public class 一次读取txt内所有内容 {
 
   public static String readToString(String filePath) {
     File file = new File(filePath);
-    String encoding = 获取TXT文本编码格式.getTextFileEncode(file);
+    String encoding = 获取TXT文本编码格式.getFilecharset(file);
     long filelength = file.length();
     byte[] filecontent = new byte[(int) filelength];
     try {

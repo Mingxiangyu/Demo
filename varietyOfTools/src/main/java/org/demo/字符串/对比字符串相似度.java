@@ -8,12 +8,14 @@ import java.util.Objects;
 
 public class 对比字符串相似度 {
   public static void main(String[] args) {
-    String b = "穿cc针c";
-    String a = "散步穿针";
-    double similar = StrUtil.similar(a, b); // 用较大的字符串长度作为分母，相似子串作为分子计算出字串相似度
+    String a = "航天侦查轻薄1";
+//    String a = "航天侦查轻薄";
+    String a1 = "航天侦查轻薄（zqkz）";
+//    String a1 = "航通报（zqkz）";
+    double similar = StrUtil.similar(a, a1); // 用较大的字符串长度作为分母，相似子串作为分子计算出字串相似度
     System.out.println(similar);
 
-    String s = countPercent(a, b);
+    String s = countPercent(a, a1);
     System.out.println(s);
   }
 

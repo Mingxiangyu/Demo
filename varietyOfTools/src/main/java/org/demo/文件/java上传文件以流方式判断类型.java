@@ -1,5 +1,7 @@
 package org.demo.文件;
 
+import cn.hutool.core.io.FileTypeUtil;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,9 +9,15 @@ import java.io.InputStream;
 public final class java上传文件以流方式判断类型 {
 
   public static void main(String[] args) throws Exception {
-    String docFilePath = "C:\\Users\\T480S\\Desktop\\ParseWordUtil.doc";
+    String docFilePath = "C:\\Users\\T480S\\Desktop\\ces1.docx";
+    hutool提供的根据文件流获取文件类型(docFilePath);
 
-    System.out.println(java上传文件以流方式判断类型.getType(docFilePath));
+//    System.out.println(java上传文件以流方式判断类型.getType(docFilePath));
+  }
+
+  private static void hutool提供的根据文件流获取文件类型(String docFilePath) {
+    String type = FileTypeUtil.getType(new File(docFilePath));
+    System.out.println(type);
   }
 
   /** * 将文件头转换成16进制字符串 * * @param 原生byte * @return 16进制字符串 */
