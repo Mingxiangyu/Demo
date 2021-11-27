@@ -3,7 +3,11 @@ package org.demo;
 import java.io.File;
 import java.io.IOException;
 
-/** @author T480S */
+/**
+ * 安全测试时提出问题
+ *
+ * @author T480S
+ */
 public class 避免目录遍历异常 {
   public static void main(String[] args) {
     failIfDirectoryTraversal("C:\\Users\\T480S\\Desktop\\测试全库导成文件\\..\\5-10开发计划.pdf");

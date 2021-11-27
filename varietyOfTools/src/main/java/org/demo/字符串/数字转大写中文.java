@@ -1,4 +1,4 @@
-package org.demo;
+package org.demo.字符串;
 
 import java.math.BigDecimal;
 

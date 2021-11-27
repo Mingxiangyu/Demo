@@ -1,4 +1,4 @@
-package org.demo;
+package org.demo.数据库;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
