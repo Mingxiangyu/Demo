@@ -537,6 +537,19 @@
       <artifactId>spring-boot-starter-mail</artifactId>
     </dependency>
     <!--    发送邮件 end-->
+
+    <!--    mongodb start-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-mongodb</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.mongodb</groupId>
+      <artifactId>mongo-java-driver</artifactId>
+      <version>3.4.2</version>
+    </dependency>
+    <!--    mongodb end-->
+
   </dependencies>
 
   <repositories>
@@ -581,6 +594,7 @@
   </repositories>
 
   <build>
+    <!--  <pluginManagement> pluginManagement是表示插件声明，即你在项目中的pluginManagement下声明了插件，Maven不会加载该插件-->
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
@@ -598,7 +612,17 @@
           <target>8</target>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.22.1</version>
+        <configuration>
+          <!--默认关掉单元测试 -->
+          <skipTests>${sikpTests}</skipTests>
+        </configuration>
+      </plugin>
     </plugins>
+    <!--  </pluginManagement>-->
   </build>
   <!-- 使用分发管理将本项目打成jar包，直接上传到指定服务器 -->
   <!--  <distributionManagement>-->

@@ -12,7 +12,6 @@
     <modules>
         <module>poiReadRuleExcel</module>
         <module>varietyOfTools</module>
-        <module>word-extractor</module>
         <module>fileparse</module>
     </modules>
 

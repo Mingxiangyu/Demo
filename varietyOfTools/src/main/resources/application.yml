@@ -59,18 +59,39 @@ spring:
   # 配置mongo数据库
   data:
     mongodb:
-      uri: mongodb://root:123456@127.0.0.1:27017/dataway2
-  #springboot启动加载图形位置
+      host: 127.0.0.1
+      port: 27017
+      authentication-database: test
+      database: test
+      username: blog
+      password: blog123456
+    #      uri: mongodb://127.0.0.1:27017/test #如果密码中含有特殊字符，需要自行查询下特殊字符url的编码，否则编译不通过。
+    #-------- 设置了密码的MongoDB配置方式 -------
+    # MongoDB服务器连接地址
+    #spring.data.mongodb.host=127.0.0.1
+    # MongoDB服务器连接端口
+    #spring.data.mongodb.port=27017
+    # MongoDB的验证数据库
+    #spring.data.mongodb.authentication-database=admin #认证的库，因为账号密码信息在admin库里
+    # MongoDB数据库用户
+    #spring.data.mongodb.username=root
+    # MongoDB数据库密码
+    #spring.data.mongodb.password=123456
+    # 带连接的数据库
+    #spring.data.mongodb.database=testMongoDB #如果密码第一位是*，yml文件不支持。需要加单引号,password是用char[]接收的，如果你的密码是纯数字也需要加单引号。
+    #    原文链接：https://blog.csdn.net/a1120467800/article/details/109954145
+  #springboot启动加载log图形位置
   banner:
     location: banner/banner.txt
+  main:
+    # springboot项目-启动logo开关控制。
+    banner-mode: console
   #控制台色彩打印
   output:
     ansi:
       enabled:
         ALWAYS
-  main:
-    # springboot项目-启动logo开关控制。
-    banner-mode: console
+  # 发送邮件相关
   mail:
     host: smtp.163.com #SMTP服务器地址
     username: Mxiang_yu@163.com #登陆账号
