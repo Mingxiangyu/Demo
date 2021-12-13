@@ -8,12 +8,14 @@ import java.util.Date;
 public class 时间解析 {
 
   public static void main(String[] args) {
-//    时间转换();
-    getTimeNowThroughCalendar();
+    时间转换();
+//    getTimeNowThroughCalendar();
   }
 
   private static void 时间转换() {
     Date newTime = new Date();
+    long time = 1639129689864L;
+    newTime.setTime(time);
     // 设置时间格式
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     SimpleDateFormat sdf1 = new SimpleDateFormat("y-M-d h:m:s a E");

@@ -46,7 +46,12 @@ public class 获取TXT文本编码格式 {
     return code;
   }
 
-  // 判断编码格式方法
+  /**
+   * 判断文件编码格式方法
+   *
+   * @param sourceFile 文件
+   * @return 编码格式
+   */
   public static String getFilecharset(File sourceFile) {
     String charset = "GBK";
     byte[] first3Bytes = new byte[3];

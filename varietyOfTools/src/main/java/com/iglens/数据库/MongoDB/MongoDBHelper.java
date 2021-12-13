@@ -2,40 +2,17 @@ package com.iglens.数据库.MongoDB;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.ListIndexesIterable;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.IndexOptions;
 import com.mongodb.client.model.Indexes;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.poifs.filesystem.POIFSFileSystem;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -55,150 +32,6 @@ public class MongoDBHelper<T> {
 
   /** 注入template */
   @Autowired private MongoTemplate mongoTemplate;
-
-  public void importExcel(String filePath) {
-    // 检查文件
-    Workbook workbook = getWorkBook(new File(filePath));
-    if (workbook == null) {
-      return;
-    }
-    for (int sheetNum = 0; sheetNum < workbook.getNumberOfSheets(); sheetNum++) {
-      // 获取当前sheet工作表
-      Sheet sheet = workbook.getSheetAt(sheetNum);
-      if (sheet == null) {
-        continue;
-      }
-      String sheetName = sheet.getSheetName();
-      System.out.println("sheetName: " + sheetName);
-      // 连接文档
-      MongoCollection<Document> collection = mongoTemplate.getCollection(sheetName);
-      System.out.println("连接成功");
-
-      List<Map<String, Object>> dataList = new ArrayList<>();
-      List<String> fieldList = new ArrayList<String>();
-      // 获取Excel第一行名称
-      Row row0 = sheet.getRow(0);
-      for (Cell cell : row0) {
-        fieldList.add(cell.toString());
-      }
-      int rows = sheet.getLastRowNum() + 1;
-      int cells = fieldList.size();
-      for (int i = 1; i < rows; i++) {
-        Row row = sheet.getRow(i);
-        Map<String, Object> paraMap = new HashMap<>();
-        for (int j = 0; j < cells; j++) {
-          Cell cell = row.getCell(j);
-          if (cell != null && !"".equals(cell.toString())) {
-            paraMap.put(fieldList.get(j), cell.toString());
-          }
-        }
-        dataList.add(paraMap);
-      }
-      // 封装数据
-      List<Document> documents = new ArrayList<>();
-      if (dataList.size() != 0) {
-        for (Map<String, Object> map : dataList) {
-          Document document = new Document();
-          for (String s : fieldList) {
-            document.append(s, map.get(s));
-          }
-          collection.insertOne(document);
-          documents.add(document);
-        }
-      }
-      //      collection.insertMany(documents);
-    }
-  }
-
-  /**
-   * 获得工作簿对象
-   *
-   * @param excelFile excel文件
-   * @return 工作簿对象
-   */
-  public static Workbook getWorkBook(File excelFile) {
-    // 获得文件名
-    String fileName = excelFile.getName();
-    // 创建Workbook工作簿对象，表示整个excel
-    Workbook workbook = null;
-    try {
-      // 获得excel文件的io流
-      InputStream is = new FileInputStream(excelFile);
-      // 根据文件后缀名不同(xls和xlsx)获得不同的workbook实现类对象
-      if (fileName.endsWith(".xls")) {
-        // 2003版本
-        workbook = new HSSFWorkbook(new POIFSFileSystem(is));
-      } else if (fileName.endsWith(".xlsx")) {
-        // 2007版本
-        workbook = new XSSFWorkbook(is);
-      }
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    return workbook;
-  }
-
-  /**
-   * 导出库中所有集合到Excel
-   *
-   * @param filePath excel文件目录
-   */
-  public void exportExcel(String filePath) {
-    // 创建HSSFWorkbook对象
-    XSSFWorkbook workbook = new XSSFWorkbook();
-    // 获取库中所有集合名称
-    Set<String> collectionNames = mongoTemplate.getCollectionNames();
-    System.out.println("collectionNames: " + collectionNames.toString());
-
-    // 循环每一个集合
-    for (String collectionName : collectionNames) {
-      List<Map> x =
-          mongoTemplate.find(
-              new Query().with(Sort.by(Direction.DESC, "x")), Map.class, collectionName);
-      for (Map map : x) {
-        System.out.println(map);
-      }
-      MongoCollection<Document> collection = mongoTemplate.getCollection(collectionName);
-      // 检索所有文档
-      FindIterable<Document> findIterable = collection.find();
-      MongoCursor<Document> mongoCursor = findIterable.iterator();
-      List<Document> documents = new ArrayList<>();
-      while (mongoCursor.hasNext()) {
-        documents.add(mongoCursor.next());
-      }
-      // 表头(属性字段名）
-      List<String> stringList = new ArrayList<>();
-      for (Entry<String, Object> entry : documents.get(0).entrySet()) {
-        stringList.add(entry.getKey());
-      }
-
-      // 创建HSSFSheet对象
-      XSSFSheet sheet = workbook.createSheet(collectionName);
-      // Excel表头
-      XSSFRow row0 = sheet.createRow(0);
-      for (int i = 0; i < stringList.size(); i++) {
-        XSSFCell cell0 = row0.createCell(i);
-        cell0.setCellValue(stringList.get(i));
-      }
-
-      // Excel数据
-      for (int i = 0; i < documents.size(); i++) {
-        XSSFRow rows = sheet.createRow(i + 1);
-        for (int j = 0; j < stringList.size(); j++) {
-          XSSFCell cells = rows.createCell(j);
-          Object obj = documents.get(i).get(stringList.get(j));
-          cells.setCellValue(obj == null ? null : obj.toString());
-        }
-      }
-    }
-    try (FileOutputStream outputStream = new FileOutputStream(filePath)) {
-      workbook.write(outputStream);
-      outputStream.flush();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    System.out.println("导出完成");
-  }
 
   /**
    * 功能描述: 创建一个集合 同一个集合中可以存入多个不同类型的对象，我们为了方便维护和提升性能， 后续将限制一个集合中存入的对象类型，即一个集合只能存放一个类型的数据
@@ -415,7 +248,7 @@ public class MongoDBHelper<T> {
     try {
       Date start = new SimpleDateFormat().parse(startTime);
       Date end = new SimpleDateFormat().parse(endTime);
-      //gt 大于  lt小于 加e后为或等于，
+      // gt 大于  lt小于 加e后为或等于，
       // 时间需要转换为date
       Criteria criteria =
           Criteria.where("createTime").gt(start).andOperator(Criteria.where("createTime").lt(end));
