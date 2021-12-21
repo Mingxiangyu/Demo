@@ -550,6 +550,13 @@
     </dependency>
     <!--    mongodb end-->
 
+    <!--zip文件加解密 start-->
+    <dependency>
+      <groupId>net.lingala.zip4j</groupId>
+      <artifactId>zip4j</artifactId>
+      <version>1.3.2</version>
+    </dependency>
+    <!--    zip文件加解密 end-->
   </dependencies>
 
   <repositories>

@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public class 数字转大写中文 {
   public static void main(String[] args) {
-    String from = from(new BigDecimal(1111111111));
+    String from = from(new BigDecimal(1697.11));
     System.out.println(from);
   }
 
