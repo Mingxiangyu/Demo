@@ -3,7 +3,6 @@ package com.iglens.压缩包.zip;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 import net.lingala.zip4j.model.FileHeader;
@@ -12,24 +11,32 @@ import net.lingala.zip4j.util.Zip4jConstants;
 
 public class Zip4j加解密1 {
   public static void main(String[] args) {
-    String zipFilePath  = "C:\\Users\\T480S\\Desktop\\zip4j.zip";
+    String zipFilePath = "C:\\Users\\T480S\\Desktop\\zip4j.zip";
     String fileFolder = "C:\\Users\\T480S\\Desktop\\zip4jtest";
     try {
-      Unzip4j(zipFilePath,fileFolder);
+      unzip4J(zipFilePath, fileFolder, "1234");
     } catch (ZipException e) {
       e.printStackTrace();
     }
   }
-  /** 压缩单个文件 */
-  public static void dozip1() throws ZipException {
-    ZipFile zip = new ZipFile("D://压缩//test.zip");
+
+  /**
+   * 压缩单个文件
+   *
+   * @throws ZipException
+   */
+  public static void dozip1(String zipFilePath) throws ZipException {
+    File file = new File(zipFilePath);
     // 需要判断压缩父路径是否存在
-    File file = zip.getFile();
     if (!file.getParentFile().exists()) {
-      file.getParentFile().mkdirs();
+      boolean mkdirs = file.getParentFile().mkdirs();
+      System.out.println("压缩包文件父路径不存在，自动创建：" + (mkdirs ? "成功" : "失败"));
     }
 
-    // 设置参数
+    ZipFile zip = new ZipFile(zipFilePath);
+    // 设置编码
+    zip.setFileNameCharset("GBK");
+    // 设置zip压缩参数
     ZipParameters para = new ZipParameters();
     // 设置压缩方式,默认是COMP_DEFLATE
     para.setCompressionMethod(Zip4jConstants.COMP_DEFLATE);
@@ -51,7 +58,7 @@ public class Zip4j加解密1 {
    *
    * @throws ZipException
    */
-  public static  void dozip2() throws ZipException {
+  public static void dozip2() throws ZipException {
     ZipFile zip = new ZipFile("D://压缩//test.zip");
     // 要紧跟设置编码
     zip.setFileNameCharset("GBK");
@@ -79,7 +86,7 @@ public class Zip4j加解密1 {
    *
    * @throws ZipException
    */
-  public static  void dozip3() throws ZipException {
+  public static void dozip3() throws ZipException {
     ZipFile zip = new ZipFile("D:\\压缩\\test.zip");
     File file = zip.getFile();
     if (!file.getParentFile().exists()) {
@@ -102,7 +109,7 @@ public class Zip4j加解密1 {
    * @param zipFile
    * @throws ZipException
    */
-  public static  void Unzip4j(String zipFile,String unZipPath) throws ZipException {
+  public static void unzip4J(String zipFile, String unZipPath, String passwd) throws ZipException {
     long startTime = System.currentTimeMillis();
     ZipFile zip = new ZipFile(zipFile);
     // 第一时间设置编码格式
@@ -111,7 +118,10 @@ public class Zip4j加解密1 {
     if (!zip.isValidZipFile()) {
       throw new ZipException("文件不合法或不存在");
     }
-    checkEncrypted(zip);
+    // 检查是否需要密码
+    if (zip.isEncrypted()) {
+      zip.setPassword(passwd.toCharArray());
+    }
     // 跟java自带相比，这里文件路径会自动生成，不用判断
     zip.extractAll(unZipPath);
     System.out.println("解压成功！");
@@ -119,39 +129,31 @@ public class Zip4j加解密1 {
     System.out.println("耗时：" + (endTime - startTime) + "ms");
   }
 
-  /** 解压方法2
+  /**
+   * 解压方法2
    *
    * @param zipFile
    * @throws ZipException
    */
-  public static  void Unzip4j1(String zipFile) throws ZipException {
+  public static void Unzip4j1(String zipFile, String passwd) throws ZipException {
     long startTime = System.currentTimeMillis();
-    ZipFile zipFile2 = new ZipFile(zipFile);
+    ZipFile zip = new ZipFile(zipFile);
     // 设置编码格式
-    zipFile2.setFileNameCharset("GBK");
-    if (!zipFile2.isValidZipFile()) {
+    zip.setFileNameCharset("GBK");
+    if (!zip.isValidZipFile()) {
       throw new ZipException("文件不合法或不存在");
     }
     // 检查是否需要密码
-    checkEncrypted(zipFile2);
-    List<FileHeader> fileHeaderList = zipFile2.getFileHeaders();
+    if (zip.isEncrypted()) {
+      zip.setPassword(passwd.toCharArray());
+    }
+    List<FileHeader> fileHeaderList = zip.getFileHeaders();
     for (int i = 0; i < fileHeaderList.size(); i++) {
       FileHeader fileHeader = fileHeaderList.get(i);
-      zipFile2.extractFile(fileHeader, "D:\\压缩\\test");
+      zip.extractFile(fileHeader, "D:\\压缩\\test");
     }
     System.out.println("解压成功！");
     long endTime = System.currentTimeMillis();
     System.out.println("耗时：" + (endTime - startTime) + "ms");
-  }
-
-  // 检测密码
-  private static  void checkEncrypted(ZipFile zip) throws ZipException {
-    Scanner in = new Scanner(System.in);
-    if (zip.isEncrypted()) {
-      System.out.println("文件" + zip.getFile().getName() + "有密码！");
-      System.out.println("请输入密码：");
-      zip.setPassword(in.next().trim());
-    }
-    in.close();
   }
 }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class 线程池测试Service {
 
-  @Async("asyncServiceExecutor")
+  @Async("asyncServiceExecutor") // 对于非默认的异步任务再通过@Async("otherTaskExecutor")来指定线程池名称
   public void executeAsync() {
     log.info("start executeAsync");
 
