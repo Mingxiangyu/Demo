@@ -13,6 +13,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.poi.POIXMLProperties;
+import org.apache.poi.POIXMLProperties.CoreProperties;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.model.PicturesTable;
 import org.apache.poi.hwpf.model.StyleDescription;
@@ -201,10 +202,10 @@ public class ParseWordUtil {
       }
     }
 
-//    /*
+    //    /*
     XWPFWordExtractor extractor = new XWPFWordExtractor(doc);
     String text = extractor.getText();
-     System.out.println(text);
+    System.out.println(text);
     POIXMLProperties.CoreProperties coreProps = extractor.getCoreProperties();
     String title = coreProps.getTitle();
     System.out.println(title);
@@ -214,19 +215,20 @@ public class ParseWordUtil {
     List<XWPFTableRow> rows;
     List<XWPFTableCell> cells;
     for (XWPFTable table : tables) {
-        // 表格属性
-        // CTTblPr pr = table.getCTTbl().getTblPr();
-        // 获取表格对应的行
-        rows = table.getRows();
-        for (XWPFTableRow row : rows) {
-            //获取行对应的单元格
-            cells = row.getTableCells();
-            for (XWPFTableCell cell : cells) {
-                System.out.println(cell.getText());;
-            }
+      // 表格属性
+      // CTTblPr pr = table.getCTTbl().getTblPr();
+      // 获取表格对应的行
+      rows = table.getRows();
+      for (XWPFTableRow row : rows) {
+        // 获取行对应的单元格
+        cells = row.getTableCells();
+        for (XWPFTableCell cell : cells) {
+          System.out.println(cell.getText());
+          ;
         }
+      }
     }
-//    */
+    //    */
     close(is);
 
     return list;
@@ -449,6 +451,24 @@ public class ParseWordUtil {
     styles.addStyle(style);
   }
 
+  /**
+   * 输出CoreProperties信息
+   *
+   * @param docxDocument word文档
+   */
+  private static void printCoreProperties(XWPFDocument docxDocument) {
+    XWPFWordExtractor extractor = new XWPFWordExtractor(docxDocument);
+    CoreProperties coreProps = extractor.getCoreProperties();
+
+    System.out.println("==============category==============");
+    System.out.println(coreProps.getCategory()); // 分类
+    System.out.println("==============creator==============");
+    System.out.println(coreProps.getCreator()); // 创建者
+    System.out.println("==============created==============");
+    System.out.println(coreProps.getCreated()); // 创建时间
+    System.out.println("==============title==============");
+    System.out.println(coreProps.getTitle()); // 标题
+  }
   /**
    * 关闭输入流
    *

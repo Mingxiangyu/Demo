@@ -16,9 +16,8 @@ import org.apache.poi.xwpf.usermodel.XWPFTable;
 
 public class 读取DOCX中图片和文本 {
 
-  public static String textPath = "src/main/resources/test.txt";
-  public static String docPath = "C:\\Users\\T480S\\Desktop\\新建 DOCX 文档.docx";
-  //  public static String docPath = "C:\\Users\\T480S\\Desktop\\新建 DOC 文档.doc";
+  public static String textPath = "C:\\Users\\T480S\\Desktop\\test.txt";
+  public static String docPath = "C:\\Users\\T480S\\Desktop\\ces.docx";
   public static String imagePath = "src/main/resources/";
 
   public static void main(String args[]) {
@@ -48,7 +47,11 @@ public class 读取DOCX中图片和文本 {
       String text = xwpfWordExtractor.getText();
       System.out.println(text);
       // 将获取到的文字存放到对应文件名中的txt文件中
-      PrintStream ps = new PrintStream(textPath);
+      File file1 = new File(textPath);
+      if (!file1.exists()) {
+        file1.createNewFile();
+      }
+      PrintStream ps = new PrintStream(file1);
       ps.println(text);
 
       // 用XWPFDocument的getAllPictures来获取所有的图片
