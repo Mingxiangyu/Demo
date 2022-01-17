@@ -557,6 +557,18 @@
       <version>1.3.2</version>
     </dependency>
     <!--    zip文件加解密 end-->
+
+    <!--监控 start-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <!--适配prometheus-->
+    <dependency>
+      <groupId>io.micrometer</groupId>
+      <artifactId>micrometer-registry-prometheus</artifactId>
+    </dependency>
+    <!--监控 end-->
   </dependencies>
 
   <repositories>

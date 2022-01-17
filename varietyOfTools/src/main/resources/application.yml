@@ -45,11 +45,13 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: root
-    password: mingxy925871
+#    password: mingxy925871
+    password: 123456
   #配置jpa自动建表
   jpa:
     hibernate:
       ddl-auto: update #第一次建表create  后面用update，要不然每次重启都会新建表
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     show-sql: true #执行命令时是否打印sql
   #配置文件上传大小限制
   servlet:
@@ -110,3 +112,21 @@ spring:
 jasypt:
   encryptor:
     password: algorithm
+
+# 监控配置  TODO
+management:
+  endpoint:
+    health:
+      show-details: always
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  metrics:
+    export:
+      prometheus:
+        enabled: true
