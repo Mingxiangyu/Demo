@@ -1,4 +1,4 @@
-package com.iglens.word.写word;
+package com.iglens.word;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
