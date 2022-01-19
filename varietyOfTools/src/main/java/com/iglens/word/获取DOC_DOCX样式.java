@@ -1,4 +1,4 @@
-package com.iglens.word.写word;
+package com.iglens.word;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -20,9 +20,9 @@ public class 获取DOC_DOCX样式 {
     String filePath = "C:\\Users\\T480S\\Desktop\\ces.docx";
     if (filePath.endsWith("doc")) {
       获取doc样式(filePath);
-    }else if(filePath.endsWith("docx")){
+    } else if (filePath.endsWith("docx")) {
       获取docx样式(filePath);
-    };
+    }
   }
 
   public static void 获取doc样式(String filePath) throws IOException {
@@ -33,6 +33,14 @@ public class 获取DOC_DOCX样式 {
 
     for (int i = 0; i < r.numParagraphs(); i++) {
       Paragraph p = r.getParagraph(i); // 获取段落
+
+      // 获取字体格式 0-left, 1-center, 2-right, 3-left and right
+      int justification = p.getJustification();
+      System.out.println("字体格式为：" + justification);
+
+      String fontName = p.getCharacterRun(0).getFontName();
+      System.out.println("字体名称为：" + fontName);
+
       int numStyles = doc.getStyleSheet().numStyles();
       int styleIndex = p.getStyleIndex();
       if (numStyles > styleIndex) {
