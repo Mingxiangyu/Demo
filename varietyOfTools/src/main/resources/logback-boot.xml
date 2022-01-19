@@ -12,6 +12,7 @@
     <!-- RollingFileAppender：滚动记录文件，先将日志记录到指定文件，当符合某个条件时，将日志记录到其他文件 -->
     <!-- 以下的大概意思是：1.先按日期存日志，日期变了，将前一天的日志文件名重命名为XXX%日期%索引，新的日志仍然是sys.log -->
     <!--             2.如果日期没有发生变化，但是当前日志的文件大小超过1KB时，对当前日志进行分割 重命名-->
+    <!--每天记录日志到文件appender-->
     <appender name="syslog"    
         class="ch.qos.logback.core.rolling.RollingFileAppender">    
         <!-- <File>log/sys.log</File>  --> 
@@ -37,16 +38,23 @@
             <!-- 记录日志的编码 -->
             <charset>UTF-8</charset> <!-- 此处设置字符集 -->   
         </encoder>    
-    </appender>    
+    </appender>
+    <!--输出到logstash的appender-->
+    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <!--可以访问的logstash日志收集端口-->
+        <destination>192.168.8.104:4560</destination>
+        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder"/>
+    </appender>
     
     <!-- 控制台输出日志级别 -->
     <root  level="error">
           <appender-ref ref="STDOUT" />
+          <appender-ref ref="LOGSTASH"/>
      </root> 
     <!-- 指定项目中某个包，当有日志操作行为时的日志记录级别 -->
     <!-- com.appley为根包，也就是只要是发生在这个根包下面的所有日志操作行为的权限都是DEBUG -->
     <!-- 级别依次为【从高到低】：FATAL > ERROR > WARN > INFO > DEBUG > TRACE  --> 
-     <logger name="com" level="error">
+    <logger name="com" level="error">
         <appender-ref ref="syslog" />    
     </logger> 
    

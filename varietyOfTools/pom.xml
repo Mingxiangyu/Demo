@@ -569,6 +569,29 @@
       <artifactId>micrometer-registry-prometheus</artifactId>
     </dependency>
     <!--监控 end-->
+
+    <!--集成logstash start-->
+    <dependency>
+      <groupId>net.logstash.logback</groupId>
+      <artifactId>logstash-logback-encoder</artifactId>
+      <version>6.6</version>
+    </dependency>
+    <!--集成logstash end-->
+
+    <!--junit单元测试 start-->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.6.2</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-test</artifactId>
+      <version>2.3.3.RELEASE</version>
+      <scope>compile</scope>
+    </dependency>
+    <!--junit单元测试 end-->
   </dependencies>
 
   <repositories>

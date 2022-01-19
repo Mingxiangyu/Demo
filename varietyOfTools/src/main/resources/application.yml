@@ -113,7 +113,7 @@ jasypt:
   encryptor:
     password: algorithm
 
-# 监控配置  TODO
+# 监控配置
 management:
   endpoint:
     health:
@@ -122,6 +122,7 @@ management:
       enabled: true
     prometheus:
       enabled: true
+  # 开启监控所有项
   endpoints:
     web:
       exposure:
