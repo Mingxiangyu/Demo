@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.iglens.elasticsearch.convert.IndexDocumentConverter;
 import com.iglens.elasticsearch.dto.IndexDocumentDTO;
 import com.iglens.elasticsearch.support.IndexUtils;
 import java.io.IOException;
@@ -46,17 +45,13 @@ public class IndexEngineServiceImpl implements IndexEngineService {
 
   private final RestHighLevelClient client;
 
-  private final IndexDocumentConverter converter;
-
   private final AdministrationService administrationService;
 
   @Autowired
   public IndexEngineServiceImpl(
       RestHighLevelClient client,
-      IndexDocumentConverter converter,
       AdministrationService administrationService) {
     this.client = client;
-    this.converter = converter;
     this.administrationService = administrationService;
   }
 
