@@ -1,6 +1,6 @@
-package com.iglens.elasticsearch.service;
+package com.iglens.elasticsearch.cpdm.service;
 
-import com.iglens.elasticsearch.dto.IndexCreationDTO;
+import com.iglens.elasticsearch.cpdm.dto.IndexCreationDTO;
 
 /** @author T480S */
 public interface AdministrationService {

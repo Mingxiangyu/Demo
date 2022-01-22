@@ -1,4 +1,4 @@
-package com.iglens.elasticsearch.dto;
+package com.iglens.elasticsearch.cpdm.dto;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -1,7 +1,5 @@
-package com.iglens.elasticsearch.service;
+package com.iglens.elasticsearch.cpdm.service;
 
-import com.iglens.elasticsearch.dto.IndexCreationDTO;
-import com.iglens.elasticsearch.support.IndexUtils;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -63,7 +61,7 @@ public class AdministrationServiceImpl implements AdministrationService {
       if (existsIndex(name)) {
         return true;
       }
-      // Create Index
+      // 这个请求是创建一个索引，在es中的索引相当于mysql 中创建一个数据库
       CreateIndexRequest request = new CreateIndexRequest(name);
       request.settings(indexSetting(), XContentType.JSON);
       request.mapping(IndexUtils.DEFAULT_TYPE_NAME, indexMapping(), XContentType.JSON);

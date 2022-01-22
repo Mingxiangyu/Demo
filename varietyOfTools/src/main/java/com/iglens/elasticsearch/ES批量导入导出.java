@@ -1,4 +1,4 @@
-package com.iglens.数据库;
+package com.iglens.elasticsearch;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -52,7 +52,7 @@ public class ES批量导入导出 {
       String filePath)
       throws Exception {
     TransportClient client = null;
-    //        createClient(clustName, sourceIp, sourcePort);
+//        createClient(clustName, sourceIp, sourcePort);
     SearchRequestBuilder builder = client.prepareSearch(indexName);
     if (typeName != null) {
       builder.setTypes(typeName);
@@ -90,8 +90,6 @@ public class ES批量导入导出 {
       System.out.println("总共写入数据:" + count);
       out.close();
       client.close();
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -118,7 +116,7 @@ public class ES批量导入导出 {
       throws Exception {
 
     TransportClient client = null;
-    //        createClient(clustName, sourceIp, sourcePort);
+//        createClient(clustName, sourceIp, sourcePort);
     try {
       // 把导出的结果以JSON的格式写到文件里
       BufferedReader br = new BufferedReader(new FileReader(filePath));
@@ -160,20 +158,21 @@ public class ES批量导入导出 {
    * @return
    * @throws Exception
    */
-  //  private static TransportClient createClient(String cluster, String ip, Integer port)
-  //      throws Exception {
-  //    TransportClient client = null;
-  //    if (client == null) {
-  //      synchronized (Elasticsearch.class) {
-  //        Settings settings = Settings.settingsBuilder().put("cluster.name", cluster).build();
-  //        client =
-  //            TransportClient.builder()
-  //                .settings(settings)
-  //                .build()
-  //                .addTransportAddress(
-  //                    new InetSocketTransportAddress(InetAddress.getByName(ip), port));
-  //      }
-  //    }
-  //    return client;
-  //  }
+//  private static TransportClient createClient(String cluster, String ip, Integer port)
+//      throws Exception {
+//    TransportClient client = null;
+//    if (client == null) {
+//      synchronized (Elasticsearch.class) {
+//        Settings settings = Settings.settingsBuilder().put("cluster.name", cluster).build();
+//        client =
+//            TransportClient.builder()
+//                .settings(settings)
+//                .build()
+//                .addTransportAddress(
+//                    new InetSocketTransportAddress(InetAddress.getByName(ip), port));
+//      }
+//    }
+//    return client;
+//  }
+
 }

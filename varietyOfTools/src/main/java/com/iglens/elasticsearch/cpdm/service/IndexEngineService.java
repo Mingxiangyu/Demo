@@ -1,4 +1,4 @@
-package com.iglens.elasticsearch.service;
+package com.iglens.elasticsearch.cpdm.service;
 
 import java.util.Map;
 

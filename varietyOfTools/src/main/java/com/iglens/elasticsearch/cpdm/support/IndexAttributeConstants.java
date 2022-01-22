@@ -1,4 +1,4 @@
-package com.iglens.elasticsearch.support;
+package com.iglens.elasticsearch.cpdm.support;
 
 /** 索引属性常量 */
 public class IndexAttributeConstants {

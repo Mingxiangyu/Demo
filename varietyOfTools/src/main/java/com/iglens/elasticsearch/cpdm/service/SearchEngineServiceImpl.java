@@ -1,8 +1,8 @@
-package com.iglens.elasticsearch.service;
+package com.iglens.elasticsearch.cpdm.service;
 
-import com.iglens.elasticsearch.dto.SearchFormDTO;
-import com.iglens.elasticsearch.dto.SearchResultDTO;
-import com.iglens.elasticsearch.support.IndexAttributeConstants;
+import com.iglens.elasticsearch.cpdm.dto.SearchFormDTO;
+import com.iglens.elasticsearch.cpdm.dto.SearchResultDTO;
+import com.iglens.elasticsearch.cpdm.support.IndexAttributeConstants;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;

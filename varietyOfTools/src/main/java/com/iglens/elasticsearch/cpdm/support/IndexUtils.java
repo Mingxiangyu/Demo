@@ -1,4 +1,4 @@
-package com.iglens.elasticsearch.support;
+package com.iglens.elasticsearch.cpdm.support;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

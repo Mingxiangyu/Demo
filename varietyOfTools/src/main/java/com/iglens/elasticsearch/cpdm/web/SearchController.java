@@ -1,9 +1,9 @@
-package com.iglens.elasticsearch.web;
+package com.iglens.elasticsearch.cpdm.web;
 
-import com.iglens.elasticsearch.dto.SearchFormDTO;
-import com.iglens.elasticsearch.dto.SearchResultDTO;
-import com.iglens.elasticsearch.service.SearchEngineService;
-import com.iglens.elasticsearch.support.IndexUtils;
+import com.iglens.elasticsearch.cpdm.dto.SearchFormDTO;
+import com.iglens.elasticsearch.cpdm.dto.SearchResultDTO;
+import com.iglens.elasticsearch.cpdm.service.SearchEngineService;
+import com.iglens.elasticsearch.cpdm.support.IndexUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

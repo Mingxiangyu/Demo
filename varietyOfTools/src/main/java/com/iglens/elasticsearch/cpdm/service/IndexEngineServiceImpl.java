@@ -1,11 +1,11 @@
-package com.iglens.elasticsearch.service;
+package com.iglens.elasticsearch.cpdm.service;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.iglens.elasticsearch.dto.IndexDocumentDTO;
-import com.iglens.elasticsearch.support.IndexUtils;
+import com.iglens.elasticsearch.cpdm.dto.IndexDocumentDTO;
+import com.iglens.elasticsearch.cpdm.support.IndexUtils;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;

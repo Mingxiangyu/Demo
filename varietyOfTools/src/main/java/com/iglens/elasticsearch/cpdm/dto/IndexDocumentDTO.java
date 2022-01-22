@@ -1,4 +1,4 @@
-package com.iglens.elasticsearch.dto;
+package com.iglens.elasticsearch.cpdm.dto;
 
 import java.util.Date;
 import java.util.List;

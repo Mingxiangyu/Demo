@@ -1,7 +1,7 @@
-package com.iglens.elasticsearch.service;
+package com.iglens.elasticsearch.cpdm.service;
 
-import com.iglens.elasticsearch.dto.SearchFormDTO;
-import com.iglens.elasticsearch.dto.SearchResultDTO;
+import com.iglens.elasticsearch.cpdm.dto.SearchFormDTO;
+import com.iglens.elasticsearch.cpdm.dto.SearchResultDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
