@@ -1,5 +1,7 @@
 package com.iglens.elasticsearch.cpdm.service;
 
+import com.iglens.elasticsearch.cpdm.dto.IndexCreationDTO;
+import com.iglens.elasticsearch.cpdm.support.IndexUtils;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;

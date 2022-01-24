@@ -456,12 +456,27 @@
     </dependency>
     <!--elasticsearch相关 end-->
 
-    <!--    Spire.DOC for Java-->
+    <!--    Spire.DOC for Java start-->
     <dependency>
       <groupId>e-iceblue</groupId>
       <artifactId>spire.doc</artifactId>
       <version>3.11.0</version>
     </dependency>
+    <!--    Spire.DOC for Java end-->
+
+    <!--doc转pdf start-->
+    <dependency>
+      <groupId>com.documents4j</groupId>
+      <artifactId>documents4j-local</artifactId>
+      <version>1.0.3</version>
+    </dependency>
+    <dependency>
+      <groupId>com.documents4j</groupId>
+      <artifactId>documents4j-transformer-msoffice-word</artifactId>
+      <version>1.0.3</version>
+    </dependency>
+    <!--doc转pdf end-->
+
 
     <!--    kettle相关-->
     <!--    原文链接：https://blog.csdn.net/pingweicheng/article/details/103547943-->

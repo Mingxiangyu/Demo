@@ -44,7 +44,7 @@ public class ExecutorConfig {
     executor.setQueueCapacity(queueCapacity);
     // 配置线程池中的线程的名称前缀
     executor.setThreadNamePrefix(namePrefix);
-    // 许的空闲时间,当超过了核心线程出之外的线程在空闲时间到达之后会被销毁
+    // 设置线程活跃时间（秒）,当超过了核心线程之外的线程在空闲时间到达之后会被销毁
     executor.setKeepAliveSeconds(200);
 
     /*
@@ -55,6 +55,8 @@ public class ExecutorConfig {
      * ThreadPoolExecutor.CallerRunsPolicy：重试添加当前的任务，自动重复调用 execute() 方法，直到成功
      */
     executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
+    // 等待所有任务结束后再关闭线程池
+//    executor.setWaitForTasksToCompleteOnShutdown(true);
     // 执行初始化
     executor.initialize();
     return executor;

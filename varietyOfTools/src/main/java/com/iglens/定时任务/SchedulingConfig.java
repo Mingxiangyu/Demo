@@ -13,6 +13,7 @@ public class SchedulingConfig {
     // 定时任务执行线程池核心线程数
     taskScheduler.setPoolSize(4);
     taskScheduler.setRemoveOnCancelPolicy(true);
+    // 线程名称前缀
     taskScheduler.setThreadNamePrefix("TaskSchedulerThreadPool-");
     return taskScheduler;
   }
