@@ -1,11 +1,13 @@
-package com.iglens;
+package com.iglens.list;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ListUtils {
 
@@ -159,10 +161,7 @@ public class ListUtils {
     System.out.println(map);
   }
 
-  /**
-   * 两个list集合的差集
-   *
-   */
+  /** 两个list集合的差集 */
   public static void 两个list集合的差集() {
     List<String> list = new ArrayList<>(); // 作为总的list
     List<String> existList = new ArrayList<>(); // 存在的list
@@ -179,5 +178,24 @@ public class ListUtils {
 
     System.out.println(existList);
     System.out.println(list);
+  }
+
+  /**
+   * 使用 LinkedHashSet 去重 能去重又能保证集合的顺
+   *
+   * @param list
+   */
+  public static void method_3(List<Integer> list) {
+    LinkedHashSet<Integer> set = new LinkedHashSet<>(list);
+    System.out.println("去重集合:" + set);
+  }
+
+  /**
+   * 使用 Stream 去重
+   * @param list
+   */
+  public static void method_5(List<Integer> list) {
+    list = list.stream().distinct().collect(Collectors.toList());
+    System.out.println("去重集合:" + list);
   }
 }
