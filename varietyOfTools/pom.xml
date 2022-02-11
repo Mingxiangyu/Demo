@@ -617,6 +617,89 @@
       <scope>compile</scope>
     </dependency>
     <!--junit单元测试 end-->
+
+    <!--视频处理  end-->
+    <dependency>
+      <groupId>org.bytedeco</groupId>
+      <artifactId>javacv-platform</artifactId>
+      <version>1.3.1</version>
+    </dependency>
+    <!--    javacv-platform这种方式依赖的jar包300M，太大了，经过精简后pom文件如下：（在用，40兆左右）-->
+    <!--     <properties>
+         <javacpp.version>1.3</javacpp.version>
+       </properties>
+
+       <dependencies>
+         <dependency>
+           <groupId>org.bytedeco</groupId>
+           <artifactId>javacv</artifactId>
+           <version>1.3.1</version>
+           <exclusions>
+             <exclusion>
+               <groupId>org.bytedeco.javacpp-presets</groupId>
+               <artifactId>flycapture</artifactId>
+             </exclusion>
+             <exclusion>
+               <groupId>org.bytedeco.javacpp-presets</groupId>
+               <artifactId>libdc1394</artifactId>
+             </exclusion>
+             <exclusion>
+               <groupId>org.bytedeco.javacpp-presets</groupId>
+               <artifactId>libfreenect</artifactId>
+             </exclusion>
+             <exclusion>
+               <groupId>org.bytedeco.javacpp-presets</groupId>
+               <artifactId>libfreenect2</artifactId>
+             </exclusion>
+             <exclusion>
+               <groupId>org.bytedeco.javacpp-presets</groupId>
+               <artifactId>librealsense</artifactId>
+             </exclusion>
+             <exclusion>
+               <groupId>org.bytedeco.javacpp-presets</groupId>
+               <artifactId>videoinput</artifactId>
+             </exclusion>
+             <exclusion>
+               <groupId>org.bytedeco.javacpp-presets</groupId>
+               <artifactId>artoolkitplus</artifactId>
+             </exclusion>
+             <exclusion>
+               <groupId>org.bytedeco.javacpp-presets</groupId>
+               <artifactId>artoolkitplus</artifactId>
+             </exclusion>
+             <exclusion>
+               <groupId>org.bytedeco.javacpp-presets</groupId>
+               <artifactId>flandmark</artifactId>
+             </exclusion>
+           </exclusions>
+         </dependency>
+
+         <dependency>
+           <groupId>org.bytedeco.javacpp-presets</groupId>
+           <artifactId>opencv</artifactId>
+           <version>3.1.0-${javacpp.version}</version>
+           <classifier>linux-x86_64</classifier>
+         </dependency>
+         <dependency>
+           <groupId>org.bytedeco.javacpp-presets</groupId>
+           <artifactId>opencv</artifactId>
+           <version>3.1.0-${javacpp.version}</version>
+           <classifier>windows-x86_64</classifier>
+         </dependency>
+         <dependency>
+           <groupId>org.bytedeco.javacpp-presets</groupId>
+           <artifactId>ffmpeg</artifactId>
+           <version>3.2.1-${javacpp.version}</version>
+           <classifier>windows-x86_64</classifier>
+         </dependency>
+         <dependency>
+           <groupId>org.bytedeco.javacpp-presets</groupId>
+           <artifactId>ffmpeg</artifactId>
+           <version>3.2.1-${javacpp.version}</version>
+           <classifier>linux-x86_64</classifier>
+         </dependency>
+       </dependencies>-->
+    <!--视频处理  end-->
   </dependencies>
 
   <repositories>
