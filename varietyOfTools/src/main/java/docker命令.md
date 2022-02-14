@@ -1,3 +1,4 @@
+[TOC]
 # Docker笔记
 
 ## Docker常用命令
@@ -58,6 +59,8 @@ docker rmi -f 镜像ID 	镜像ID 镜像ID 					# 强制删除多个镜像
 docker rmi -f ${docker images -aq}   # 强制删除全部的容器
 ```
 
+
+
 ### 容器命令
 
 ```shell
@@ -110,6 +113,83 @@ docker restart 容器id
 docker stop 容器id
 docker kill 容器id    # 强制停止当前容器
 ~~~
+
+
+
+### 镜像导入导出
+
+##### docker镜像的导出
+
+~~~shell
+docker save [options]  images [images...]
+
+docker save -o dockerdemo.tar  dockerdemo
+docker save > dockerdemo.tar dockerdemo
+# 参数说明
+-o和>表示输出到文件
+dockerdemo.tar为导出的目标文件
+dockerdemo为源镜像名
+如果不指定路径，默认是当前文件夹。 
+~~~
+
+##### docker镜像的导入
+
+~~~shell	
+docker load [options]
+
+docker load -i dockerdemo.tar
+docker load < dockerdemo.tar
+# 参数说明
+-i(i即imput)和<表示从文件输入,上面的两个命令都会成功导入镜像以及相关元数据，包括tag信息。
+~~~
+
+
+
+### 容器导入导出
+
+###### docker容器的导出
+
+~~~shell	
+docker export [options]  container
+
+docker export -o D:\containers\dockerdemocontainer.tar dockerdemo
+# 参数说明
+-o表示输出的文件，这里指定了输出的路径，如果没有指定路径，则默认生成到当前文件夹。
+dockerdemocontainer.tar为目标文件，
+dockerdemo为源容器名。
+~~~
+
+###### docker容器的导入
+
+~~~shell
+docker import [options] file|URL|- [REPOSITORY[:TAG]]
+
+docker import dockerdemocontainer.tar dockerdemo:imp
+# 参数说明
+dockerdemocontainer.tar表示要导入的容器，
+dockerdemo表示导入后的镜像名称，
+imp表示给导入的镜像打tag。
+~~~
+
+### 两种导出导入方案的差别
+
+**两种方法不可混用。**
+如果使用 **import** 导入 **save** 产生的文件，虽然导入不提示错误，但是启动容器时会提示失败，会出现类似"**docker: Error response from daemon: Container command not found or does not exist**"的错误。
+
+1. 镜像导入是一个复制的过程，容器导入是将当前容器变成一个新的镜像。
+
+2. docker save命令保存的是镜像（image），docker export命令保存的是容器（container）。
+
+3. export命令导出的tar文件略小于save命令导出的。
+
+4. 因为export导出的是容器，export导出的文件在import导入时，无法保留镜像所有的历史（即每一层layer信息），不能进行回滚操作。而save是根据镜像来的，所以导入时可以完整保留下每一层layer信息。如下图所示：dockerdemo:latest是save导出load导入的，dockerdemo:imp是export导出import导入的。
+
+   ![1033738-20200711115830169-1262686556](https://gitee.com/ming-xiangyu/Imageshack/raw/master/img/1033738-20200711115830169-1262686556.png)
+
+5. docker load不能对导入的镜像重命名，而docker import导入可以为镜像指定新名称。例如，上面导入的时候指定dockerdeom:imp。
+
+   > 1. 若是只想备份image，使用save和load。
+   > 2. 若是在启动容器后，容器内容有变化，需要备份，则使用export和import
 
 ### 常用命令
 
@@ -257,5 +337,4 @@ CMD　　指定一个容器启动时要运行的命令。Dockerfile中可以有�
 ENTRYPOINT　　指定一个容器启动时要运行的命令。ENTRYPOINT的目的和CMD一样，都是在指定容器启动程序及参数
 ONBUILD　　当构建一个被继承的Dockerfile时运行命令，父镜像在被子继承后父镜像的onbuild被触发
 ~~~
-
 
