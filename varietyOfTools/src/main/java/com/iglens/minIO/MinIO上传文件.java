@@ -20,6 +20,16 @@ public class MinIO上传文件 {
               "https://play.min.io",
               "Q3AM3UQ867SPQQA43P2F",
               "zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG");
+      // 该配置可放到配置文件中
+      /*
+      # 设置单个文件大小
+      spring.servlet.multipart.max-file-size= 50MB
+      #minio文件服务器配置
+      minio.address=http://localhost:9000
+      minio.accessKey=admin
+      minio.secretKey=12345678
+      minio.bucketName=myfile
+             */
 
       // 检查存储桶是否已经存在
       boolean isExist = minioClient.bucketExists("10-26");
@@ -44,8 +54,7 @@ public class MinIO上传文件 {
       }
 
       // 使用putObject上传一个文件到存储桶中。
-      minioClient.putObject(
-          "10-26", "/中午14/ces.docx", "C:\\Users\\T480S\\Desktop\\ces.docx", null);
+      minioClient.putObject("10-26", "/中午14/ces.docx", "C:\\Users\\T480S\\Desktop\\ces.docx", null);
       System.out.println(
           "/home/user/Photos/asiaphotos.zip is successfully uploaded as asiaphotos.zip to `asiatrip` bucket.");
     } catch (MinioException e) {

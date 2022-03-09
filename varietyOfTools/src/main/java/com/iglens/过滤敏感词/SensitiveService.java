@@ -43,7 +43,7 @@ public class SensitiveService {
       InputStream inputStream =
           new FileInputStream(
               new File(
-                  "F:\\gitWorkSpace\\Demo\\varietyOfTools\\src\\main\\java\\org\\demo\\过滤敏感词\\sensitiveWord.txt")); // 从resource文件夹取配套字典
+                  "src\\main\\java\\org\\demo\\过滤敏感词\\sensitiveWord.txt")); // 从resource文件夹取配套字典
 
       BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
       String line;

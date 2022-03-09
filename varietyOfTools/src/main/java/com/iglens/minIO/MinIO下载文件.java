@@ -32,6 +32,16 @@ public class MinIO下载文件 {
               "https://play.min.io",
               "Q3AM3UQ867SPQQA43P2F",
               "zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG");
+      // 该配置可放到配置文件中
+      /*
+      # 设置单个文件大小
+      spring.servlet.multipart.max-file-size= 50MB
+      #minio文件服务器配置
+      minio.address=http://localhost:9000
+      minio.accessKey=admin
+      minio.secretKey=12345678
+      minio.bucketName=myfile
+             */
 
       // 调用statObject()来判断对象是否存在。
       // 如果不存在, statObject()抛出异常,
