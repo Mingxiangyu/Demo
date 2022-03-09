@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import javax.imageio.ImageIO;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
+import net.coobird.thumbnailator.name.Rename;
 
 /** @author xming */
 public class Thumbnailator生成缩略图 {
@@ -17,7 +18,7 @@ public class Thumbnailator生成缩略图 {
    * @throws IOException
    */
   public static void main(String[] args) throws IOException {
-    //注意，该targetImagePath不会创建父级路径
+    // 注意，该targetImagePath不会创建父级路径
     String sourceimagePath = "/Users/ming/Desktop/398091-20160605174410680-1218395382.jpg";
     String targetImagePath = "images/test.jpg";
     Thumbnailator生成缩略图 thumbnailatorTest = new Thumbnailator生成缩略图();
@@ -30,6 +31,7 @@ public class Thumbnailator生成缩略图 {
     thumbnailatorTest.转化图像格式(sourceimagePath, targetImagePath);
     thumbnailatorTest.输出到OutputStreamtest8(sourceimagePath, targetImagePath);
     thumbnailatorTest.输出到BufferedImage(sourceimagePath, targetImagePath);
+    thumbnailatorTest.文件夹生成缩略图(sourceimagePath, targetImagePath);
   }
 
   /**
@@ -195,5 +197,19 @@ public class Thumbnailator生成缩略图 {
     BufferedImage thumbnail = Thumbnails.of(sourceimagePath).size(1280, 1024).asBufferedImage();
     ImageIO.write(
         thumbnail, "jpg", new File("/Users/ming/Desktop/image/image_1280x1024_BufferedImage.jpg"));
+  }
+
+  /**
+   * 文件夹生成缩略图
+   *
+   * @throws IOException
+   * @param sourceimagePath
+   * @param targetImagePath
+   */
+  private void 文件夹生成缩略图(String sourceimagePath, String targetImagePath) throws IOException {
+    Thumbnails.of(new File("path/to/directory").listFiles())
+        .size(640, 480)
+        .outputFormat("jpg")
+        .toFiles(Rename.PREFIX_DOT_THUMBNAIL);
   }
 }
