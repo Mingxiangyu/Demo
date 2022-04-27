@@ -1,4 +1,4 @@
-${AnsiColor.BRIGHT_YELLOW}
+${AnsiColor.BRIGHT_YELLOW} #此处设置文字颜色
 
                  /***
                  *      ┌─┐       ┌─┐
@@ -24,3 +24,8 @@ ${AnsiColor.BRIGHT_YELLOW}
                  *                神兽保佑
                  *               代码无BUG!
                  */
+
+${AnsiColor.BRIGHT_GREEN}
+Jeecg  Boot Version: 3.1.0
+Spring Boot Version: ${spring-boot.version}${spring-boot.formatted-version}
+${AnsiColor.BLACK}

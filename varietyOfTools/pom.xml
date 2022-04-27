@@ -7,7 +7,7 @@
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
     <version>2.3.3.RELEASE</version>
-    <relativePath/> <!-- lookup parent from repository -->
+    <relativePath/> <!-- MAVEN构建jar包时候查找顺序：relativePath元素中的地址–本地仓库–远程仓库  -->
   </parent>
   <artifactId>varietyOfTools</artifactId>
 
