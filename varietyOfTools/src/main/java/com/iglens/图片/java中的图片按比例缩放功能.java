@@ -12,10 +12,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class java中的图片按比例缩放功能 {
   public static void main(String[] args) {
-    String srcPath = "C:\\Users\\T480S\\Desktop\\微信截图_20210730102723.png";
-    String destPath = "C:\\Users\\T480S\\Desktop\\微信截图_20210730102723-fuben.png";
+    String srcPath = "D:\\图片\\微信图片_20220427124546.jpg";
+    String destPath = "D:\\图片\\sch.jpg";
     try {
-      zoomImage(srcPath, destPath, 84, 71);
+      zoomImage(srcPath, destPath, 150, 200);
       //      zoomImage(srcPath,destPath,58);
     } catch (Exception e) {
       e.printStackTrace();
