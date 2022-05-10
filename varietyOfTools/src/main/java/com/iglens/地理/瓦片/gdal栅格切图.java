@@ -21,7 +21,7 @@ public class gdal栅格切图 {
 
   public static void main(String[] args) throws FactoryException, NoSuchAuthorityCodeException {
     gdal.AllRegister();
-    String fileName = "C:\\Users\\h\\Desktop\\tif\\map.tif";
+    String fileName = "D:\\WeChat Files\\aion_my_god\\FileStorage\\File\\2022-05\\L18.tif";
     Dataset dataset = gdal.Open(fileName, gdalconstConstants.GA_ReadOnly);
     double[] ori_transform = dataset.GetGeoTransform();
     int rasterCount = dataset.getRasterCount();

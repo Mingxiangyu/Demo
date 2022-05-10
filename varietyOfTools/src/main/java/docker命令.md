@@ -338,3 +338,43 @@ ENTRYPOINT　　指定一个容器启动时要运行的命令。ENTRYPOINT的目
 ONBUILD　　当构建一个被继承的Dockerfile时运行命令，父镜像在被子继承后父镜像的onbuild被触发
 ~~~
 
+## Docker 设置国内镜像源
+
+### 国内源
+
+~~~sh
+Docker中国区官方镜像
+https://registry.docker-cn.com
+
+网易
+http://hub-mirror.c.163.com
+
+ustc 
+https://docker.mirrors.ustc.edu.cn
+
+中国科技大学
+https://docker.mirrors.ustc.edu.cn
+~~~
+
+### 修改方法
+
+创建或修改 `/etc/docker/daemon.json` 文件，修改为如下形式
+
+```xml
+{
+ "registry-mirrors" : [
+   "https://mirror.ccs.tencentyun.com",
+   "http://registry.docker-cn.com",
+   "http://docker.mirrors.ustc.edu.cn",
+   "http://hub-mirror.c.163.com"
+ ],
+ "insecure-registries" : [
+   "registry.docker-cn.com",
+   "docker.mirrors.ustc.edu.cn"
+ ],
+ "debug" : true,
+ "experimental" : true
+}
+```
+
+加载重启docker

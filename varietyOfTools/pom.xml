@@ -374,13 +374,6 @@
       <version>1.1.1</version>
     </dependency>
 
-
-    <dependency>
-      <groupId>org.gdal</groupId>
-      <artifactId>gdal</artifactId>
-      <version>3.2.0</version>
-    </dependency>
-
     <!-- mysql -->
     <dependency>
       <groupId>mysql</groupId>
@@ -708,6 +701,20 @@
       <version>0.4.8</version>
     </dependency>
     <!-- 生成缩略图  end   原文链接：https://blog.csdn.net/qq_34839150/article/details/109903432-->
+
+    <!-- gdal  start  原文链接：https://blog.csdn.net/Neuromancerr/article/details/122838289 -->
+<!--    <dependency>-->
+<!--      <groupId>org.gdal</groupId>-->
+<!--      <artifactId>gdal</artifactId>-->
+<!--      <scope>system</scope>-->
+<!--      <systemPath>${project.basedir}/lib/gdal.jar</systemPath>-->
+<!--    </dependency>-->
+        <dependency>
+          <groupId>org.gdal</groupId>
+          <artifactId>gdal</artifactId>
+          <version>3.2.0</version>
+        </dependency>
+    <!-- gdal  end -->
   </dependencies>
 
   <repositories>
