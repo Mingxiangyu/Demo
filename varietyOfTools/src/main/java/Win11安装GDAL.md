@@ -14,15 +14,15 @@
 
 [**java GDAL下载**](http://download.gisinternals.com/sdk.php)：http://download.gisinternals.com/sdk.php
 
-![image-20220507105437998](C:\Users\zhouhuilin\AppData\Roaming\Typora\typora-user-images\image-20220507105437998.png)
+![image-20220507105437998](https://gitee.com/ming-xiangyu/Imageshack/raw/master/image-20220507105437998.png)
 
-![image-20220507105841707](C:\Users\zhouhuilin\AppData\Roaming\Typora\typora-user-images\image-20220507105841707.png)
+![image-20220507105841707](https://gitee.com/ming-xiangyu/Imageshack/raw/master/image-20220507105841707.png)
 
 ## 2.GDAL安装（既解压后拷贝）
 
-![image-20220507111815126](C:\Users\zhouhuilin\AppData\Roaming\Typora\typora-user-images\image-20220507111815126.png)
+![image-20220507111815126](https://gitee.com/ming-xiangyu/Imageshack/raw/master/image-20220507111815126.png)
 
-![image-20220507112249301](C:\Users\zhouhuilin\AppData\Roaming\Typora\typora-user-images\image-20220507112249301.png)
+![image-20220507112249301](https://gitee.com/ming-xiangyu/Imageshack/raw/master/image-20220507112249301.png)
 
 将下好的压缩包里**gdal-release-1928-x64/bin/**目录下的东西解压到jdk/bin目录下（如果放jdk/bin下运行程序还是报错`Native library load failed.`，尝试放`jre/bin`目录下或者`java工程根目录下`）
 
@@ -112,13 +112,13 @@ public class RasterGdalTest {
 
 采用资源管理gdal文件，通过Maven加载gdal.jar，在web应用resources目录下新增gdal文件件，再新建linux,win32两个子文件夹，结构如下
 
-![img](https://upload-images.jianshu.io/upload_images/18566927-5fbc5e83a9b8498d.png?imageMogr2/auto-orient/strip|imageView2/2/w/193/format/webp)
+![img](https://gitee.com/ming-xiangyu/Imageshack/raw/master/18566927-5fbc5e83a9b8498d.png)
 
 ### 资源配置gdal.jar,动态库文件
 
 从*gdal\bin\gdal\java* 复制 *gdal.jar、lgdalalljni.dll* 到项目 *resources/gdal/win32*
 
-![img](https://upload-images.jianshu.io/upload_images/18566927-48093bcba1713b82.png?imageMogr2/auto-orient/strip|imageView2/2/w/326/format/webp)
+![img](https://gitee.com/ming-xiangyu/Imageshack/raw/master/18566927-48093bcba1713b82.png)
 
 IDE中启动，运行正常，打成jar包后直接无法启动，启动报错**no gdaljni in java.library.path**，原因本地动为态库*gdalalljni*载入错误，需要加载gdalalljni动态库
 
@@ -297,7 +297,7 @@ public class LibraryUtil {
 
 把 *gdal\bin* 下所有的dll复制到目标路径 *D:\Program Files\Java\jdk1.8.0_231\bin(即jdk所在目录）*
 
-![img](https://upload-images.jianshu.io/upload_images/18566927-ae1531d583e4610f.png?imageMogr2/auto-orient/strip|imageView2/2/w/626/format/webp)
+![img](https://gitee.com/ming-xiangyu/Imageshack/raw/master/18566927-ae1531d583e4610f.png)
 
 再次启动jar包就可以正常运行
 
@@ -330,7 +330,7 @@ public class LibraryUtil {
 
 在系统环境变量中配置，`PROJ_LIB：C:Program FilesGDALprojlibproj.db` 配置完后记得重启或注销计算机使配置⽣效
 
-![img](https://img2020.cnblogs.com/blog/771906/202011/771906-20201130163115834-1398288475.png)
+![img](https://gitee.com/ming-xiangyu/Imageshack/raw/master/771906-20201130163115834-1398288475.png)
 
 ```sh
 变量名：PROJ_LIB
@@ -505,11 +505,11 @@ make && make install
 
 安装过程中会出现以下错误
 
-![img](https://upload-images.jianshu.io/upload_images/18566927-5ed512cca0ee048c.png?imageMogr2/auto-orient/strip|imageView2/2/w/576/format/webp)
+![img](https://gitee.com/ming-xiangyu/Imageshack/raw/master/18566927-5ed512cca0ee048c.png)
 
 解决方法： 修改/usr/include/boost/ cstdint.hpp 44行代码为：
 
-![img](https://upload-images.jianshu.io/upload_images/18566927-9743532a7cdfb461.png?imageMogr2/auto-orient/strip|imageView2/2/w/576/format/webp)
+![img](https://gitee.com/ming-xiangyu/Imageshack/raw/master/18566927-9743532a7cdfb461.png)
 
 ```ruby
 #if defined(BOOST_HAS_STDINT_H) \
@@ -611,13 +611,13 @@ ldconfig
 
 > 错误1：修改/usr/local/src/gdal-3.0.4/gcore/gdal_version.h.in为gdal_version.h
 
-![img](https://upload-images.jianshu.io/upload_images/18566927-9455d2b776f2a048.png?imageMogr2/auto-orient/strip|imageView2/2/w/698/format/webp)
+![img](https://gitee.com/ming-xiangyu/Imageshack/raw/master/18566927-9455d2b776f2a048.png)
 
 > 错误2：出现这个错误时，一般是sqlite3生成文件在/usr/local/lib下，必须移除后，重新编译sqlite3生成文件单独放置，如usr/local/sqlite3下，在gdal配置时指明--with-sqlite3
 >
 > 清除语句:rm要慎用，要确认清楚，删库跑路就是因为这 rm -rf /usr/local/lib/libsqlite3* /usr/local/bin/sqlite3 /usr/local/lib/pkgconfig/sqlite3.pc
 
-![img](https://upload-images.jianshu.io/upload_images/18566927-5c1a2f75f10bcfc5.png?imageMogr2/auto-orient/strip|imageView2/2/w/698/format/webp)
+![img](https://gitee.com/ming-xiangyu/Imageshack/raw/master/18566927-5c1a2f75f10bcfc5.png)
 
 > 错误3：缺少json-c静态库文件,可以通过指明静态库路径方式来解决，但这是临时解决方案。最好重新编译json-c到usr/local/json-c, 在gdal配置时指明--with-libjson-c
 
@@ -626,7 +626,7 @@ cd /usr/local/src/gdal-3.0.4/apps
 /bin/sh /usr/local/src/gdal-3.0.4/libtool --mode=link --silent g++ -std=c++11  gdalserver.lo  /usr/local/src/gdal-3.0.4/libgdal.la /usr/local/lib/libjson-c.a -o gdalserver
 ```
 
-![img](https://upload-images.jianshu.io/upload_images/18566927-2db2c35624fc1767.png?imageMogr2/auto-orient/strip|imageView2/2/w/698/format/webp)
+![img](https://gitee.com/ming-xiangyu/Imageshack/raw/master/18566927-2db2c35624fc1767.png)
 
 > 错误4： make: execvp: /usr/local/gdal-3.0.4/install-sh: Permission denied
 
@@ -655,7 +655,7 @@ export ... PATH LD_LIBRARY_PATH GDAL_DATA
 gdalinfo --version
 ogr2ogr --formats
 
-![img](https://upload-images.jianshu.io/upload_images/18566927-a42a6d3b2bafbbd9.png?imageMogr2/auto-orient/strip|imageView2/2/w/626/format/webp)
+![img](https://gitee.com/ming-xiangyu/Imageshack/raw/master/18566927-a42a6d3b2bafbbd9.png)
 
 ## 编译生成gdal.jar
 
@@ -701,7 +701,7 @@ source /etc/profile
 
 #### 4、在/usr/local/gdal-3.0.4/swig/java/目录下复制gdal.jar、libgdalalljni.so文件到项目resources/gdal/linux
 
-![img](https://upload-images.jianshu.io/upload_images/18566927-d2a91808dd11adb7.png?imageMogr2/auto-orient/strip|imageView2/2/w/576/format/webp)
+![img](https://gitee.com/ming-xiangyu/Imageshack/raw/master/18566927-d2a91808dd11adb7.png)
 
 #### 5、启动JavaWeb看看吧
 

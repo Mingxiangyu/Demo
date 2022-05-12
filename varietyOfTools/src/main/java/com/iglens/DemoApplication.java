@@ -34,8 +34,7 @@ public class DemoApplication {
       e.printStackTrace();
     }
     String port = env.getProperty("server.port");
-    String path  = "null";
-        // = oConvertUtils.getString(env.getProperty("server.servlet.context-path"));
+    String path = env.getProperty("server.servlet.context-path");
     log.info(
         "\n----------------------------------------------------------\n\t"
             + "Application Jeecg-Boot is running! Access URLs:\n\t"
