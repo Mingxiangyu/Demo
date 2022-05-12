@@ -1,4 +1,4 @@
-package com.iglens.地理;
+package com.iglens.地理.GDAL;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +12,7 @@ import org.gdal.gdal.gdal;
 import org.gdal.gdalconst.gdalconst;
 import org.gdal.osr.SpatialReference;
 
-public class Gdal生成tif {
+public class GDAL生成tif {
 
   public static void main(String[] args) {
 

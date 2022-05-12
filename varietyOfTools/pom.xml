@@ -703,17 +703,19 @@
     <!-- 生成缩略图  end   原文链接：https://blog.csdn.net/qq_34839150/article/details/109903432-->
 
     <!-- gdal  start  原文链接：https://blog.csdn.net/Neuromancerr/article/details/122838289 -->
-<!--    <dependency>-->
-<!--      <groupId>org.gdal</groupId>-->
-<!--      <artifactId>gdal</artifactId>-->
-<!--      <scope>system</scope>-->
-<!--      <systemPath>${project.basedir}/lib/gdal.jar</systemPath>-->
-<!--    </dependency>-->
-        <dependency>
-          <groupId>org.gdal</groupId>
-          <artifactId>gdal</artifactId>
-          <version>3.2.0</version>
-        </dependency>
+    <!--    <dependency>-->
+    <!--      <groupId>org.gdal</groupId>-->
+    <!--      <artifactId>gdal</artifactId>-->
+    <!--      <scope>system</scope>-->
+    <!--      <systemPath>${project.basedir}/lib/gdal.jar</systemPath>-->
+    <!--    </dependency>-->
+    <dependency>
+      <groupId>org.gdal</groupId>
+      <artifactId>gdal</artifactId>
+      <version>3.2.0</version>
+      <!--      如果出现 org.gdal.gdal.gdalJNI.Dataset_SWIGUpcast(J)J 可能是maven库中jar包和-->
+      <!--      dll版本不一致，这样只能使用gisinternals提供的jar文件-->
+    </dependency>
     <!-- gdal  end -->
   </dependencies>
 
@@ -761,11 +763,12 @@
   <build>
     <!--  <pluginManagement> pluginManagement是表示插件声明，即你在项目中的pluginManagement下声明了插件，Maven不会加载该插件-->
     <plugins>
+      <!--      如果没有该插件，则打出的jar包没法运行，java-jar时报没有主清单属性-->
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <configuration>
-          <executable>false</executable><!--          如果为True则该jar包不能外部修改-->
+          <executable>false</executable><!--          该选项如果为True则该jar包不能外部修改-->
           <includeSystemScope>true</includeSystemScope><!-- 加入该配置,maven在打包时才会引入外部jar包-->
         </configuration>
       </plugin>

@@ -1,3 +1,11 @@
+#docker部署nginx（linux）
+> docker run -id --name=c_tomcat \
+  -p 8080:8080 \
+  -v $PWD:/usr/local/tomcat/webapps \
+  tomcat
+> -p 8080:8080： 将容器的8080端⼝映射到主机的8080端⼝
+> -v $PWD:/usr/local/tomcat/webapps： 将主机中当前⽬录挂载到容器的webapps
+
 docker部署git(win)
 docker run -d  --hostname localhost  -p 10080:80  -p 10443:443  --name gitlab  --restart unless-stopped  -v "E:\gitlab/etc":/etc/gitlab  -v "E:\gitlab/log":/var/log/gitlab  -v "E:\gitlab/data":/var/data/gitlab  gitlab/gitlab-ce:latest
 docker部署git(linux)
