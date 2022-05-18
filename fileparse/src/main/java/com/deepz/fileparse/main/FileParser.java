@@ -1,8 +1,9 @@
 package com.deepz.fileparse.main;
 
 import com.deepz.fileparse.domain.dto.FileDto;
+import com.deepz.fileparse.domain.vo.StructableFileVo;
+import com.deepz.fileparse.domain.vo.StructablePdfVo;
 import com.deepz.fileparse.domain.vo.StructableWordVo;
-import com.deepz.fileparse.domain.vo.StructableWordVo.Head;
 import com.deepz.fileparse.parse.Parser;
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import org.apache.commons.io.FilenameUtils;
 import org.reflections.Reflections;
 import org.reflections.scanners.SubTypesScanner;
 import org.reflections.scanners.TypeAnnotationsScanner;
@@ -52,17 +54,30 @@ public class FileParser {
 
   public static void main(String[] args) {
     FileDto fileDto = new FileDto();
-    String pathname = "C:\\Users\\T480S\\Desktop\\5-10开发计划.docx";
+    String pathname = "G:\\软件备份\\MyDocument\\IDE\\blog.csdn.net-Gogs-搭建自己的Git服务器.pdf";
+    // String pathname = "G:\\软件备份\\Project\\J2\\信大\\相关文档\\多源情报分析系统部署-最终完善版(新增gis).docx";
     File file = new File(pathname);
     try (FileInputStream fileInputStream = new FileInputStream(file)) {
       // 传入的后缀不能带.,支持的格式都在Parse的策略类里注解配置
-      fileDto.setSuffx("docx");
+      String s = FilenameUtils.getExtension(pathname).toLowerCase();
+      System.out.println(s);
+      fileDto.setSuffx(s);
       fileDto.setInputStream(fileInputStream);
       FileParser fileParser = new FileParser();
-      StructableWordVo parse = fileParser.parse(fileDto);
-      System.out.println(parse.getContent());
-      List<Head> heads = parse.getHeads();
-      System.out.println(heads.toString());
+      StructableFileVo parse = fileParser.parse(fileDto);
+      if (s.equals("pdf")) {
+        StructablePdfVo parse1 = (StructablePdfVo) parse;
+        System.out.println(parse1.getContent());
+      } else if (s.equals("doc")||s.equals("docx")) {
+        StructableWordVo parse1 = (StructableWordVo) parse;
+        System.out.println(parse1.getContent());
+        System.out.println("文字内容结束");
+        List<StructableWordVo.Head> heads = parse1.getHeads();
+        System.out.println(heads.toString());
+      }
+      System.out.println("文字内容结束");
+      // List<StructablePdfVo.Head> heads = parse.getHeads();
+      // System.out.println(heads.toString());
     } catch (IOException e) {
       e.printStackTrace();
     }

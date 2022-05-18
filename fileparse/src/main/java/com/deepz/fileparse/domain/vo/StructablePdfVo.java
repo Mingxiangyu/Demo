@@ -7,7 +7,7 @@ import java.util.List;
  * @date 2019/7/25 16:01
  * @description
  */
-public class StructablePdfVo {
+public class StructablePdfVo extends StructableFileVo {
 
 
     /**

@@ -9,13 +9,13 @@ import java.util.List;
  */
 public class StructableExcelVo {
 
-    private List<StructableFileVO> values;
+    private List<StructableFileVo> values;
 
-    public List<StructableFileVO> getValues() {
+    public List<StructableFileVo> getValues() {
         return values;
     }
 
-    public void setValues(List<StructableFileVO> values) {
+    public void setValues(List<StructableFileVo> values) {
         this.values = values;
     }
 }

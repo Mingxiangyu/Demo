@@ -717,6 +717,15 @@
       <!--      dll版本不一致，这样只能使用gisinternals提供的jar文件-->
     </dependency>
     <!-- gdal  end -->
+
+    <!--IKSegmenter分词 start 原文链接：https://blog.csdn.net/qq_35290785/article/details/102661412-->
+    <dependency>
+      <groupId>com.janeluo</groupId>
+      <artifactId>ikanalyzer</artifactId>
+      <version>2012_u6</version>
+    </dependency>
+    <!--IKSegmenter分词 end-->
+
   </dependencies>
 
   <repositories>

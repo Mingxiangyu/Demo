@@ -2,7 +2,7 @@ package com.deepz.fileparse.parse;
 
 import com.deepz.fileparse.domain.dto.FileDto;
 import com.deepz.fileparse.domain.vo.StructableExcelVo;
-import com.deepz.fileparse.domain.vo.StructableFileVO;
+import com.deepz.fileparse.domain.vo.StructableFileVo;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -76,7 +76,7 @@ public class ExcelParser implements Parser<StructableExcelVo> {
      */
     private StructableExcelVo doParse(Workbook wb) {
 
-        List<StructableFileVO> fileVOS = new CopyOnWriteArrayList<>();
+        List<StructableFileVo> fileVOS = new CopyOnWriteArrayList<>();
 
         int size = wb.getNumberOfSheets();
 
@@ -107,8 +107,8 @@ public class ExcelParser implements Parser<StructableExcelVo> {
     }
 
     @NotNull
-    private StructableFileVO getSheetData(Sheet sheet) {
-        StructableFileVO fileVO = new StructableFileVO();
+    private StructableFileVo getSheetData(Sheet sheet) {
+        StructableFileVo fileVO = new StructableFileVo();
         List<String> headers = new ArrayList<>();
         List<List<Object>> datas = new ArrayList<>();
         for (Row row : sheet) {
