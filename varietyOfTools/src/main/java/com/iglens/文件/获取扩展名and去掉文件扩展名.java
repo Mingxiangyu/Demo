@@ -10,7 +10,7 @@ public class 获取扩展名and去掉文件扩展名 {
    *      Author: blueeagle
    */
   public static String getExtensionName(String filename) {
-    String ext = FilenameUtils.getExtension(filename).toLowerCase(); // FilenameUtils提供的获取扩展名方法
+    String ext = FilenameUtils.getExtension(filename).toLowerCase(); // FilenameUtils提供的获取扩展名方法 不带.
 
     if ((filename != null) && (filename.length() > 0)) {
       int dot = filename.lastIndexOf('.');

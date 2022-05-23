@@ -21,8 +21,8 @@
     <!--    jedis为2.9.0时会和redis-start冲突，更新为3.1.0后则没有这个问题-->
     <jedis.version>3.1.0</jedis.version>
 
-    <tika.version>0.7</tika.version>
-    <!--    <tika.version>1.20</tika.version>-->
+<!--    <tika.version>0.7</tika.version>-->
+        <tika.version>1.20</tika.version>
   </properties>
 
   <dependencies>
@@ -200,17 +200,6 @@
       <groupId>commons-net</groupId>
       <artifactId>commons-net</artifactId>
       <version>3.3</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.apache.tika</groupId>
-      <artifactId>tika-parsers</artifactId>
-      <version>${tika.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.tika</groupId>
-      <artifactId>tika-core</artifactId>
-      <version>${tika.version}</version>
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-compress -->
@@ -725,6 +714,36 @@
       <version>2012_u6</version>
     </dependency>
     <!--IKSegmenter分词 end-->
+
+    <!--Tika start -->
+    <dependency>
+      <groupId>org.apache.tika</groupId>
+      <artifactId>tika-parsers</artifactId>
+      <version>${tika.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.tika</groupId>
+      <artifactId>tika-core</artifactId>
+      <version>${tika.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>tika-app</artifactId>
+      <groupId>org.apache.tika</groupId>
+      <version>${tika.version}</version>
+    </dependency>
+    <!--    没有也不影响，只是运行时会报警告⚠-->
+    <dependency>
+      <artifactId>sqlite-jdbc</artifactId>
+      <groupId>org.xerial</groupId>
+      <version>3.14.2.1</version>
+    </dependency>
+    <dependency>
+      <!--      没有也不影响，只是运行时会报警告⚠-->
+      <artifactId>jbig2-imageio</artifactId>
+      <groupId>org.apache.pdfbox</groupId>
+      <version>3.0.0</version>
+    </dependency>
+    <!--Tika end -->
 
   </dependencies>
 
