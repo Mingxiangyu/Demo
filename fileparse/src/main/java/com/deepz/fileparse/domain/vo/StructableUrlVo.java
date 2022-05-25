@@ -4,11 +4,11 @@ import lombok.Data;
 
 /**
  * @author xming
- * @description 文件解析内容父级Vo
+ * @description
  */
 @Data
-public class StructableFileVo {
+public class StructableUrlVo {
 
-  /** 正文内容 */
+  /** 文本内容 */
   private String content;
 }

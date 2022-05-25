@@ -1,8 +1,7 @@
 package com.deepz.fileparse.domain.vo;
 
 /**
- * @author T480S
- * @date 2019/7/26 10:33
+ * @author xming
  * @description
  */
 public class StructableTxtVo {

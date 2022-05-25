@@ -13,3 +13,5 @@
 /smb-synchronize/smb-synchronize.iml
 .idea
 /fileparse/fileparse.iml
+/poiReadRuleExcel/src/main/resources/rebel.xml
+/varietyOfTools/src/main/resources/rebel.xml

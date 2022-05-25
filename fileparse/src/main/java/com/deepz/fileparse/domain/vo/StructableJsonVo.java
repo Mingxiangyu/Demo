@@ -1,10 +1,7 @@
 package com.deepz.fileparse.domain.vo;
 
 /**
- * @author zhangdingping
- * @date 2019/7/25 15:56
+ * @author xming
  * @description
  */
-public class StructableJsonVo extends StructableFileVo {
-
-}
+public class StructableJsonVo extends StructableFileVo {}

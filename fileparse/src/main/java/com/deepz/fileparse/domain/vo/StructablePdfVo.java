@@ -1,68 +1,31 @@
 package com.deepz.fileparse.domain.vo;
 
 import java.util.List;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author zhangdingping
- * @date 2019/7/25 16:01
+ * @author xming
  * @description
  */
+@Data
+@Slf4j
+@EqualsAndHashCode(callSuper = true)
 public class StructablePdfVo extends StructableFileVo {
 
+  /** 标题对象 */
+  private List<Head> heads;
 
-    /**
-     * 标题对象
-     */
-    private List<Head> heads;
+  /** 正文内容 */
+  private String content;
 
-    /**
-     * 正文内容
-     */
-    private String content;
+  @Data
+  public static class Head {
 
-
-    public static class Head {
-
-        /**
-         * 页码
-         */
-        private String page;
-        /**
-         * 标题
-         */
-        private String title;
-
-        public String getPage() {
-            return page;
-        }
-
-        public void setPage(String page) {
-            this.page = page;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
-    }
-
-    public List<Head> getHeads() {
-        return heads;
-    }
-
-    public void setHeads(List<Head> heads) {
-        this.heads = heads;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
+    /** 页码 */
+    private String page;
+    /** 标题 */
+    private String title;
+  }
 }
-

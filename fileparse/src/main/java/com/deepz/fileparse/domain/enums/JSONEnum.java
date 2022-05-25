@@ -1,14 +1,8 @@
 package com.deepz.fileparse.domain.enums;
 
-
-/**
- * @author T480S
- * @date 2019/7/24 10:52
- * @description
- */
+/** @author xming */
 public enum JSONEnum {
-
-    JSONArray, JSONObject, NotJSON;
-
-    
+  JSONArray,
+  JSONObject,
+  NotJSON;
 }

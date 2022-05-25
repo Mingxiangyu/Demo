@@ -1,9 +1,7 @@
 package com.deepz.fileparse.domain.vo;
 
 /**
- * @author zhangdingping
- * @date 2019/7/29 16:47
+ * @author xming
  * @description
  */
-public class StructableCsvVo extends StructableFileVo {
-}
+public class StructableCsvVo extends StructableFileVo {}

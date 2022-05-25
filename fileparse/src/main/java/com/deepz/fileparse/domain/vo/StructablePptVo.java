@@ -1,22 +1,19 @@
 package com.deepz.fileparse.domain.vo;
 
 /**
- * @author zhangdingping
- * @date 2019/7/26 10:00
+ * @author xming
  * @description
  */
 public class StructablePptVo {
 
-    /**
-     * 文本内容
-     */
-    private String content;
+  /** 文本内容 */
+  private String content;
 
-    public String getContent() {
-        return content;
-    }
+  public String getContent() {
+    return content;
+  }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+  public void setContent(String content) {
+    this.content = content;
+  }
 }

@@ -1,129 +1,132 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>fileparse</artifactId>
+  <parent>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <groupId>org.springframework.boot</groupId>
+    <version>2.3.0.RELEASE</version>
+  </parent>
+  <artifactId>fileparse</artifactId>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.0.RELEASE</version>
-    </parent>
+  <properties>
+    <tika.version>1.20</tika.version>
+  </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.apache.tika</groupId>
-            <artifactId>tika-core</artifactId>
-            <version>1.20</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.tika/tika-parsers -->
-        <dependency>
-            <groupId>org.apache.tika</groupId>
-            <artifactId>tika-parsers</artifactId>
-            <version>1.20</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.tika/tika-app -->
-        <dependency>
-            <groupId>org.apache.tika</groupId>
-            <artifactId>tika-app</artifactId>
-            <version>1.20</version>
-        </dependency>
-        <dependency>
-            <groupId>org.xerial</groupId>
-            <artifactId>sqlite-jdbc</artifactId>
-            <version>3.14.2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.pdfbox</groupId>
-            <artifactId>jbig2-imageio</artifactId>
-            <version>3.0.0</version>
-        </dependency>
+  <dependencies>
+    <dependency>
+      <artifactId>tika-core</artifactId>
+      <groupId>org.apache.tika</groupId>
+      <version>${tika.version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.tika/tika-parsers -->
+    <dependency>
+      <artifactId>tika-parsers</artifactId>
+      <groupId>org.apache.tika</groupId>
+      <version>${tika.version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.tika/tika-app -->
+    <dependency>
+      <artifactId>tika-app</artifactId>
+      <groupId>org.apache.tika</groupId>
+      <version>${tika.version}</version>
+    </dependency>
+    <!--    没有也不影响，只是运行时会报警告⚠-->
+    <dependency>
+      <artifactId>sqlite-jdbc</artifactId>
+      <groupId>org.xerial</groupId>
+      <version>3.14.2.1</version>
+    </dependency>
+    <dependency>
+      <!--      没有也不影响，只是运行时会报警告⚠-->
+      <artifactId>jbig2-imageio</artifactId>
+      <groupId>org.apache.pdfbox</groupId>
+      <version>3.0.0</version>
+    </dependency>
 
+    <dependency>
+      <artifactId>poi</artifactId>
+      <groupId>org.apache.poi</groupId>
+      <version>3.15</version>
+    </dependency>
+    <dependency>
+      <artifactId>poi-ooxml</artifactId>
+      <groupId>org.apache.poi</groupId>
+      <version>3.15</version>
+    </dependency>
+    <dependency>
+      <artifactId>poi-scratchpad</artifactId>
+      <groupId>org.apache.poi</groupId>
+      <version>3.15</version>
+    </dependency>
 
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi</artifactId>
-            <version>3.15</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-ooxml</artifactId>
-            <version>3.15</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-scratchpad</artifactId>
-            <version>3.15</version>
-        </dependency>
+    <dependency>
+      <artifactId>ant</artifactId>
+      <groupId>org.apache.ant</groupId>
+      <version>1.10.5</version>
+    </dependency>
+    <dependency>
+      <artifactId>pdfbox</artifactId>
+      <groupId>org.apache.pdfbox</groupId>
+      <version>2.0.4</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+    <dependency>
+      <artifactId>fastjson</artifactId>
+      <groupId>com.alibaba</groupId>
+      <version>1.2.58</version>
+    </dependency>
 
+    <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-email -->
+    <dependency>
+      <artifactId>commons-email</artifactId>
+      <groupId>org.apache.commons</groupId>
+      <version>1.5</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/net.sourceforge.javacsv/javacsv -->
+    <dependency>
+      <artifactId>javacsv</artifactId>
+      <groupId>net.sourceforge.javacsv</groupId>
+      <version>2.0</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
+    <dependency>
+      <artifactId>commons-beanutils</artifactId>
+      <groupId>commons-beanutils</groupId>
+      <version>1.9.3</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.reflections/reflections -->
+    <dependency>
+      <artifactId>reflections</artifactId>
+      <groupId>org.reflections</groupId>
+      <version>0.9.10</version>
+    </dependency>
+    <dependency>
+      <artifactId>junit</artifactId>
+      <groupId>junit</groupId>
+      <version>4.12</version>
+    </dependency>
 
-        <dependency>
-            <groupId>org.apache.ant</groupId>
-            <artifactId>ant</artifactId>
-            <version>1.10.5</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.pdfbox</groupId>
-            <artifactId>pdfbox</artifactId>
-            <version>2.0.4</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi</artifactId>
-            <version>4.0.0</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.58</version>
-        </dependency>
+    <dependency>
+      <artifactId>lombok</artifactId>
+      <groupId>org.projectlombok</groupId>
+      <optional>true</optional>
+    </dependency>
+  </dependencies>
 
-        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-email -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-email</artifactId>
-            <version>1.5</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
-        <dependency>
-            <groupId>commons-beanutils</groupId>
-            <artifactId>commons-beanutils</artifactId>
-            <version>1.9.3</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.reflections/reflections -->
-        <dependency>
-            <groupId>org.reflections</groupId>
-            <artifactId>reflections</artifactId>
-            <version>0.9.10</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/net.sourceforge.javacsv/javacsv -->
-        <dependency>
-            <groupId>net.sourceforge.javacsv</groupId>
-            <artifactId>javacsv</artifactId>
-            <version>2.0</version>
-        </dependency>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>8</source>
+          <target>8</target>
+        </configuration>
+        <groupId>org.apache.maven.plugins</groupId>
+      </plugin>
+    </plugins>
+  </build>
 
-    </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>8</source>
-                    <target>8</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>

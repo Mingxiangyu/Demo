@@ -1,34 +1,17 @@
 package com.deepz.fileparse.domain.dto;
 
 import java.io.InputStream;
+import lombok.Data;
 
 /**
- * @author T480S
- * @date 2019/7/29 11:34
+ * @author xming
  * @description
  */
+@Data
 public class FileDto {
 
-    private InputStream inputStream;
+  private InputStream inputStream;
 
-    /**
-     * 文件后缀(不包含 .)
-     */
-    private String suffx;
-
-    public InputStream getInputStream() {
-        return inputStream;
-    }
-
-    public void setInputStream(InputStream inputStream) {
-        this.inputStream = inputStream;
-    }
-
-    public String getSuffx() {
-        return suffx;
-    }
-
-    public void setSuffx(String suffx) {
-        this.suffx = suffx;
-    }
+  /** 文件后缀(不包含 .) */
+  private String suffx;
 }

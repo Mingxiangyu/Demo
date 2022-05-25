@@ -2,8 +2,6 @@ package com.iglens.pdf;
 
 import java.io.File;
 import org.apache.tika.Tika;
-import org.apache.tika.config.TikaConfig;
-import org.apache.tika.utils.ParseUtils;
 
 public class Tika实现pdf提取 {
 
@@ -19,22 +17,6 @@ public class Tika实现pdf提取 {
     String[] tt = new String[] {s};
 
     tika(tt);
-  }
-  /**
-   * 方法一：使用ParseUtils解析 解析各种类型文件
-   *
-   * @param
-   * @return 文件内容字符串
-   */
-  public static String parse(String path) {
-    String result = "";
-    TikaConfig tikaConfig = TikaConfig.getDefaultConfig();
-    try {
-      result = ParseUtils.getStringContent(new File(path), tikaConfig);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return result;
   }
 
   public static void tika(String[] tt) throws Exception {
