@@ -21,8 +21,8 @@
     <!--    jedis为2.9.0时会和redis-start冲突，更新为3.1.0后则没有这个问题-->
     <jedis.version>3.1.0</jedis.version>
 
-<!--    <tika.version>0.7</tika.version>-->
-        <tika.version>1.20</tika.version>
+    <!--    <tika.version>0.7</tika.version>-->
+    <tika.version>1.20</tika.version>
   </properties>
 
   <dependencies>
@@ -748,6 +748,16 @@
   </dependencies>
 
   <repositories>
+    <!--    <repository>-->
+    <!--      <id>spring</id>-->
+    <!--      <url>https://maven.aliyun.com/repository/spring</url>-->
+    <!--      <releases>-->
+    <!--        <enabled>true</enabled>-->
+    <!--      </releases>-->
+    <!--      <snapshots>-->
+    <!--        <enabled>true</enabled>-->
+    <!--      </snapshots>-->
+    <!--    </repository>-->
     <!--    GeoTool所需仓库-->
     <repository>
       <id>osgeo</id>
@@ -772,20 +782,26 @@
       </releases>
     </repository>
 
-    <!--    kettle依赖所在的仓库地址-->
+    <!--    kettle依赖所在的仓库地址 start-->
     <repository>
       <id>pentaho-releases</id>
       <name>kettle</name>
       <url>https://nexus.pentaho.org/content/groups/omni/</url>
     </repository>
+    <!--    kettle依赖所在的仓库地址 end-->
 
     <!--    原文链接：https://blog.csdn.net/pingweicheng/article/details/103547943-->
-    <!--    Spire.PDF for Java所需仓库  -->
+    <!--    Spire.PDF for Java所需仓库  start-->
     <repository>
       <id>com.e-iceblue</id>
       <name>e-iceblue</name>
       <url>http://repo.e-iceblue.com/nexus/content/groups/public/</url>
     </repository>
+    <repository>
+      <id>com.e-iceblue</id>
+      <url>http://repo.e-iceblue.cn/repository/maven-public/</url>
+    </repository>
+    <!--    Spire.PDF for Java所需仓库  end-->
   </repositories>
 
   <build>

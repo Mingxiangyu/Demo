@@ -10,8 +10,12 @@ import lombok.Data;
 @Data
 public class FileDto {
 
+  /** 文件流 */
   private InputStream inputStream;
 
   /** 文件后缀(不包含 .) */
   private String suffx;
+
+  /** 文字内容 */
+  private String strContent;
 }
