@@ -1,10 +1,10 @@
 package com.iglens.统计代码;
 
-import com.sun.istack.internal.Nullable;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;

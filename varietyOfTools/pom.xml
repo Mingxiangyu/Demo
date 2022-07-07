@@ -748,16 +748,16 @@
   </dependencies>
 
   <repositories>
-    <!--    <repository>-->
-    <!--      <id>spring</id>-->
-    <!--      <url>https://maven.aliyun.com/repository/spring</url>-->
-    <!--      <releases>-->
-    <!--        <enabled>true</enabled>-->
-    <!--      </releases>-->
-    <!--      <snapshots>-->
-    <!--        <enabled>true</enabled>-->
-    <!--      </snapshots>-->
-    <!--    </repository>-->
+    <repository>
+      <id>spring</id>
+      <url>https://maven.aliyun.com/repository/spring</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
     <!--    GeoTool所需仓库-->
     <repository>
       <id>osgeo</id>
@@ -792,11 +792,11 @@
 
     <!--    原文链接：https://blog.csdn.net/pingweicheng/article/details/103547943-->
     <!--    Spire.PDF for Java所需仓库  start-->
-    <repository>
-      <id>com.e-iceblue</id>
-      <name>e-iceblue</name>
-      <url>http://repo.e-iceblue.com/nexus/content/groups/public/</url>
-    </repository>
+    <!--    <repository>-->
+    <!--      <id>com.e-iceblue</id>-->
+    <!--      <name>e-iceblue</name>-->
+    <!--      <url>http://repo.e-iceblue.com/nexus/content/groups/public/</url>-->
+    <!--    </repository>-->
     <repository>
       <id>com.e-iceblue</id>
       <url>http://repo.e-iceblue.cn/repository/maven-public/</url>
