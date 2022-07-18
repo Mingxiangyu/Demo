@@ -822,6 +822,16 @@
         <configuration>
           <executable>false</executable><!--          该选项如果为True则该jar包不能外部修改-->
           <includeSystemScope>true</includeSystemScope><!-- 加入该配置,maven在打包时才会引入外部jar包-->
+          <!--          加了此配置后，打包后的项目发布服务器，可支持远程DEBUG
+          原文链接：https://blog.csdn.net/qq_41615095/article/details/123923462
+          -Xdebug 通知JVM工作在DEBUG模式下；
+          -Xrunjdwp 通知JVM使用(Java debug wire protocol)运行调试环境。该参数同时包含了一系列的调试选项；
+          transport 指定了调试数据的传送方式，dt_socket是指用SOCKET模式，另有dt_shmem指用共享内存方式，其中，dt_shmem只适用于Windows平台；
+          address 调试服务器的端口号，客户端用来连接服务器的端口号；
+          server=y/n VM 是否需要作为调试服务器执行；
+          suspend=y/n 是否在调试客户端建立连接之后启动 VM；-->
+          <jvmArguments>-Xdebug -Xrunjdwp:transport=dt_socket,address=8088,server=y,suspend=n
+          </jvmArguments>
         </configuration>
       </plugin>
       <plugin>
