@@ -815,6 +815,25 @@
   <build>
     <!--  <pluginManagement> pluginManagement是表示插件声明，即你在项目中的pluginManagement下声明了插件，Maven不会加载该插件-->
     <plugins>
+      <!--      build-helper-maven-plugin允许用户使用不同的地区设置自定义的时间戳格式。-->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>timestamp-property</id>
+            <goals>
+              <goal>timestamp-property</goal>
+            </goals>
+            <configuration>
+              <name>build.time</name>
+              <pattern>MM/dd/yyyy hh:mm aa</pattern>
+              <locale>en_US</locale>
+              <timeZone>America/Detroit</timeZone>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <!--      如果没有该插件，则打出的jar包没法运行，java-jar时报没有主清单属性-->
       <plugin>
         <groupId>org.springframework.boot</groupId>
