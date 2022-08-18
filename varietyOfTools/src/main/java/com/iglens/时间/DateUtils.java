@@ -293,8 +293,6 @@ public class DateUtils {
 	/**
 	 * 方向
 	 * 
-	 * @author liuyazhuang
-	 *
 	 */
 	public enum Direction {
 		Previous, After
