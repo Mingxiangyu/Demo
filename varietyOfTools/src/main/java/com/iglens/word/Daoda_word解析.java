@@ -34,7 +34,7 @@ import org.apache.poi.xwpf.usermodel.XWPFTableCell;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
 @Slf4j
-public class word解析 {
+public class Daoda_word解析 {
 
   /**
    * word的全角空格 以及\t 制表符
