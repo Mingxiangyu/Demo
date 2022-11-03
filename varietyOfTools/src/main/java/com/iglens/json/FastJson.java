@@ -20,7 +20,7 @@ import java.util.Map;
 import lombok.Data;
 import org.apache.commons.io.FileUtils;
 
-public class Json {
+public class FastJson {
   public static void main(String[] args) {
     // 1、生成json文件--测试
     List<Object> agencyList = new ArrayList<Object>();
