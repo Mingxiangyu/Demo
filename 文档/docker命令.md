@@ -114,7 +114,50 @@ docker stop 容器id
 docker kill 容器id    # 强制停止当前容器
 ~~~
 
+###### 运行容器添加新的端口映射
 
+修改要端口映射的容器的配置文件
+
+```bash
+#1、查看容器的信息
+docker ps -a
+ 
+#2、查看容器的端口映射情况，在容器外执行：
+docker port 容器ID 或者 docker port 容器名称
+ 
+#3、查找要修改容器的全ID
+docker inspect 容器ID |grep Id
+ 
+#4、进到/var/lib/docker/containers(具体路径通过 docker inspect 容器Id 查看) 目录下找到与全 Id 相同的目录，修改 其中的hostconfig.json 和 config.v2.json文件：
+#注意：若该容器还在运行中，需要先停掉
+docker stop 容器ID
+#再停掉docker服务
+systemctl stop docker
+ 
+#5、修改hostconfig.json如下，添加端口绑定"9003/tcp": [{"HostIp": "","HostPort": "9003"}]，表示绑定端口9003
+ 
+#6、修改config.v2.json在ExposedPorts中加上要暴露的端口，即9003
+
+#7、改完之后，重启docker服务和容器
+systemctl restart docker
+docker start 容器名
+
+#8、此时，可以查看宿主机端口是否和容器内端口映射成功，在容器外执行
+netstat -an |grep 宿主机的映射端口
+```
+
+###### 实时查看容器日志
+
+```bash
+docker logs -f  --tail=100 f41c6a557eb6
+docker logs -f -t --since=“2017-05-31” --tail=10 f41c6a557eb6
+
+–since : 此参数指定了输出日志开始日期，即只输出指定日期之后的日志。
+-f : 查看实时日志
+-t : 查看日志产生的日期
+-tail=10 : 查看最后的10条日志。
+f41c6a557eb6 : 容器Id
+```
 
 ### 镜像导入导出
 
