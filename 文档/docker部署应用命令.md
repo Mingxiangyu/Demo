@@ -77,3 +77,19 @@ docker run -it -p 8012:8012 keking/kkfileview
 ##### docker 部署mysql
 
 docker run --name mysql -e MYSQL_ROOT_PASSWORD=123456 -p 3306:3306 -d mysql
+
+##### Docker安装ElasticSearch 版本7.6.2
+
+```dockerfile
+docker run -p 9200:9200 -p 9300:9300 --privileged=true --name es7.6.2 -e "discovery.type=single-node"  -v D:\elasticsearch\plugins:/usr/share/elasticsearch/plugins -v D:\elasticsearch\config:/usr/share/elasticsearch/config -v D:\elasticsearch\data:/usr/share/elasticsearch/data -v D:\elasticsearch\logs:/usr/share/elasticsearch/logs -d elasticsearch:7.6.2
+```
+
+> 原文链接：https://blog.csdn.net/yexiaomodemo/article/details/112966842
+
+##### docker安装kibana-7.6.1
+
+```dockerfile
+docker run -itd --name kibana -p 5601:5601 -e \
+"ELASTICSEARCH_HOSTS=http://"yourIp":9200" docker.elastic.co/kibana/kibana:7.6.2
+```
+

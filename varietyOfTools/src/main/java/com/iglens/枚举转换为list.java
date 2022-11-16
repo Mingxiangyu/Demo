@@ -1,6 +1,5 @@
 package com.iglens;
 
-import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.iglens.定时任务.SysJobStatus;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -10,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.util.CollectionUtils;
 
 public class 枚举转换为list {
   private static String ENUM_CLASSPATH = "java.lang.Enum";
