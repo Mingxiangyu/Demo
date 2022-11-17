@@ -870,6 +870,52 @@
           <skipTests>${sikpTests}</skipTests>
         </configuration>
       </plugin>
+
+      <plugin>
+        <!--docker的maven插件-->
+        <!--      原文链接：https://blog.csdn.net/weixin_44597369/article/details/115737608-->
+        <groupId>com.spotify</groupId>
+        <artifactId>docker-maven-plugin</artifactId>
+        <version>1.1.0</version>
+
+        <configuration>
+          <!--配置最后生成的镜像名，docker images里的，我们这边取项目名:版本-->
+          <imageName>${project.artifactId}:${project.version}</imageName>
+          <!--指定标签-->
+          <imageTags>
+            <imageTag>latest</imageTag>
+          </imageTags>
+          <!-- 基础镜像jdk 1.8-->
+          <baseImage>java</baseImage>
+          <!-- 制作者提供本人信息 -->
+          <maintainer>guoweixin guoweixin@aliyun.com</maintainer>
+          <!--切换到/ROOT目录 -->
+          <workdir>/ROOT</workdir>
+          <cmd>["java", "-version"]</cmd>
+          <entryPoint>["java", "-jar", "${project.build.finalName}.jar"]</entryPoint>
+          <!--是否推送到docker私有仓库-->
+          <pushImage>true</pushImage>
+          <!-- Dockerfile的位置 -->
+          <dockerDirectory>src/main/docker</dockerDirectory>
+          <!-- 指定 Dockerfile 路径
+            <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+         -->
+          <!--指定远程 docker api地址-->
+          <dockerHost>http://192.168.20.135:2375</dockerHost>
+
+          <!-- 这里是复制 jar 包到 docker 容器指定目录配置 -->
+          <resources>
+            <resource>
+              <targetPath>/ROOT</targetPath>
+              <!--用于指定需要复制的根目录，${project.build.directory}表示target目录-->
+              <directory>${project.build.directory}</directory>
+              <!--用于指定需要复制的文件。${project.build.finalName}.jar指的是打包后的jar包文件。-->
+              <!--把哪个文件上传到docker，相当于Dockerfile里的add testDocker.jar /-->
+              <include>${project.build.finalName}.jar</include>
+            </resource>
+          </resources>
+        </configuration>
+      </plugin>
     </plugins>
     <!--  </pluginManagement>-->
   </build>

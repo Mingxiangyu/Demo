@@ -89,7 +89,7 @@ docker run -p 9200:9200 -p 9300:9300 --privileged=true --name es7.6.2 -e "discov
 ##### docker安装kibana-7.6.1
 
 ```dockerfile
-docker run -itd --name kibana -p 5601:5601 -e \
-"ELASTICSEARCH_HOSTS=http://"yourIp":9200" docker.elastic.co/kibana/kibana:7.6.2
+docker run -itd --name kibana -p 5601:5601 -e "ELASTICSEARCH_HOSTS=http://localhost:9200" docker.elastic.co/kibana/kibana:7.6.2
 ```
 
+> 原文链接：https://blog.csdn.net/weixin_42854904/article/details/118756989
