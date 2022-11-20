@@ -7,7 +7,7 @@ package com.iglens;
  *
  * @author snx
  */
-public class ProgressBar {
+public class 进度条工具 {
 
   /** 当前进度 */
   private int index;
@@ -26,31 +26,31 @@ public class ProgressBar {
   private static final char PROCESS_CHAR = '█';
   private static final char WAIT_CHAR = '─';
 
-  private ProgressBar() {
+  private 进度条工具() {
     index = 0;
     step = 1;
     barLength = 100;
     title = "Progress:";
   }
 
-  public static ProgressBar build() {
-    return new ProgressBar();
+  public static 进度条工具 build() {
+    return new 进度条工具();
   }
 
-  public static ProgressBar build(int step) {
-    ProgressBar progressBar = build();
+  public static 进度条工具 build(int step) {
+    进度条工具 progressBar = build();
     progressBar.step = step;
     return progressBar;
   }
 
-  public static ProgressBar build(int index, int step) {
-    ProgressBar progressBar = build(step);
+  public static 进度条工具 build(int index, int step) {
+    进度条工具 progressBar = build(step);
     progressBar.index = index;
     return progressBar;
   }
 
-  public static ProgressBar build(int index, int step, String title) {
-    ProgressBar progressBar = build(index, step);
+  public static 进度条工具 build(int index, int step, String title) {
+    进度条工具 progressBar = build(index, step);
     progressBar.title = title;
     return progressBar;
   }

@@ -1,4 +1,4 @@
-package com.iglens;
+package com.iglens.字符串;
 
 import java.lang.Character.UnicodeBlock;
 
