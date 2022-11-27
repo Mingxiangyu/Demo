@@ -255,10 +255,16 @@ docker attach 容器id
 ###### 从容器内拷贝文件到主机上
 
 ~~~sh
-docker cp 容器id:容器内路径 目的地路径（如果为宿主机当前文件夹路径，可以直接.代替目的地路径）
+docker cp 容器id:容器内路径 目的地路径（如果为宿主机当前文件夹路径，可以直接`.`代替目的地路径）
 # 将容器文件拷贝到主机上
 #docker cp 402:/home/test.java .
 ~~~
+
+###### 从主机内拷贝文件到容器上
+
+```sh
+docker cp 宿主机目录/文件  容器:/目录/
+```
 
 ###### docker运行
 
@@ -276,8 +282,6 @@ docker run -d --name nginx01 -p 5566:80 nginx
 ~~~sh
 docker inspect 容器id
 ~~~
-
-
 
 ~~~sh
 docker run -it --rm tomcat:9.0 # 测试时使用，用完即删
@@ -320,6 +324,8 @@ docker run -d -p 3307:3306 -v /data/mysql/conf:/etc/mysql/conf.d -v /data/mysql/
 
 
 ## 具名和匿名挂载
+
+**正在运行的容器无法挂载，须在启动容器进行指定： docker run -v 宿主机目录:容器目录  容器镜像**
 
 ~~~sh
 # 匿名挂载 在-v的时候只写了容器内部的路径，没有写外部的路径
