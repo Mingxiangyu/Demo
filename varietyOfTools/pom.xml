@@ -753,6 +753,18 @@
     </dependency>
     <!--获取照片中元数据 end -->
 
+    <!--    自动重试机制 start-->
+    <dependency>
+      <groupId>org.springframework.retry</groupId>
+      <artifactId>spring-retry</artifactId>
+      <version>1.2.5.RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjweaver</artifactId>
+    </dependency>
+    <!--    自动重试机制 end-->
+
   </dependencies>
 
   <repositories>
