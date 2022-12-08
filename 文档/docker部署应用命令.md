@@ -76,7 +76,23 @@ docker run -it -p 8012:8012 keking/kkfileview
 
 ##### docker 部署mysql
 
+第一种
+
+```sh
 docker run --name mysql -e MYSQL_ROOT_PASSWORD=123456 -p 3306:3306 -d mysql
+```
+
+第二种
+
+```sh
+docker run --restart=always --privileged=true -d -v /home/mysql/data:/var/lib/mysql -v /home/mysql/conf:/etc/mysql/conf.d -v /home/mysql/my.cnf:/etc/mysql/my.cnf -p 3311:3306 --name mysql02 -e MYSQL_ROOT_PASSWORD=root mysql
+```
+
+- `--restart=always` 代表开启启动
+- `--privileged=true` 代表进入容器内部为管理员身份
+- `-d` 表示后台运行容器 并返回容器Id
+- `-v` 把mysql产生的数据同步到本地 防止数据丢失
+- `-e` 容器传参  设置mysql的初始密码
 
 ##### Docker安装ElasticSearch 版本7.6.2
 
