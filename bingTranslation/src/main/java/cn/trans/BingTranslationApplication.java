@@ -5,6 +5,7 @@ import java.net.UnknownHostException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
@@ -19,9 +20,10 @@ import springfox.documentation.spring.web.plugins.Docket;
 /** @author T480S */
 @Slf4j
 @SpringBootApplication
-public class DemoApplication {
+@EnableFeignClients
+public class BingTranslationApplication {
   public static void main(String[] args) {
-    ConfigurableApplicationContext application = SpringApplication.run(DemoApplication.class, args);
+    ConfigurableApplicationContext application = SpringApplication.run(BingTranslationApplication.class, args);
     Environment env = application.getEnvironment();
     String ip = null;
     try {
@@ -53,7 +55,7 @@ public class DemoApplication {
     return new ApiInfoBuilder()
         .title("Swagger3接口文档")
         .description("更多请咨询服务开发者Mxy。")
-        .contact(new Contact("Mxy。", "http://www.baidu.com", "Mxy@foxmail.com"))
+        .contact(new Contact("Mxy。", "http://www.bing.com", "Mxy@foxmail.com"))
         .version("1.0")
         .build();
   }

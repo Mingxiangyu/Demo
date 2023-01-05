@@ -1,4 +1,4 @@
-package cn.ruiyeclub.services;
+package cn.trans.services;
 
 import cn.hutool.core.util.StrUtil;
 import java.io.BufferedInputStream;

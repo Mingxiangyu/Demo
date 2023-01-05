@@ -1,6 +1,6 @@
-package cn.ruiyeclub.controller;
+package cn.trans.controller;
 
-import cn.ruiyeclub.services.GeoPdfService;
+import cn.trans.services.GeoPdfService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import javax.servlet.http.HttpServletResponse;
