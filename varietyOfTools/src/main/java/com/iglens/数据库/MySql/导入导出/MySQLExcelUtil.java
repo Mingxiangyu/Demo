@@ -39,12 +39,15 @@ public class MySQLExcelUtil {
     String password = "mingxy925871";
     String database = "test";
     String filePath = "C:\\Users\\T480S\\Desktop\\mysql-excel";
+
+    // 导出
     //    try {
     //      MySQLExcelUtil.exportFromMySQLToExcel(ip, port, database, username, password, filePath);
     //    } catch (SQLException e) {
     //      e.printStackTrace();
     //    }
 
+    // 导入
     importFromExcelToMySQL(
         ip,
         port,
