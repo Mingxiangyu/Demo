@@ -25,7 +25,7 @@ public class CSV导入到MySQL {
 
   public static void main(String[] args) {
     List<List<String>> csvList =
-        readCsv("E:\\WorkSpace\\pyWorkSpace\\noaa\\tar_gz\\2022\\47108099999.csv", 1);
+        readCsv("E:\\WorkSpace\\pyWorkSpace\\noaa\\tar_gz\\2022\\54511099999.csv", 1);
     insert(csvList);
   }
 
@@ -165,6 +165,7 @@ public class CSV导入到MySQL {
         // 获取每行下的每项数据
         for (int i = 0; i < line.size(); i++) {
           String source = line.get(i);
+          source = source.trim();
           if (i == 0) {
             ps.setString(k++, source);
             continue;
