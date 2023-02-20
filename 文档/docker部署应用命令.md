@@ -68,7 +68,22 @@ IP 后面是你的服务器公网ip或者虚拟机的IP，-e WEB_PORT=80 指定 
 
 ##### Docker 安装运行 Redis
 
-docker run -d -p 6379:6379 redis:4.0.8
+```sh
+docker run -d --name redis -p6379:6379 -v /d/redis/data:/data redis --appendonly yes
+```
+
+> **参数说明：**
+> **-d** ------ 后台运行
+> **--name** ------ 实例运行后的名字 myredis
+> **-p6379:6379** ------ 端口映射，冒号前面是windows下的端口，后面是虚拟机的端口
+> **-v /d/redis/data:/data** ------ 保存数据的位置。
+>
+> - d:\redis\data 前面是windows下的实际保存数据目录
+> - /data 虚拟机内的目录
+>
+> **redis-server --appendonly yes** ------ 在容器执行redis-server启动命令，并打开redis持久化配置。
+
+> 原文链接：https://www.moguf.com/post/windockerrunredis
 
 ##### Docker 安装kkFile
 
