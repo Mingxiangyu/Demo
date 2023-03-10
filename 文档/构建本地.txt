@@ -1,0 +1,1 @@
+mvn install:install-file -Dfile=F:\ktWorkSpace\algorithm\target\ALGORITHM-SNAPSHOT.jar -DgroupId=org.com -DartifactId=algorithm -Dversion=1.0 -Dpackaging=jar
