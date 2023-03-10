@@ -50,6 +50,7 @@ public class 删除目录及子文件 {
     }
     return true;
   }
+
   /**
    * 删除单个文件
    *
@@ -64,13 +65,15 @@ public class 删除目录及子文件 {
         LOGGER.info("删除单个文件" + filePath + "成功！");
         return true;
       } else {
-        LOGGER.info("删除单个文件" + filePath + "失败！");
-        return false;
+        System.gc();
+        System.runFinalization();
+        boolean delete = file.delete();
+        LOGGER.info("删除单个文件" + filePath + "：" + delete + " ！");
+        return delete;
       }
     } else {
-      LOGGER.info("删除单个文件失败：" + filePath + "不存在！");
+      LOGGER.info("删除单个文件失败：" + filePath);
       return false;
     }
   }
-
 }

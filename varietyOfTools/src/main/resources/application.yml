@@ -6,9 +6,11 @@ server:
     include-message: always
 #mybatis
 mybatis-plus:
+  # xml扫描，多个目录用逗号或者分号分隔（告诉 Mapper 所对应的 XML 文件位置）
   mapper-locations: classpath:com/doubleskyline/gkly/qbzb/mapper/*.xml
-  #实体扫描，多个package用逗号或者分号分隔
+  #  定义所有操作类的别名所在包
   typeAliasesPackage: com.doubleskyline.gkly.qbzb.entity
+  # 以下配置均有默认值,可以不设置
   global-config:
     #数据库相关配置
     db-config:
@@ -18,16 +20,22 @@ mybatis-plus:
       field-strategy: NOT_EMPTY
       #驼峰下划线转换
       column-underline: true
+      # 逻辑已删除值(默认为 1)
       logic-delete-value: -1
+      # 逻辑未删除值(默认为 0)
       logic-not-delete-value: 0
     #禁用掉启动时控制台打印mybatisPlus的banner
     banner: false
   #原生配置
   configuration:
+    # 是否开启自动驼峰命名规则映射:从数据库列名到Java属性驼峰命名的类似映射
     map-underscore-to-camel-case: true
     cache-enabled: false
+    # 如果查询结果中包含空值的列，则 MyBatis 在映射的时候，不会映射这个字段
     call-setters-on-nulls: true
     jdbc-type-for-null: 'null'
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mybatis-refresh:
     #是否开启刷新线程
     enabled: true

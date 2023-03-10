@@ -20,9 +20,14 @@ public class JDBC连接获取Mysql信息 {
   private static final Logger log = LoggerFactory.getLogger(JDBC连接获取Mysql信息.class);
 
   private static final String URL =
-      "jdbc:mysql://%s:%s/%s?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai";
+      "jdbc:mysql://%s:%s/%s?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai"
+          // MySql服务器默认关闭批处理的，我们需要通过一个参数，让MySQL开启批处理的支持：
+          // ?rewriteBatchedStatements=true(补充在url的后面)
+          // @link https://blog.csdn.net/star_zhang_jx/article/details/120168213
+          // + "&rewriteBatchedStatements=true";
+          + "";
 
-  private static final String driver = "com.mysql.cj.jdbc.Driver";
+  private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 
   private static final String SELECT_SQL = "SELECT * FROM %s";
 
@@ -110,7 +115,7 @@ public class JDBC连接获取Mysql信息 {
     String url = String.format(URL, ip, port, database);
     System.out.println(url);
     try {
-      Class.forName(driver);
+      Class.forName(DRIVER);
       // 获得连接
       return DriverManager.getConnection(url, username, password);
     } catch (ClassNotFoundException e) {

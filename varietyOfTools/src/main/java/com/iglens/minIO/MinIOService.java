@@ -31,6 +31,9 @@ public class MinIOService {
 
   public MinioClient getMinioClient() {
     try {
+      address = "49.5.9.35:16051";
+      accessKey = "LXidNNWyrA0Qamoj";
+      secretKey = "fyqpEV0Y5rZw0IXWdnvzXdxLU2qvsgNi";
       return new MinioClient(address, accessKey, secretKey);
     } catch (Exception e) {
       e.printStackTrace();

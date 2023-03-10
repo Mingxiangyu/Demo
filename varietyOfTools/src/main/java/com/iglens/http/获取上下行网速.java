@@ -3,7 +3,12 @@ package com.iglens.http;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.Formatter;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Properties;
+import java.util.StringTokenizer;
 
 public class 获取上下行网速 {
   private static final int SLEEP_TIME = 2*1000 ;

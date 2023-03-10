@@ -3,14 +3,13 @@ package com.iglens;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.iglens.txt.获取TXT文本编码格式;
-import org.apache.commons.lang3.math.NumberUtils;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.apache.commons.lang3.math.NumberUtils;
 
 public class 钱磊项目中风场转向量 {
 

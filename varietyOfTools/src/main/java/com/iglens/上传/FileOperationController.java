@@ -13,7 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * 单文件、多文件上传
  * @author luolei
- * @date 2019年1月31日
  */
 @RestController
 public class FileOperationController {

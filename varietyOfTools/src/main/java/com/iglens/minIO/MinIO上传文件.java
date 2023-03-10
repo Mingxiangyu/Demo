@@ -13,13 +13,16 @@ public class MinIO上传文件 {
 
   public static void main(String[] args)
       throws NoSuchAlgorithmException, IOException, InvalidKeyException, XmlPullParserException {
+    String address = "http://49.5.9.35:16051";
+    String accessKey = "LXidNNWyrA0Qamoj";
+    String secretKey = "fyqpEV0Y5rZw0IXWdnvzXdxLU2qvsgNi";
     try {
       // 使用MinIO服务的URL，端口，Access key和Secret key创建一个MinioClient对象
       MinioClient minioClient =
           new MinioClient(
-              "https://play.min.io",
-              "Q3AM3UQ867SPQQA43P2F",
-              "zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG");
+              address,
+              accessKey,
+              secretKey);
       // 该配置可放到配置文件中
       /*
       # 设置单个文件大小

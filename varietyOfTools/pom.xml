@@ -745,19 +745,47 @@
     </dependency>
     <!--Tika end -->
 
+    <!--获取照片中元数据 start -->
+    <dependency>
+      <groupId>com.drewnoakes</groupId>
+      <artifactId>metadata-extractor</artifactId>
+      <version>2.16.0</version>
+    </dependency>
+    <!--获取照片中元数据 end -->
+
+    <!--读取csv start -->
+    <dependency>
+      <groupId>net.sourceforge.javacsv</groupId>
+      <artifactId>javacsv</artifactId>
+      <version>2.0</version>
+    </dependency>
+    <!--读取csv end -->
+
+    <!--    自动重试机制 start-->
+    <dependency>
+      <groupId>org.springframework.retry</groupId>
+      <artifactId>spring-retry</artifactId>
+      <version>1.2.5.RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjweaver</artifactId>
+    </dependency>
+    <!--    自动重试机制 end-->
+
   </dependencies>
 
   <repositories>
-    <!--    <repository>-->
-    <!--      <id>spring</id>-->
-    <!--      <url>https://maven.aliyun.com/repository/spring</url>-->
-    <!--      <releases>-->
-    <!--        <enabled>true</enabled>-->
-    <!--      </releases>-->
-    <!--      <snapshots>-->
-    <!--        <enabled>true</enabled>-->
-    <!--      </snapshots>-->
-    <!--    </repository>-->
+    <repository>
+      <id>spring</id>
+      <url>https://maven.aliyun.com/repository/spring</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
     <!--    GeoTool所需仓库-->
     <repository>
       <id>osgeo</id>
@@ -792,11 +820,11 @@
 
     <!--    原文链接：https://blog.csdn.net/pingweicheng/article/details/103547943-->
     <!--    Spire.PDF for Java所需仓库  start-->
-    <repository>
-      <id>com.e-iceblue</id>
-      <name>e-iceblue</name>
-      <url>http://repo.e-iceblue.com/nexus/content/groups/public/</url>
-    </repository>
+    <!--    <repository>-->
+    <!--      <id>com.e-iceblue</id>-->
+    <!--      <name>e-iceblue</name>-->
+    <!--      <url>http://repo.e-iceblue.com/nexus/content/groups/public/</url>-->
+    <!--    </repository>-->
     <repository>
       <id>com.e-iceblue</id>
       <url>http://repo.e-iceblue.cn/repository/maven-public/</url>
@@ -807,6 +835,25 @@
   <build>
     <!--  <pluginManagement> pluginManagement是表示插件声明，即你在项目中的pluginManagement下声明了插件，Maven不会加载该插件-->
     <plugins>
+      <!--      build-helper-maven-plugin允许用户使用不同的地区设置自定义的时间戳格式。-->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>timestamp-property</id>
+            <goals>
+              <goal>timestamp-property</goal>
+            </goals>
+            <configuration>
+              <name>build.time</name>
+              <pattern>MM/dd/yyyy hh:mm aa</pattern>
+              <locale>en_US</locale>
+              <timeZone>America/Detroit</timeZone>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <!--      如果没有该插件，则打出的jar包没法运行，java-jar时报没有主清单属性-->
       <plugin>
         <groupId>org.springframework.boot</groupId>
@@ -814,6 +861,16 @@
         <configuration>
           <executable>false</executable><!--          该选项如果为True则该jar包不能外部修改-->
           <includeSystemScope>true</includeSystemScope><!-- 加入该配置,maven在打包时才会引入外部jar包-->
+          <!--          加了此配置后，打包后的项目发布服务器，可支持远程DEBUG
+          原文链接：https://blog.csdn.net/qq_41615095/article/details/123923462
+          -Xdebug 通知JVM工作在DEBUG模式下；
+          -Xrunjdwp 通知JVM使用(Java debug wire protocol)运行调试环境。该参数同时包含了一系列的调试选项；
+          transport 指定了调试数据的传送方式，dt_socket是指用SOCKET模式，另有dt_shmem指用共享内存方式，其中，dt_shmem只适用于Windows平台；
+          address 调试服务器的端口号，客户端用来连接服务器的端口号；
+          server=y/n VM 是否需要作为调试服务器执行；
+          suspend=y/n 是否在调试客户端建立连接之后启动 VM；-->
+          <jvmArguments>-Xdebug -Xrunjdwp:transport=dt_socket,address=8088,server=y,suspend=n
+          </jvmArguments>
         </configuration>
       </plugin>
       <plugin>
@@ -831,6 +888,52 @@
         <configuration>
           <!--默认关掉单元测试 -->
           <skipTests>${sikpTests}</skipTests>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <!--docker的maven插件-->
+        <!--      原文链接：https://blog.csdn.net/weixin_44597369/article/details/115737608-->
+        <groupId>com.spotify</groupId>
+        <artifactId>docker-maven-plugin</artifactId>
+        <version>1.1.0</version>
+
+        <configuration>
+          <!--配置最后生成的镜像名，docker images里的，我们这边取项目名:版本-->
+          <imageName>${project.artifactId}:${project.version}</imageName>
+          <!--指定标签-->
+          <imageTags>
+            <imageTag>latest</imageTag>
+          </imageTags>
+          <!-- 基础镜像jdk 1.8-->
+          <baseImage>java</baseImage>
+          <!-- 制作者提供本人信息 -->
+          <maintainer>guoweixin guoweixin@aliyun.com</maintainer>
+          <!--切换到/ROOT目录 -->
+          <workdir>/ROOT</workdir>
+          <cmd>["java", "-version"]</cmd>
+          <entryPoint>["java", "-jar", "${project.build.finalName}.jar"]</entryPoint>
+          <!--是否推送到docker私有仓库-->
+          <pushImage>true</pushImage>
+          <!-- Dockerfile的位置 -->
+          <dockerDirectory>src/main/docker</dockerDirectory>
+          <!-- 指定 Dockerfile 路径
+            <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+         -->
+          <!--指定远程 docker api地址-->
+          <dockerHost>http://192.168.20.135:2375</dockerHost>
+
+          <!-- 这里是复制 jar 包到 docker 容器指定目录配置 -->
+          <resources>
+            <resource>
+              <targetPath>/ROOT</targetPath>
+              <!--用于指定需要复制的根目录，${project.build.directory}表示target目录-->
+              <directory>${project.build.directory}</directory>
+              <!--用于指定需要复制的文件。${project.build.finalName}.jar指的是打包后的jar包文件。-->
+              <!--把哪个文件上传到docker，相当于Dockerfile里的add testDocker.jar /-->
+              <include>${project.build.finalName}.jar</include>
+            </resource>
+          </resources>
         </configuration>
       </plugin>
     </plugins>

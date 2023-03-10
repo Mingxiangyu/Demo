@@ -1,8 +1,7 @@
 package com.iglens.字符串;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.nio.charset.Charset;
+import org.apache.commons.lang3.StringUtils;
 
 public class 获取字符串实际的存储长度 {
   public static void main(String[] args) {

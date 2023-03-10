@@ -37,7 +37,7 @@ public class 批量插入数据库 {
       // 设置事务为非自动提交
       conn.setAutoCommit(false);
       // 比起st，pst会更好些
-      PreparedStatement pst = (PreparedStatement) conn.prepareStatement(" "); // 准备执行语句
+      PreparedStatement pst = conn.prepareStatement(" "); // 准备执行语句
       // 外层循环，总提交事务次数
       for (int i = 1; i <= 100; i++) {
         suffix = new StringBuffer();
@@ -52,7 +52,7 @@ public class 批量插入数据库 {
         }
         // 构建完整SQL
         String sql = prefix + suffix.substring(0, suffix.length() - 1);
-        //        System.out.println(sql);
+        System.out.println(sql);
         // 添加执行SQL
         pst.addBatch(sql);
         // 执行操作
@@ -60,7 +60,7 @@ public class 批量插入数据库 {
         // 提交事务
         conn.commit();
       }
-      // 头等连接
+      // 关闭连接
       pst.close();
       conn.close();
     } catch (SQLException e) {

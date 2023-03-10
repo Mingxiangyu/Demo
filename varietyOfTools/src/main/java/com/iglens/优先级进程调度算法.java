@@ -1,9 +1,8 @@
 package com.iglens;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @author xming

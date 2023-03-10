@@ -1,11 +1,10 @@
 package com.iglens.爬虫;
 
-import org.apache.commons.io.IOUtils;
-
 import java.io.InputStream;
 import java.net.InetSocketAddress;
 import java.net.URL;
 import java.net.URLConnection;
+import org.apache.commons.io.IOUtils;
 
 public class 检查代理有效性 {
 

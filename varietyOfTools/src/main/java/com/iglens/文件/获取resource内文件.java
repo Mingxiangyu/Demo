@@ -1,9 +1,13 @@
 package com.iglens.文件;
 
-import org.springframework.core.io.ClassPathResource;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URLDecoder;
+import org.springframework.core.io.ClassPathResource;
 
 public class 获取resource内文件 {
 

@@ -1,2 +1,0 @@
-删除数据库中以往的图
-MATCH (n) DETACH DELETE n
