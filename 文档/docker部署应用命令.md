@@ -1,11 +1,21 @@
 ##### # docker部署nginx（linux）
-
-> docker run -id --name=c_tomcat \
-  -p 8080:8080 \
-  -v $PWD:/usr/local/tomcat/webapps \
-  tomcat
+~~~
+ docker run -id --name=c_tomcat \
+ -p 8080:8080 \
+ -v $PWD:/usr/local/tomcat/webapps \
+ tomcat
+ 
+ docker run -itd \ 
+--name nginx02 \
+-v /home/nginx/conf.d:/etc/nginx/conf.d \ (以下是将/home/nginx的内容挂载到对应的目录下，注意位置千万不能搞错)
+-v /home/nginx/html:/etc/nginx/html \
+-v /home/nginx/log:/usr/log/nginx \
+-p 8081:80 \
+nginx
+~~~
 > -p 8080:8080： 将容器的8080端⼝映射到主机的8080端⼝
 > -v $PWD:/usr/local/tomcat/webapps： 将主机中当前⽬录挂载到容器的webapps
+> 原文链接：https://blog.csdn.net/qq_58804301/article/details/123699684
 
 ##### docker部署git(win)
 
