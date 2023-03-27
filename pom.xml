@@ -9,6 +9,7 @@
   <packaging>pom</packaging>
   <version>1.0.0-SNAPSHOT</version>
 
+  <!--模块（有时称作子项目） 被构建成项目的一部分。列出的每个模块元素是指向该模块的目录的相对路径-->
   <modules>
     <module>poiReadRuleExcel</module>
     <module>varietyOfTools</module>
