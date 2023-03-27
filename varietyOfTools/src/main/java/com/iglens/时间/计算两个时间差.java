@@ -1,8 +1,25 @@
 package com.iglens.时间;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class 计算两个时间差 {
+
+  public static void main(String[] args) {
+    Date date = new Date();
+
+    //获取一小时前时间
+    Calendar c = Calendar.getInstance();
+    // HOUR_OF_DAY 指一天中的小时
+    c.set(Calendar.HOUR_OF_DAY, (c.get(Calendar.HOUR_OF_DAY) - 1));
+    Date time = c.getTime();
+
+    String datePoor = getDatePoor(date, time);
+    System.out.println(datePoor);
+
+    int i = differentDaysByMillisecond(date, time);
+    System.out.println(i);
+  }
 
   /** 计算两个时间差 */
   public static String getDatePoor(Date endDate, Date nowDate) {
