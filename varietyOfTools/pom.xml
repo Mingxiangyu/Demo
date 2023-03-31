@@ -286,21 +286,21 @@
       <version>1.4.01</version>
     </dependency>
 
-        <dependency>
-            <groupId>com.twelvemonkeys.imageio</groupId>
-            <artifactId>imageio-tiff</artifactId>
-            <version>3.4.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.geotools</groupId>
-            <artifactId>gt-epsg-hsql</artifactId>
-            <version>23.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.geotools</groupId>
-            <artifactId>gt-geotiff</artifactId>
-            <version>23.0</version>
-        </dependency>
+    <dependency>
+      <groupId>com.twelvemonkeys.imageio</groupId>
+      <artifactId>imageio-tiff</artifactId>
+      <version>3.4.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.geotools</groupId>
+      <artifactId>gt-epsg-hsql</artifactId>
+      <version>23.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.geotools</groupId>
+      <artifactId>gt-geotiff</artifactId>
+      <version>23.0</version>
+    </dependency>
 
     <!-- for geotools begin -->
     <dependency>
@@ -463,6 +463,12 @@
       <groupId>pentaho-kettle</groupId>
       <artifactId>kettle-core</artifactId>
       <version>8.1.0.0-365</version>
+      <!--<exclusions>-->
+      <!--  <exclusion>-->
+      <!--    <artifactId>slf4j-log4j12</artifactId>-->
+      <!--    <groupId>org.slf4j</groupId>-->
+      <!--  </exclusion>-->
+      <!--</exclusions>-->
     </dependency>
     <dependency>
       <groupId>pentaho-kettle</groupId>
@@ -852,103 +858,103 @@
         </executions>
       </plugin>
       <!--添加代码混淆-->
-<!--      原文链接：https://blog.csdn.net/qq_45699784/article/details/125764225-->
-<!--      <plugin>-->
-<!--        <groupId>com.github.wvengen</groupId>-->
-<!--        <artifactId>proguard-maven-plugin</artifactId>-->
-<!--        <version>2.0.11</version>-->
-<!--        <executions>-->
-<!--          <execution>-->
-<!--            &lt;!&ndash; 混淆时刻，这里是打包的时候混淆 &ndash;&gt;-->
-<!--            <phase>package</phase>-->
-<!--            <goals>-->
-<!--              &lt;!&ndash; 使用插件的什么功能，当然是混淆 &ndash;&gt;-->
-<!--              <goal>proguard</goal>-->
-<!--            </goals>-->
-<!--          </execution>-->
-<!--        </executions>-->
-<!--        <configuration>-->
-<!--          &lt;!&ndash; 是否将生成的PG文件安装部署 &ndash;&gt;-->
-<!--          <attach>true</attach>-->
-<!--          &lt;!&ndash; 是否混淆 &ndash;&gt;-->
-<!--          <obfuscate>true</obfuscate>-->
-<!--          &lt;!&ndash; 指定生成文件分类 &ndash;&gt;-->
-<!--          <attachArtifactClassifier>pg</attachArtifactClassifier>-->
-<!--          <options>-->
-<!--            &lt;!&ndash; 不做收缩（删除注释、未被引用代码） &ndash;&gt;-->
-<!--            <option>-dontshrink</option>-->
-<!--            &lt;!&ndash; 不做优化（变更代码实现逻辑） &ndash;&gt;-->
-<!--            <option>-dontoptimize</option>-->
-<!--            &lt;!&ndash; 不路过非公用类文件及成员 &ndash;&gt;-->
-<!--            <option>-dontskipnonpubliclibraryclasses</option>-->
-<!--            <option>-dontskipnonpubliclibraryclassmembers</option>-->
-<!--            &lt;!&ndash; 优化时允许访问并修改有修饰符的类和类的成员 &ndash;&gt;-->
-<!--            <option>-allowaccessmodification</option>-->
-<!--            &lt;!&ndash; 确定统一的混淆类的成员名称来增加混淆 &ndash;&gt;-->
-<!--            <option>-useuniqueclassmembernames</option>-->
-<!--            &lt;!&ndash; 不混淆所有包名，本人测试混淆后WEB项目问题实在太多，毕竟Spring配置中有-->
-<!--            大量固定写法的包名 &ndash;&gt;-->
-<!--            <option>-keeppackagenames</option>-->
-<!--            <option>-adaptclassstrings</option>-->
-<!--            &lt;!&ndash; <option>-keepdirectories</option> &ndash;&gt;-->
-<!--            &lt;!&ndash; 不混淆所有特殊的类 &ndash;&gt;-->
-<!--            <option>-keepattributes-->
-<!--              Exceptions,InnerClasses,Signature,Deprecated,SourceFile,LineNumberTable,LocalVariable*Table,*Annotation*,Synthetic,EnclosingMethod-->
-<!--            </option>-->
-<!--            &lt;!&ndash; This option will save all original methods parameters in files-->
-<!--defined in -keep sections, otherwise all parameter names will be obfuscate. &ndash;&gt;-->
-<!--            <option>-keepparameternames</option>-->
-<!--            <option>-keepclassmembers class * {-->
-<!--              @org.springframework.beans.factory.annotation.Autowired *;-->
-<!--              @javax.annotation.Resource *;-->
-<!--              @org.springframework.beans.factory.annotation.Value *;-->
-<!--              }-->
-<!--            </option>-->
+      <!--      原文链接：https://blog.csdn.net/qq_45699784/article/details/125764225-->
+      <!--      <plugin>-->
+      <!--        <groupId>com.github.wvengen</groupId>-->
+      <!--        <artifactId>proguard-maven-plugin</artifactId>-->
+      <!--        <version>2.0.11</version>-->
+      <!--        <executions>-->
+      <!--          <execution>-->
+      <!--            &lt;!&ndash; 混淆时刻，这里是打包的时候混淆 &ndash;&gt;-->
+      <!--            <phase>package</phase>-->
+      <!--            <goals>-->
+      <!--              &lt;!&ndash; 使用插件的什么功能，当然是混淆 &ndash;&gt;-->
+      <!--              <goal>proguard</goal>-->
+      <!--            </goals>-->
+      <!--          </execution>-->
+      <!--        </executions>-->
+      <!--        <configuration>-->
+      <!--          &lt;!&ndash; 是否将生成的PG文件安装部署 &ndash;&gt;-->
+      <!--          <attach>true</attach>-->
+      <!--          &lt;!&ndash; 是否混淆 &ndash;&gt;-->
+      <!--          <obfuscate>true</obfuscate>-->
+      <!--          &lt;!&ndash; 指定生成文件分类 &ndash;&gt;-->
+      <!--          <attachArtifactClassifier>pg</attachArtifactClassifier>-->
+      <!--          <options>-->
+      <!--            &lt;!&ndash; 不做收缩（删除注释、未被引用代码） &ndash;&gt;-->
+      <!--            <option>-dontshrink</option>-->
+      <!--            &lt;!&ndash; 不做优化（变更代码实现逻辑） &ndash;&gt;-->
+      <!--            <option>-dontoptimize</option>-->
+      <!--            &lt;!&ndash; 不路过非公用类文件及成员 &ndash;&gt;-->
+      <!--            <option>-dontskipnonpubliclibraryclasses</option>-->
+      <!--            <option>-dontskipnonpubliclibraryclassmembers</option>-->
+      <!--            &lt;!&ndash; 优化时允许访问并修改有修饰符的类和类的成员 &ndash;&gt;-->
+      <!--            <option>-allowaccessmodification</option>-->
+      <!--            &lt;!&ndash; 确定统一的混淆类的成员名称来增加混淆 &ndash;&gt;-->
+      <!--            <option>-useuniqueclassmembernames</option>-->
+      <!--            &lt;!&ndash; 不混淆所有包名，本人测试混淆后WEB项目问题实在太多，毕竟Spring配置中有-->
+      <!--            大量固定写法的包名 &ndash;&gt;-->
+      <!--            <option>-keeppackagenames</option>-->
+      <!--            <option>-adaptclassstrings</option>-->
+      <!--            &lt;!&ndash; <option>-keepdirectories</option> &ndash;&gt;-->
+      <!--            &lt;!&ndash; 不混淆所有特殊的类 &ndash;&gt;-->
+      <!--            <option>-keepattributes-->
+      <!--              Exceptions,InnerClasses,Signature,Deprecated,SourceFile,LineNumberTable,LocalVariable*Table,*Annotation*,Synthetic,EnclosingMethod-->
+      <!--            </option>-->
+      <!--            &lt;!&ndash; This option will save all original methods parameters in files-->
+      <!--defined in -keep sections, otherwise all parameter names will be obfuscate. &ndash;&gt;-->
+      <!--            <option>-keepparameternames</option>-->
+      <!--            <option>-keepclassmembers class * {-->
+      <!--              @org.springframework.beans.factory.annotation.Autowired *;-->
+      <!--              @javax.annotation.Resource *;-->
+      <!--              @org.springframework.beans.factory.annotation.Value *;-->
+      <!--              }-->
+      <!--            </option>-->
 
-<!--            <option>-keep class !com.xh.okdz.** { *; }</option>-->
-<!--            &lt;!&ndash; 不混淆main方法 &ndash;&gt;-->
-<!--            <option>-keep class com.xh.okdz.OkdzApplication { *; }</option>-->
+      <!--            <option>-keep class !com.xh.okdz.** { *; }</option>-->
+      <!--            &lt;!&ndash; 不混淆main方法 &ndash;&gt;-->
+      <!--            <option>-keep class com.xh.okdz.OkdzApplication { *; }</option>-->
 
-<!--            &lt;!&ndash; 不混淆所有的set/get方法 &ndash;&gt;-->
-<!--            <option>-keepclassmembers public class * {void set*(***);***-->
-<!--              get*();}-->
-<!--            </option>-->
-<!--            &lt;!&ndash; 不混淆包中的所有类以及类的属性及方法，实体包，混淆了会导致ORM框架及前端无法识别 &ndash;&gt;-->
+      <!--            &lt;!&ndash; 不混淆所有的set/get方法 &ndash;&gt;-->
+      <!--            <option>-keepclassmembers public class * {void set*(***);***-->
+      <!--              get*();}-->
+      <!--            </option>-->
+      <!--            &lt;!&ndash; 不混淆包中的所有类以及类的属性及方法，实体包，混淆了会导致ORM框架及前端无法识别 &ndash;&gt;-->
 
-<!--            &lt;!&ndash; 不对包类的类名进行混淆，但对类中的属性和方法混淆 &ndash;&gt;-->
-<!--            <option>-keep class com.java.controller.**</option>-->
-<!--            <option>-keep class com.java.service.**</option>-->
-<!--            <option>-keep class com.java.exception.**</option>-->
-<!--            <option>-keep class com.java.tasks.**</option>-->
-<!--            <option>-keep class com.java.utils.**</option>-->
+      <!--            &lt;!&ndash; 不对包类的类名进行混淆，但对类中的属性和方法混淆 &ndash;&gt;-->
+      <!--            <option>-keep class com.java.controller.**</option>-->
+      <!--            <option>-keep class com.java.service.**</option>-->
+      <!--            <option>-keep class com.java.exception.**</option>-->
+      <!--            <option>-keep class com.java.tasks.**</option>-->
+      <!--            <option>-keep class com.java.utils.**</option>-->
 
-<!--            &lt;!&ndash; 不混淆包下的所有类名，且类中的方法也不混淆 &ndash;&gt;-->
-<!--            <option>-keep class com.java.config.**{*;}</option>-->
-<!--            <option>-keep class com.java.entity.** {*;}</option>-->
-<!--            <option>-keep class com.java.vo.** {*;}</option>-->
-<!--            <option>-keep class com.java.annotation.**{*;}</option>-->
-<!--            <option>-keep class com.java.dao.** {*;}</option>-->
+      <!--            &lt;!&ndash; 不混淆包下的所有类名，且类中的方法也不混淆 &ndash;&gt;-->
+      <!--            <option>-keep class com.java.config.**{*;}</option>-->
+      <!--            <option>-keep class com.java.entity.** {*;}</option>-->
+      <!--            <option>-keep class com.java.vo.** {*;}</option>-->
+      <!--            <option>-keep class com.java.annotation.**{*;}</option>-->
+      <!--            <option>-keep class com.java.dao.** {*;}</option>-->
 
-<!--          </options>-->
-<!--          <outjar>${project.build.finalName}-pg.jar</outjar>-->
-<!--          &lt;!&ndash; 添加依赖，这里你可以按你的需要修改，这里测试只需要一个JRE的Runtime包就行了 &ndash;&gt;-->
-<!--          <libs>-->
-<!--            <lib>${java.home}/lib/rt.jar</lib>-->
-<!--            <lib>${java.home}/lib/jce.jar</lib>-->
-<!--          </libs>-->
-<!--          &lt;!&ndash; 对什么东西进行加载，这里加载classes就行，配置文件或者其他的三方文件应该不会混淆吧 &ndash;&gt;-->
-<!--          <injar>classes</injar>-->
-<!--          &lt;!&ndash; 输出目录 &ndash;&gt;-->
-<!--          <outputDirectory>${project.build.directory}</outputDirectory>-->
-<!--        </configuration>-->
-<!--        <dependencies>-->
-<!--          <dependency>-->
-<!--            <groupId>net.sf.proguard</groupId>-->
-<!--            <artifactId>proguard-base</artifactId>-->
-<!--            <version>6.2.2</version>-->
-<!--          </dependency>-->
-<!--        </dependencies>-->
-<!--      </plugin>-->
+      <!--          </options>-->
+      <!--          <outjar>${project.build.finalName}-pg.jar</outjar>-->
+      <!--          &lt;!&ndash; 添加依赖，这里你可以按你的需要修改，这里测试只需要一个JRE的Runtime包就行了 &ndash;&gt;-->
+      <!--          <libs>-->
+      <!--            <lib>${java.home}/lib/rt.jar</lib>-->
+      <!--            <lib>${java.home}/lib/jce.jar</lib>-->
+      <!--          </libs>-->
+      <!--          &lt;!&ndash; 对什么东西进行加载，这里加载classes就行，配置文件或者其他的三方文件应该不会混淆吧 &ndash;&gt;-->
+      <!--          <injar>classes</injar>-->
+      <!--          &lt;!&ndash; 输出目录 &ndash;&gt;-->
+      <!--          <outputDirectory>${project.build.directory}</outputDirectory>-->
+      <!--        </configuration>-->
+      <!--        <dependencies>-->
+      <!--          <dependency>-->
+      <!--            <groupId>net.sf.proguard</groupId>-->
+      <!--            <artifactId>proguard-base</artifactId>-->
+      <!--            <version>6.2.2</version>-->
+      <!--          </dependency>-->
+      <!--        </dependencies>-->
+      <!--      </plugin>-->
 
       <!--      如果没有该插件，则打出的jar包没法运行，java-jar时报没有主清单属性-->
       <plugin>

@@ -18,12 +18,27 @@ JDK1.8以上无法使用 sun.misc.BASE64Decoder;<pr>
 /**
  * 将图片转换为Base64流
  *
- * @author: 李德才
  * @date: 2020年4月18日 下午1:45:52
  */
 public class 图片与base64互转 {
 
-
+  /**
+   * data:,<文本数据> <br>
+   * data:text/plain,<文本数据> <br>
+   * data:text/html,<HTML代码> <br>
+   * data:text/html;base64,<base64编码的HTML代码> <br>
+   * data:text/plain;charset=UTF-8;base64,<base64编码的HTML代码> <br>
+   * data:text/css,<CSS代码> <br>
+   * data:text/css;base64,<base64编码的CSS代码> <br>
+   * data:text/javascript,<Javascript代码> <br>
+   * data:text/javascript;base64,<base64编码的Javascript代码> <br>
+   * data:image/gif;base64,<base64编码的gif图片数据> <br>
+   * data:image/png;base64,<base64编码的png图片数据> <br>
+   * data:image/jpeg;base64,<base64编码的jpeg图片数据> <br>
+   * data:image/x-icon;base64,<base64编码的icon图片数据>
+   *
+   * @param args
+   */
   public static void main(String[] args) {
     String url = "C:\\Users\\T480S\\Desktop\\微信截图_20210918110842.png"; // 待处理的图片
     String imgbese = getImgStr(url);
