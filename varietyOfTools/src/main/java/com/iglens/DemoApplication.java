@@ -1,7 +1,5 @@
 package com.iglens;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,6 +15,9 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 /** @author T480S */
 @Slf4j
@@ -35,6 +36,9 @@ public class DemoApplication {
     }
     String port = env.getProperty("server.port");
     String path = env.getProperty("server.servlet.context-path");
+    if (path == null) {
+      path = "";
+    }
     log.info(
         "\n----------------------------------------------------------\n\t"
             + "Application Jeecg-Boot is running! Access URLs:\n\t"
