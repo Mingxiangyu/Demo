@@ -6,8 +6,8 @@ import com.spire.pdf.PdfDocument;
 public class Spire实现pdf转word {
 
   public static void main(String[] args) {
-    String path = "E:\\Deploy-HT\\数据\\1.pdf";
-    String targetpath = "E:\\Deploy-HT\\数据\\1.docx";
+    String path = "C:\\Users\\zhouhuilin\\Desktop\\pdf.pdf";
+    String targetpath = "C:\\Users\\zhouhuilin\\Desktop\\1.docx";
 
     // 加载PDF
     PdfDocument pdf = new PdfDocument();
