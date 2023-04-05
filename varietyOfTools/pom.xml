@@ -782,7 +782,24 @@
       <artifactId>jodconverter</artifactId>
       <version>2.2.1</version>
     </dependency>
-  </dependencies>
+        <!--    识别获取pdf中文字信息 start-->
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>2.0.23</version>
+        </dependency>
+        <!--        原文链接：https://blog.csdn.net/qq_31194371/article/details/125103695-->
+        <!--    识别获取pdf中文字信息 end-->
+
+        <!--    latex转图片 start-->
+        <dependency>
+            <groupId>org.scilab.forge</groupId>
+            <artifactId>jlatexmath</artifactId>
+            <version>1.0.7</version>
+        </dependency>
+        <!--        原文链接：https://www.jianshu.com/p/b734ff9525d4 -->
+        <!--    latex转图片 end-->
+    </dependencies>
 
   <repositories>
     <repository>
