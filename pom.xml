@@ -14,6 +14,7 @@
     <module>poiReadRuleExcel</module>
     <module>varietyOfTools</module>
     <module>fileparse</module>
+    <module>websocket</module>
   </modules>
 
   <build>
