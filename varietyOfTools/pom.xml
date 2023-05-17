@@ -60,7 +60,7 @@
       <version>1.1.23</version>
     </dependency>
 
-    <!--    jpa所需-->
+    <!--    jpa所需 start-->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -69,6 +69,7 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-rest</artifactId>
     </dependency>
+    <!--    jpa所需 end-->
 
     <dependency>
       <groupId>org.springframework.boot</groupId>

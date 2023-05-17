@@ -1,12 +1,10 @@
 package cn.iglens.handler;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URLDecoder;
+import com.csvreader.CsvReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Arrays;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -51,29 +49,65 @@ public class MyStringWebSocketHandler extends TextWebSocketHandler {
         System.out.println("=====接受到的数据"+receiveMessage);
         log.info(receiveMessage);
 
+        String filepath = "C:\\Users\\zhouhuilin\\Desktop\\AIS_2019_01_01.csv";
         long start = System.currentTimeMillis();
-        String imageFileName =
-            File.separator + "example" + File.separator + "AIS_2019_01_01.csv";
-        String decode = URLDecoder.decode(imageFileName, "UTF-8");
-        ClassPathResource resource = new ClassPathResource(decode);
-        // 因为 ClassPathResource.getFile 只能读取文件，jar包中已经不是文件，不适用所以只能使用 getInputStream 来获取文件流
-        InputStream inputStream = resource.getInputStream();
-        InputStreamReader inreader = new InputStreamReader(inputStream);
-        BufferedReader bfreader = new BufferedReader(inreader,510241024);//设置缓存大小:5M
-        String m;
-        long end = System.currentTimeMillis();
-        System.out.println("读取耗时："+(end-start)/1000);
+        CsvReader cr;
+        try {
+            cr = new CsvReader(filepath);
+        } catch (FileNotFoundException e) {
+            log.error(e.getMessage(), e);
+            throw new RuntimeException();
+        }
+        try {
+            // boolean b = cr.readHeaders(); // 跳过表头   如果需要表头的话，不要写这句。
+            String[] header = cr.getHeaders();
+            System.out.println(Arrays.toString(header));
 
-        long sendStart = System.currentTimeMillis();
-        while((m=bfreader.readLine())!=null){
-            // 发送消息给客户端
-            session.sendMessage(new TextMessage(m));
-            Thread.sleep(1000);
+
+            while ((cr.readRecord())) {
+                // 发送消息给客户端
+                String[] values = cr.getValues();
+                String s = Arrays.toString(values);
+                session.sendMessage(new TextMessage(s));
+                Thread.sleep(1000);
+            }
+        } catch (IOException e) {
+            log.error(e.getMessage(), e);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
         long sendend = System.currentTimeMillis();
-        System.out.println("发送耗时："+(end-start)/1000);
+        System.out.println("发送耗时：" + (sendend - start) / 1000);
 
 
+
+        // long start = System.currentTimeMillis();
+        // FileReader in;
+        // try {
+        //   in = new FileReader(filepath);
+        // } catch (FileNotFoundException e) {
+        //   log.error(e.getMessage(), e);
+        //   throw new RuntimeException();
+        // }
+        // BufferedReader bfreader = new BufferedReader(in);
+        // String m;
+        // long end = System.currentTimeMillis();
+        // System.out.println("读取耗时：" + (end - start) / 1000);
+        //
+        // long sendStart = System.currentTimeMillis();
+        // try {
+        //   while ((m = bfreader.readLine()) != null) {
+        //     // 发送消息给客户端
+        //     session.sendMessage(new TextMessage(m));
+        //     Thread.sleep(1000);
+        //   }
+        // } catch (IOException e) {
+        //   log.error(e.getMessage(), e);
+        // } catch (InterruptedException e) {
+        //   e.printStackTrace();
+        // }
+        // long sendend = System.currentTimeMillis();
+        // System.out.println("发送耗时：" + (sendend - sendStart) / 1000);
 
         // 关闭连接
         // session.close(CloseStatus.NORMAL);
