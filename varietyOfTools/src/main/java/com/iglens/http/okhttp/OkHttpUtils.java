@@ -22,6 +22,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import org.apache.commons.lang.StringEscapeUtils;
 
 /**
  * @author xming
@@ -32,6 +33,7 @@ public class OkHttpUtils {
   private static volatile Semaphore semaphore = null;
   private Map<String, String> headerMap;
   private Map<String, String> paramMap;
+  private Map<String, Object> objectParamMap;
   private String url;
   private Request.Builder request;
 
@@ -122,6 +124,21 @@ public class OkHttpUtils {
   }
 
   /**
+   * 添加参数
+   *
+   * @param key 参数名
+   * @param value 参数值
+   * @return
+   */
+  public OkHttpUtils addObjectParam(String key, Object value) {
+    if (objectParamMap == null) {
+      objectParamMap = new LinkedHashMap<>(16);
+    }
+    objectParamMap.put(key, value);
+    return this;
+  }
+
+  /**
    * 添加请求头
    *
    * @param key 参数名
@@ -175,6 +192,7 @@ public class OkHttpUtils {
       String json = "";
       if (paramMap != null) {
         json = JSON.toJSONString(paramMap);
+        System.out.println("paramJSON为："+json);
       }
       requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
     } else {
@@ -184,6 +202,28 @@ public class OkHttpUtils {
       }
       requestBody = formBody.build();
     }
+    request = new Request.Builder().post(requestBody).url(url);
+    return this;
+  }
+
+  /**
+   * 初始化post方法（参数的value为object版）
+   *
+   * @return
+   */
+  public OkHttpUtils jsonObjectPost() {
+    RequestBody requestBody;
+
+      String json = "";
+      if (objectParamMap != null) {
+        Object o = JSON.toJSON(objectParamMap);
+        json = JSON.toJSONString(objectParamMap);
+        System.out.println("paramJSON为："+json);
+         json = StringEscapeUtils.unescapeJavaScript(json);
+        System.out.println("paramJSON为："+json);
+      }
+      requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
+
     request = new Request.Builder().post(requestBody).url(url);
     return this;
   }

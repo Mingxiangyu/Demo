@@ -1,5 +1,5 @@
 
-package com.iglens.resttemplate;
+package com.iglens.http.resttemplate;
 
 import java.util.ArrayList;
 import java.util.List;
