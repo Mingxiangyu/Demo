@@ -192,7 +192,7 @@ public class OkHttpUtils {
       String json = "";
       if (paramMap != null) {
         json = JSON.toJSONString(paramMap);
-        System.out.println("paramJSON为："+json);
+        System.out.println("paramJSON为：" + json);
       }
       requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
     } else {
@@ -214,15 +214,15 @@ public class OkHttpUtils {
   public OkHttpUtils jsonObjectPost() {
     RequestBody requestBody;
 
-      String json = "";
-      if (objectParamMap != null) {
-        Object o = JSON.toJSON(objectParamMap);
-        json = JSON.toJSONString(objectParamMap);
-        System.out.println("paramJSON为："+json);
-         json = StringEscapeUtils.unescapeJavaScript(json);
-        System.out.println("paramJSON为："+json);
-      }
-      requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
+    String json = "";
+    if (objectParamMap != null) {
+      Object o = JSON.toJSON(objectParamMap);
+      json = JSON.toJSONString(objectParamMap);
+      System.out.println("paramJSON为：" + json);
+      json = StringEscapeUtils.unescapeJavaScript(json);
+      System.out.println("paramJSON为：" + json);
+    }
+    requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
 
     request = new Request.Builder().post(requestBody).url(url);
     return this;
@@ -240,14 +240,43 @@ public class OkHttpUtils {
     return this;
   }
 
-  public OkHttpUtils del() {
-    String json = "";
-    if (paramMap != null) {
-      json = JSON.toJSONString(paramMap);
+  /**
+   * 初始化post方法
+   *
+   * @param isJsonPost true等于json的方式提交数据，类似postman里post方法的raw false等于普通的表单提交，如果在问号后面拼接需要传false
+   * @return
+   */
+  public OkHttpUtils del(boolean isJsonPost) {
+    RequestBody requestBody;
+    if (isJsonPost) {
+      String json = "";
+      if (paramMap != null) {
+        json = JSON.toJSONString(paramMap);
+        System.out.println("paramJSON为：" + json);
+      }
+      requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
+    } else {
+      request = new Request.Builder().delete();
+      StringBuilder urlBuilder = new StringBuilder(url);
+      if (paramMap != null) {
+        urlBuilder.append("?");
+        try {
+          for (Map.Entry<String, String> entry : paramMap.entrySet()) {
+            urlBuilder
+                .append(URLEncoder.encode(entry.getKey(), "utf-8"))
+                .append("=")
+                .append(URLEncoder.encode(entry.getValue(), "utf-8"))
+                .append("&");
+          }
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+        urlBuilder.deleteCharAt(urlBuilder.length() - 1);
+      }
+      request.url(urlBuilder.toString());
+      return this;
     }
-    RequestBody requestBody =
-        RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
-    request = new Request.Builder().delete(requestBody).url(url);
+    request = new Request.Builder().post(requestBody).url(url);
     return this;
   }
 
