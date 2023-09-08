@@ -1,9 +1,14 @@
 package com.iglens.jpa;
 
+import cn.hutool.core.util.StrUtil;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
@@ -199,6 +204,85 @@ public class BusinessServiceImpl {
           return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
         };
     Page<BusinessEntity> fileEntitys = repository.findAll(specification, pageable);
+    return null;
+  }
+  /**
+   * springJpa Specification 条件查询
+   *
+   * <p>原文链接：https://blog.51cto.com/u_15061930/4188197https://blog.51cto.com/u_15061930/4188197
+   *
+   * @param dto
+   * @return
+   */
+  public List<String> 条件查询(BusinessEntity dto) {
+    String dataType = dto.getDataType();
+    Specification<BusinessEntity> specification =
+        new Specification<BusinessEntity>() {
+          @Override
+          @SneakyThrows
+          public Predicate toPredicate(
+              Root<BusinessEntity> root,
+              CriteriaQuery<?> criteriaQuery,
+              CriteriaBuilder criteriaBuilder) {
+            List<Predicate> predicateList = new ArrayList<>();
+
+            /** 相等=== @参数 X @参数类型 */
+            if (StrUtil.isNotEmpty(dataType)) {
+              predicateList.add(criteriaBuilder.equal(root.get("dataType"), dataType));
+            }
+
+            /** not in @参数 XXXX @参数类型 List */
+            // if (CollUtil.isNotEmpty(dataType)) {
+            //   Predicate validDnaPredicate = root.get("dna").in(dataType).not();
+            //   predicateList.add(validDnaPredicate);
+            // }
+
+            /** in @参数 XXXX @参数类型 List */
+            // if (CollUtil.isNotEmpty(XXXX)) {
+            //   Predicate invalidDna = root.get("dna").in(XXXX);
+            //   predicateList.add(invalidDna);
+            // }
+
+            /** 大于等于>= @参数 XX @参数类型 数值 */
+            // if (CollUtil.isNotEmpty(XX)) {
+            //   predicateList.add(criteriaBuilder.greaterThanOrEqualTo(root.get("level"), XX));
+            // }
+
+            /** 小于等于<= @参数 XX @参数类型 数值 */
+            // if (CollUtil.isNotEmpty(XX)) {
+            //   predicateList.add(criteriaBuilder.lessThanOrEqualTo(root.get("level"), XX));
+            // }
+
+            /** betweeen @参数 XX_1 ; XX_2 @参数类型 数值 */
+            // if (CollUtil.isNotEmpty(XXX_1) && CollUtil.isNotEmpty(XXX_2)) {
+            //   predicateList.add(criteriaBuilder.between(root.get("level"), XX_1, XX_2));
+            // }
+
+            /** 大于等于>= @参数 XXX @参数类型 Date */
+            // if (CollUtil.isNotEmpty(XXX)) {
+            //
+            // predicateList.add(criteriaBuilder.greaterThanOrEqualTo(root.get("level").as(Date.class), XX));
+            // }
+
+            /** 小于等于<= @参数 XXX @参数类型 Date */
+            // if (CollUtil.isNotEmpty(XXX)) {
+            //
+            // predicateList.add(criteriaBuilder.lessThanOrEqualTo(root.get("level").as(Date.class),
+            // XX));
+            // }
+
+            /** betweeen @参数 XXX_1 ; XXX_2 @参数类型 Date */
+            // if (CollUtil.isNotEmpty(XXX_1) && CollUtil.isNotEmpty(XXX_2)) {
+            //   predicateList.add(criteriaBuilder.between(root.get("level").as(Date.class), XX_1,
+            // XX_2));
+            // }
+
+            Predicate[] pre = new Predicate[predicateList.size()];
+            pre = predicateList.toArray(pre);
+            return criteriaQuery.where(pre).getRestriction();
+          }
+        };
+    List<BusinessEntity> all = repository.findAll(specification);
     return null;
   }
 }
