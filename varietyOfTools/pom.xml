@@ -604,6 +604,14 @@
     </dependency>
     <!--junit单元测试 end-->
 
+    <!--地理 判断polygon是否相交 start-->
+    <dependency>
+      <groupId>com.vividsolutions</groupId>
+      <artifactId>jts-core</artifactId>
+      <version>1.14.0</version>
+    </dependency>
+    <!--判断polygon是否相交 end-->
+
     <!--视频处理  end-->
     <dependency>
       <groupId>org.bytedeco</groupId>
