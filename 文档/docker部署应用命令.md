@@ -56,6 +56,18 @@ for (var i = 1; i <= 9000000; i++) {
 
 docker run --detach   --hostname gitlab.example.com   --publish 8929:443 --publish 8980:80 --publish 8922:22   --name gitlab   --restart always   --volume E:labgitlabetc:/etc/gitlab   --volume E:labgitlablog:/var/log/gitlab   --volume E:labgitlabdata:/var/opt/gitlab   gitlab/gitlab-ce:latest
 
+
+
+##### docker部署gitGogs
+
+~~~docker
+docker run -d --name=gogs -p 10022:22 -p 10080:3000 -v /var/gogs:/data gogs/gogs
+~~~
+
+> 原文： https://blog.51cto.com/u_14671216/6397322
+
+
+
 ##### docker部署yapi
 
  docker run -it --rm --link mongo-yapi:mongo --entrypoint npm --workdir /api/vendors registry.cn-hangzhou.aliyuncs.com/anoy/yapi run install-server
@@ -104,7 +116,7 @@ docker run -it -p 8012:8012 keking/kkfileview
 第一种
 
 ```sh
-docker run --name mysql -e MYSQL_ROOT_PASSWORD=123456 -p 3306:3306 -d mysql
+docker run --name mysql --restart=always -e MYSQL_ROOT_PASSWORD=123456 -p 3306:3306 -d mysql
 ```
 
 第二种

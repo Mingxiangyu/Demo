@@ -16,7 +16,7 @@ import java.util.Map;
 public class CSVReader读取CSV {
 
   public static void main(String[] args) {
-    String filepath = "C:\\Users\\zhouhuilin\\Desktop\\AIS_2019_01_01.csv";
+    String filepath ="C:\\Users\\zhouhuilin\\Downloads\\54511099999 (2).csv";
 
     File csvFile = new File(filepath);
     readCsvByCsvReader(csvFile);
@@ -53,7 +53,7 @@ public class CSVReader读取CSV {
         // 如果不知道有多少列，则可再加一个循环
         Map<String, Object> map = new HashMap<>();
         for (int j = 0; j < arrList.get(0).length; j++) {
-          map.put("" + arrList.get(0)[j] + "", arrList.get(i)[j]);
+          map.put("" + headArray[j] + "", arrList.get(i)[j]);
         }
         // 返回的数格为拼接
         /*String ele = arrList.get(i)[0] + "," + arrList.get(i)[1] + "," + arrList.get(i)[2];
