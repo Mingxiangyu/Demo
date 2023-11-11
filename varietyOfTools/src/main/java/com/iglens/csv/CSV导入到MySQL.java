@@ -20,6 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 /** @author xming */
 @Slf4j
 public class CSV导入到MySQL {
+<<<<<<< HEAD
     private static Connection conn;
     public static String SQL_INSTALL_IDNO_THIRD = null;
     public static String ip = "211.157.132.19";
@@ -27,6 +28,15 @@ public class CSV导入到MySQL {
     public static String username = "root";
     public static String password = "guoyao@123";
     public static String database = "bigdata_zhongbao";
+=======
+  private static Connection conn;
+  public static String SQL_INSTALL_IDNO_THIRD = null;
+  public static String ip = "211.157.132.19";
+  public static String port = "17062";
+  public static String username = "root";
+  public static String password = "guoyao@123";
+  public static String database = "bigdata_zhongbao";
+>>>>>>> c8d6216e0adc479af5196112b2137a5e46ab0fb2
 
     public static void main(String[] args) {
         List<List<String>> csvList =
