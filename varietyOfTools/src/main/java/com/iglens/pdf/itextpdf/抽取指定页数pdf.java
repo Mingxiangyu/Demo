@@ -18,9 +18,9 @@ import java.util.Objects;
 public class 抽取指定页数pdf {
 
   public static void main(String[] args) {
-    String spec = "C:\\Users\\zhouhuilin\\Desktop\\pdf.pdf";
-    String extractspec = "C:\\Users\\zhouhuilin\\Desktop\\pdfextract.pdf";
-    extract(spec, extractspec, 5, 120);
+    String spec = "G:\\xunleiDownload\\考试App\\数据\\教科书pdf\\义务教育教科书·语文一年级上册.pdf";
+    String extractspec = "G:\\xunleiDownload\\考试App\\数据\\教科书pdf\\语文一年级上册extract.pdf";
+    extract(spec, extractspec, 4, 23);
 
     // extract(
     //     spec,

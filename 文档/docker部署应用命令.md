@@ -141,6 +141,15 @@ docker run -itd --name kibana -p 5601:5601 -e "ELASTICSEARCH_HOSTS=http://localh
 docker run -d --restart=always -e FILE_SIZE_LIMIT=1000 -e ERROR_COUNT=15 -e ERROR_MINUTE=1  -p 9093:12345 -v /opt/FileCodeBox/:/app/data --name filecodebox lanol/filecodebox:latest
 ```
 
+> 原文链接：https://blog.csdn.net/weixin_42854904/article/details/118756989
+
+##### docker安装nps内网穿透
+
+```
+docker run -d --name npc --net=host ffdfgdfg/npc -server=39.103.151.150:8024 -vkey=test
+```
+> 原文链接：https://blog.csdn.net/m0_64349423/article/details/130339223
+
 ##### docker-compose安装photoprism
 
 ```dockerfile
