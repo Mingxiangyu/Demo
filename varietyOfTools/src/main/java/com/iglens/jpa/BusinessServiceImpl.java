@@ -277,6 +277,9 @@ public class BusinessServiceImpl {
             // XX_2));
             // }
 
+            /** 判断不为空 @参数 XXX_1 ; XXX_2 @参数类型 Date */
+            // predicateList.add(criteriaBuilder.isNotNull(root.get("type")));
+
             Predicate[] pre = new Predicate[predicateList.size()];
             pre = predicateList.toArray(pre);
             return criteriaQuery.where(pre).getRestriction();

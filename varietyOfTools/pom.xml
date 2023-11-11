@@ -348,12 +348,13 @@
     <!--for geotools end-->
     <!--    原文链接：https://blog.csdn.net/lnxyangruosong/article/details/77456735-->
 
-    <!-- jts处理Geometry -->
+    <!-- jts处理Geometry start -->
     <dependency>
       <groupId>com.vividsolutions</groupId>
       <artifactId>jts</artifactId>
       <version>1.13</version>
     </dependency>
+    <!-- jts处理Geometry end-->
 
     <dependency>
       <groupId>com.googlecode.json-simple</groupId>

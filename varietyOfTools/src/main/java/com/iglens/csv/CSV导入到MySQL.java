@@ -22,6 +22,11 @@ import org.apache.commons.lang3.StringUtils;
 public class CSV导入到MySQL {
   private static Connection conn;
   public static String SQL_INSTALL_IDNO_THIRD = null;
+  public static String ip = "211.157.132.19";
+  public static String port = "17062";
+  public static String username = "root";
+  public static String password = "guoyao@123";
+  public static String database = "bigdata_zhongbao";
 
   public static void main(String[] args) {
     List<List<String>> csvList =

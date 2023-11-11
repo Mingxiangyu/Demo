@@ -1,11 +1,13 @@
 package com.iglens.http.okhttp;
 
 import com.alibaba.fastjson.JSON;
+import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
@@ -18,22 +20,22 @@ import okhttp3.Callback;
 import okhttp3.ConnectionPool;
 import okhttp3.FormBody;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import org.apache.commons.lang.StringEscapeUtils;
 
 /**
  * @author xming
  * @link https://blog.csdn.net/weixin_45203607/article/details/124204137
  */
 public class OkHttpUtils {
+
   private static volatile OkHttpClient okHttpClient = null;
   private static volatile Semaphore semaphore = null;
   private Map<String, String> headerMap;
-  private Map<String, String> paramMap;
-  private Map<String, Object> objectParamMap;
+  private Map<String, Object> paramMap;
   private String url;
   private Request.Builder request;
 
@@ -51,11 +53,11 @@ public class OkHttpUtils {
           okHttpClient =
               new OkHttpClient.Builder()
                   // 设置连接超时时间
-                  .connectTimeout(15, TimeUnit.SECONDS)
+                  .connectTimeout(60, TimeUnit.SECONDS)
                   // 写入超时时间
-                  .writeTimeout(20, TimeUnit.SECONDS)
+                  .writeTimeout(60, TimeUnit.SECONDS)
                   // 从连接成功到响应的总时间
-                  .readTimeout(20, TimeUnit.SECONDS)
+                  .readTimeout(60, TimeUnit.SECONDS)
                   // 跳过ssl认证(https)
                   .sslSocketFactory(
                       createSSLSocketFactory(trustManagers), (X509TrustManager) trustManagers[0])
@@ -73,11 +75,7 @@ public class OkHttpUtils {
     }
   }
 
-  /**
-   * 用于异步请求时，控制访问线程数，返回结果
-   *
-   * @return
-   */
+  /** 用于异步请求时，控制访问线程数，返回结果 */
   private static Semaphore getSemaphoreInstance() {
     // 只能1个线程同时访问
     synchronized (OkHttpUtils.class) {
@@ -88,21 +86,12 @@ public class OkHttpUtils {
     return semaphore;
   }
 
-  /**
-   * 创建OkHttpUtils
-   *
-   * @return
-   */
+  /** 创建OkHttpUtils */
   public static OkHttpUtils builder() {
     return new OkHttpUtils();
   }
 
-  /**
-   * 添加url
-   *
-   * @param url
-   * @return
-   */
+  /** 添加url */
   public OkHttpUtils url(String url) {
     this.url = url;
     return this;
@@ -113,9 +102,8 @@ public class OkHttpUtils {
    *
    * @param key 参数名
    * @param value 参数值
-   * @return
    */
-  public OkHttpUtils addParam(String key, String value) {
+  public OkHttpUtils addParam(String key, Object value) {
     if (paramMap == null) {
       paramMap = new LinkedHashMap<>(16);
     }
@@ -124,26 +112,10 @@ public class OkHttpUtils {
   }
 
   /**
-   * 添加参数
-   *
-   * @param key 参数名
-   * @param value 参数值
-   * @return
-   */
-  public OkHttpUtils addObjectParam(String key, Object value) {
-    if (objectParamMap == null) {
-      objectParamMap = new LinkedHashMap<>(16);
-    }
-    objectParamMap.put(key, value);
-    return this;
-  }
-
-  /**
    * 添加请求头
    *
    * @param key 参数名
    * @param value 参数值
-   * @return
    */
   public OkHttpUtils addHeader(String key, String value) {
     if (headerMap == null) {
@@ -153,22 +125,18 @@ public class OkHttpUtils {
     return this;
   }
 
-  /**
-   * 初始化get方法
-   *
-   * @return
-   */
+  /** 初始化get方法 */
   public OkHttpUtils get() {
     request = new Request.Builder().get();
     StringBuilder urlBuilder = new StringBuilder(url);
     if (paramMap != null) {
       urlBuilder.append("?");
       try {
-        for (Map.Entry<String, String> entry : paramMap.entrySet()) {
+        for (Map.Entry<String, Object> entry : paramMap.entrySet()) {
           urlBuilder
               .append(URLEncoder.encode(entry.getKey(), "utf-8"))
               .append("=")
-              .append(URLEncoder.encode(entry.getValue(), "utf-8"))
+              .append(URLEncoder.encode(String.valueOf(entry.getValue()), "utf-8"))
               .append("&");
         }
       } catch (Exception e) {
@@ -183,8 +151,36 @@ public class OkHttpUtils {
   /**
    * 初始化post方法
    *
+   * <p>url路径后拼接
+   */
+  public OkHttpUtils post() {
+    RequestBody requestBody;
+    FormBody.Builder formBody = new FormBody.Builder();
+    requestBody = formBody.build();
+    StringBuilder urlBuilder = new StringBuilder(url);
+    if (paramMap != null) {
+      urlBuilder.append("?");
+      try {
+        for (Map.Entry<String, Object> entry : paramMap.entrySet()) {
+          urlBuilder
+              .append(URLEncoder.encode(entry.getKey(), "utf-8"))
+              .append("=")
+              .append(URLEncoder.encode(String.valueOf(entry.getValue()), "utf-8"))
+              .append("&");
+        }
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+      urlBuilder.deleteCharAt(urlBuilder.length() - 1);
+    }
+    request = new Request.Builder().post(requestBody).url(urlBuilder.toString());
+    return this;
+  }
+
+  /**
+   * 初始化post方法
+   *
    * @param isJsonPost true等于json的方式提交数据，类似postman里post方法的raw false等于普通的表单提交
-   * @return
    */
   public OkHttpUtils post(boolean isJsonPost) {
     RequestBody requestBody;
@@ -192,13 +188,15 @@ public class OkHttpUtils {
       String json = "";
       if (paramMap != null) {
         json = JSON.toJSONString(paramMap);
-        System.out.println("paramJSON为：" + json);
+        // System.out.println(json);
       }
       requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
     } else {
       FormBody.Builder formBody = new FormBody.Builder();
       if (paramMap != null) {
-        paramMap.forEach(formBody::add);
+        for (String key : paramMap.keySet()) {
+          formBody.add(key, String.valueOf(paramMap.get(key)));
+        }
       }
       requestBody = formBody.build();
     }
@@ -206,85 +204,90 @@ public class OkHttpUtils {
     return this;
   }
 
-  /**
-   * 初始化post方法（参数的value为object版）
-   *
-   * @return
-   */
-  public OkHttpUtils jsonObjectPost() {
-    RequestBody requestBody;
-
-    String json = "";
-    if (objectParamMap != null) {
-      Object o = JSON.toJSON(objectParamMap);
-      json = JSON.toJSONString(objectParamMap);
-      System.out.println("paramJSON为：" + json);
-      json = StringEscapeUtils.unescapeJavaScript(json);
-      System.out.println("paramJSON为：" + json);
-    }
-    requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
-
+  /** 初始化post方法 */
+  public OkHttpUtils postForXml(String xmlStr) {
+    RequestBody requestBody = RequestBody.create(MediaType.parse("application/xml"), xmlStr);
     request = new Request.Builder().post(requestBody).url(url);
     return this;
   }
 
-  public OkHttpUtils put() {
+  /**
+   * post上传文件
+   *
+   * <p>原文链接：https://blog.csdn.net/qq_36699930/article/details/84335581
+   *
+   * @param fileList
+   */
+  public OkHttpUtils postFile(List<File> fileList) {
+    MultipartBody.Builder builder = new MultipartBody.Builder();
+    builder.setType(MultipartBody.FORM);
+
+    // 参数
+    if (paramMap != null) {
+      for (String s : paramMap.keySet()) {
+        builder.addFormDataPart(s, String.valueOf(paramMap.get(s)));
+      }
+    }
+    if (fileList != null) {
+      for (File file : fileList) {
+        builder.addFormDataPart(
+            "file",
+            file.getName(),
+            RequestBody.create(MediaType.parse("application/octet-stream"), file));
+      }
+    }
+
+    MultipartBody multipartBody = builder.build();
+    request = new Request.Builder().url(url).post(multipartBody);
+    return this;
+  }
+
+  public OkHttpUtils put(boolean isJsonPost) {
+    RequestBody requestBody;
+    if (isJsonPost) {
+      String json = "";
+      if (paramMap != null) {
+        json = JSON.toJSONString(paramMap);
+        System.out.println(json);
+      }
+      requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
+    } else {
+      FormBody.Builder formBody = new FormBody.Builder();
+      if (paramMap != null) {
+        for (String key : paramMap.keySet()) {
+          formBody.add(key, String.valueOf(paramMap.get(key)));
+        }
+      }
+      requestBody = formBody.build();
+    }
+    request = new Request.Builder().put(requestBody).url(url);
+    return this;
+  }
+
+  /**
+   * put 纯文本上传
+   *
+   * @param text
+   * @return
+   */
+  public OkHttpUtils putText(String text) {
+    RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), text);
+    request = new Request.Builder().put(requestBody).url(url);
+    return this;
+  }
+
+  public OkHttpUtils del() {
     String json = "";
     if (paramMap != null) {
       json = JSON.toJSONString(paramMap);
     }
     RequestBody requestBody =
         RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
-
-    request = new Request.Builder().put(requestBody).url(url);
+    request = new Request.Builder().delete(requestBody).url(url);
     return this;
   }
 
-  /**
-   * 初始化post方法
-   *
-   * @param isJsonPost true等于json的方式提交数据，类似postman里post方法的raw false等于普通的表单提交，如果在问号后面拼接需要传false
-   * @return
-   */
-  public OkHttpUtils del(boolean isJsonPost) {
-    RequestBody requestBody;
-    if (isJsonPost) {
-      String json = "";
-      if (paramMap != null) {
-        json = JSON.toJSONString(paramMap);
-        System.out.println("paramJSON为：" + json);
-      }
-      requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
-    } else {
-      request = new Request.Builder().delete();
-      StringBuilder urlBuilder = new StringBuilder(url);
-      if (paramMap != null) {
-        urlBuilder.append("?");
-        try {
-          for (Map.Entry<String, String> entry : paramMap.entrySet()) {
-            urlBuilder
-                .append(URLEncoder.encode(entry.getKey(), "utf-8"))
-                .append("=")
-                .append(URLEncoder.encode(entry.getValue(), "utf-8"))
-                .append("&");
-          }
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
-        urlBuilder.deleteCharAt(urlBuilder.length() - 1);
-      }
-      request.url(urlBuilder.toString());
-      return this;
-    }
-    request = new Request.Builder().post(requestBody).url(url);
-    return this;
-  }
-
-  /**
-   * 同步请求
-   *
-   * @return
-   */
+  /** 同步请求 */
   public String sync() {
     setHeader(request);
     try {
@@ -325,11 +328,7 @@ public class OkHttpUtils {
     return buffer.toString();
   }
 
-  /**
-   * 异步请求，带有接口回调
-   *
-   * @param callBack
-   */
+  /** 异步请求，带有接口回调 */
   public void async(ICallBack callBack) {
     setHeader(request);
     okHttpClient
@@ -349,11 +348,7 @@ public class OkHttpUtils {
             });
   }
 
-  /**
-   * 为request添加请求头
-   *
-   * @param request
-   */
+  /** 为request添加请求头 */
   private void setHeader(Request.Builder request) {
     if (headerMap != null) {
       try {
@@ -366,11 +361,7 @@ public class OkHttpUtils {
     }
   }
 
-  /**
-   * 生成安全套接字工厂，用于https请求的证书跳过
-   *
-   * @return
-   */
+  /** 生成安全套接字工厂，用于https请求的证书跳过 */
   private static SSLSocketFactory createSSLSocketFactory(TrustManager[] trustAllCerts) {
     SSLSocketFactory ssfFactory = null;
     try {
