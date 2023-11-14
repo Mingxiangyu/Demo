@@ -3,6 +3,9 @@ package com.iglens.csv;
 import cn.hutool.core.collection.CollectionUtil;
 import com.google.common.collect.Lists;
 import com.iglens.数据库.MySql.JDBC连接获取Mysql信息;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.sql.Connection;
@@ -14,21 +17,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 
 /** @author xming */
 @Slf4j
 public class CSV导入到MySQL {
-<<<<<<< HEAD
-    private static Connection conn;
-    public static String SQL_INSTALL_IDNO_THIRD = null;
-    public static String ip = "211.157.132.19";
-    public static String port = "17062";
-    public static String username = "root";
-    public static String password = "guoyao@123";
-    public static String database = "bigdata_zhongbao";
-=======
   private static Connection conn;
   public static String SQL_INSTALL_IDNO_THIRD = null;
   public static String ip = "211.157.132.19";
@@ -36,7 +28,6 @@ public class CSV导入到MySQL {
   public static String username = "root";
   public static String password = "guoyao@123";
   public static String database = "bigdata_zhongbao";
->>>>>>> c8d6216e0adc479af5196112b2137a5e46ab0fb2
 
     public static void main(String[] args) {
         List<List<String>> csvList =

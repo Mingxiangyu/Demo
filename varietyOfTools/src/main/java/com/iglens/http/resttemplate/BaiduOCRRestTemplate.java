@@ -1,16 +1,10 @@
-package com.iglens;
+package com.iglens.http.resttemplate;
 
 import com.alibaba.fastjson.JSONObject;
-import java.io.File;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -24,6 +18,12 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
+
 /** 百度OCR接口请求 */
 @Component
 @Slf4j
@@ -31,7 +31,7 @@ public class BaiduOCRRestTemplate {
 
   @Autowired RestTemplate restTemplate;
 
-  @Value("${baiduapi.ocr.url}")
+  // @Value("${baiduapi.ocr.url}")
   private String baiduOcrUrl;
 
   /** 扫描PDF */
