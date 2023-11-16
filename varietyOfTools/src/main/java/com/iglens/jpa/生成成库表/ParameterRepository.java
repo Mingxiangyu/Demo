@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
  *
  */
 @Repository
-public interface ParameterRepository extends BaseJpaRepository<Parameter> {
+public interface ParameterRepository extends BaseJpaRepository<JsonsRootBean> {
 
 }
