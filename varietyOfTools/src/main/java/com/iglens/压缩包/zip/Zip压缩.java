@@ -10,7 +10,7 @@ import java.util.zip.ZipOutputStream;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class zip压缩 {
+public class Zip压缩 {
 
   private static final byte[] buf = new byte[1024];
 
