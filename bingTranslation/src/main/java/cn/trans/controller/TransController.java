@@ -31,7 +31,7 @@ public class TransController {
 
     @ApiOperation("文本翻译")
     @GetMapping("/translation")
-    public R<String> translation(@RequestBody TransParam param) {
+    public R<String> translation(TransParam param) {
         if (log.isDebugEnabled()) {
             log.debug("参数 --> param:{}", param);
         }

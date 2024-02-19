@@ -4,29 +4,29 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import io.minio.MinioClient;
 import io.minio.PutObjectOptions;
+import lombok.Data;
+import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
-import lombok.Data;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @Component
 public class MinIOService {
-  @Value("${minio.address}")
+  // @Value("${minio.address}")
   private String address;
 
-  @Value("${minio.accessKey}")
+  // @Value("${minio.accessKey}")
   private String accessKey;
 
-  @Value("${minio.secretKey}")
+  // @Value("${minio.secretKey}")
   private String secretKey;
 
-  @Value("${minio.bucketName}")
+  // @Value("${minio.bucketName}")
   private String bucketName;
 
   public MinioClient getMinioClient() {
