@@ -8,9 +8,12 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import lombok.extern.slf4j.Slf4j;
 
-/** @link 原文链接：https://blog.csdn.net/weixin_32475629/article/details/114063366 */
+/**
+ * @link 原文链接：https://blog.csdn.net/weixin_32475629/article/details/114063366
+ */
 @Slf4j
-public class java中的图片按比例缩放功能 {
+public class 按比例或文件大小缩放图片功能 {
+
   public static void main(String[] args) {
     String srcPath = "D:\\图片\\微信图片_20220427124546.jpg";
     String destPath = "D:\\图片\\sch.jpg";
@@ -21,6 +24,7 @@ public class java中的图片按比例缩放功能 {
       e.printStackTrace();
     }
   }
+
   /**
    * 按固定长宽进行缩放
    *
@@ -28,7 +32,6 @@ public class java中的图片按比例缩放功能 {
    * @param dest dest为缩放后保存文件
    * @param w 缩放的目标宽度
    * @param h 缩放的目标高度
-   * @throws Exception
    */
   public static void zoomImage(String src, String dest, int w, int h) throws Exception {
     double wr = 0, hr = 0;
@@ -63,7 +66,6 @@ public class java中的图片按比例缩放功能 {
    * @param src src为源文件
    * @param dest dest为缩放后保存文件
    * @param size 文件大小
-   * @throws Exception
    */
   public static void zoomImage(String src, String dest, Integer size) throws Exception {
     File srcFile = new File(src);

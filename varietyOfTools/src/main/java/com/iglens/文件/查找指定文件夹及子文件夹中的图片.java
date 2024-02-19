@@ -1,8 +1,12 @@
-package com.iglens.图片;
+package com.iglens.文件;
 
 import java.io.File;
-/** 项目:Java编程实现查找指定文件夹及子文件夹中的图片 时间:2019/8/21 */
-public class Java编程实现查找指定文件夹及子文件夹中的图片 {
+
+/**
+ * 项目:Java编程实现查找指定文件夹及子文件夹中的图片 时间:2019/8/21
+ */
+public class 查找指定文件夹及子文件夹中的图片 {
+
   public static void picture(File dir) {
     if (dir.isFile()) {
       throw new IllegalArgumentException("不是文件夹");
