@@ -1,7 +1,5 @@
 package com.iglens.nc.ncUtils;
 
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +29,7 @@ public interface NcUtils {
      * @throws IOException           变量读取数据{@code variable.read()}时抛出的异常
      * @throws InvalidRangeException 切片过程中，重新生成 Range 对象时抛出的范围异常，已做保护措施，应该不会抛出该异常
      */
-    NcData getDataOfSlice(Variable variable, @Nullable Integer positionOf0) throws IOException, InvalidRangeException;
+    NcData getDataOfSlice(Variable variable,  Integer positionOf0) throws IOException, InvalidRangeException;
 
     /**
      * 读取变量中的全部数据，对于 3 维及以上的数据，是切片的数据
@@ -44,7 +42,7 @@ public interface NcUtils {
      * @throws IOException           变量读取数据{@code variable.read()}时抛出的异常
      * @throws InvalidRangeException 切片过程中，重新生成 Range 对象时抛出的范围异常，已做保护措施，应该不会抛出该异常
      */
-    NcData getDataOfSlice(Variable variable, @Nullable Integer positionOf0, @Nullable Integer positionOf1) throws IOException, InvalidRangeException;
+    NcData getDataOfSlice(Variable variable,  Integer positionOf0,  Integer positionOf1) throws IOException, InvalidRangeException;
 
     /**
      * 读取变量集合中的全部数据，对于 3 维及以上的数据，是切片的数据
@@ -65,7 +63,7 @@ public interface NcUtils {
      * @throws IOException           变量读取数据 {@code variable.read()} 时抛出的异常
      * @throws InvalidRangeException 切片过程中，重新生成 Range 对象时抛出的范围异常，已做保护措施，应该不会抛出该异常
      */
-    Map<String, NcData> getAllDataOfSlice(List<Variable> variables, @Nullable Integer positionOf0) throws IOException, InvalidRangeException;
+    Map<String, NcData> getAllDataOfSlice(List<Variable> variables,  Integer positionOf0) throws IOException, InvalidRangeException;
 
     /**
      * 读取变量集合中的全部数据，对于 3 维及以上的数据，是切片的数据
@@ -77,7 +75,7 @@ public interface NcUtils {
      * @throws IOException           变量读取数据 {@code variable.read()} 时抛出的异常
      * @throws InvalidRangeException 切片过程中，重新生成 Range 对象时抛出的范围异常，已做保护措施，应该不会抛出该异常
      */
-    Map<String, NcData> getAllDataOfSlice(List<Variable> variables, @Nullable Integer positionOf0, @Nullable Integer positionOf1) throws IOException, InvalidRangeException;
+    Map<String, NcData> getAllDataOfSlice(List<Variable> variables,  Integer positionOf0,  Integer positionOf1) throws IOException, InvalidRangeException;
 
     /**
      * 设置维度条件，读取变量中的数据
@@ -89,7 +87,7 @@ public interface NcUtils {
      * @throws IOException           变量读取数据{@code variable.read()}时抛出的异常
      * @throws InvalidRangeException 切片过程中，重新生成 Range 对象时抛出的范围异常，已做保护措施，应该不会抛出该异常
      */
-    NcData getDataWithLimit(@NotNull Variable variable,@NotNull NcDimension... ncDimensions) throws IOException, InvalidRangeException;
+    NcData getDataWithLimit( Variable variable, NcDimension... ncDimensions) throws IOException, InvalidRangeException;
 
     /**
      * 设置维度条件，读取变量集合中的所有数据
@@ -101,6 +99,6 @@ public interface NcUtils {
      * @throws IOException           变量读取数据{@code variable.read()}时抛出的异常
      * @throws InvalidRangeException 切片过程中，重新生成 Range 对象时抛出的范围异常，已做保护措施，应该不会抛出该异常
      */
-    Map<String,NcData> getAllDataWithLimit(@NotNull List<Variable> variables,@NotNull NcDimension... ncDimensions) throws IOException, InvalidRangeException;
+    Map<String,NcData> getAllDataWithLimit( List<Variable> variables, NcDimension... ncDimensions) throws IOException, InvalidRangeException;
 
 }

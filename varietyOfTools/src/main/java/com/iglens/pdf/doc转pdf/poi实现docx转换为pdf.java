@@ -23,8 +23,8 @@ import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 public class poi实现docx转换为pdf {
 
   public static void main(String[] args) {
-    String filepath = "C:\\Users\\T480S\\Desktop\\1.docx";
-    String outpath = "C:\\Users\\T480S\\Desktop\\我是结果.pdf";
+    String filepath = "G:\\WeChat Files\\WeChat Files\\aion_my_god\\FileStorage\\File\\2024-01\\FyRlXVveIu_Report.docx";
+    String outpath = "C:\\Users\\12074\\Desktop\\test.txt我是结果.pdf";
     // 如果报org.apache.poi.POIXMLDocumentPart.getPackageRelationship()Lorg/apache/poi/openxml4j/opc/PackageRelationship;<br>
     // 证明是poi版本太高，3.15版poi可以正常使用
     try (InputStream source = new FileInputStream(filepath);

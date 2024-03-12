@@ -61,6 +61,24 @@ docker run -d  --hostname localhost  -p 10080:80  -p 10443:443  --name gitlab  -
 
 docker run -d  --hostname localhost  -p 10080:80  -p 10443:443  --name gitlab  --restart unless-stopped  -v "/home/gitlab/etc":/etc/gitlab  -v "/home/gitlab/log":/var/log/gitlab  -v "/home/gitlab/data":/var/data/gitlab  gitlab/gitlab-ce:latest
 
+##### docker部署mongo（linux）
+~~~
+docker run \
+-d \
+--name mongo \
+--restart=always \
+--privileged=true \
+-p 27017:27017 \
+-v /home//mongodb/data:/data/db \
+mongo:4.2 --auth
+
+–auth：需要密码才能访问容器服务。
+~~~
+参考链接：
+> https://cloud.tencent.com/developer/article/2347965
+> 
+> https://blog.csdn.net/liuyunshengsir/article/details/127924865
+
 ##### docker部署mongo（win）
 
 docker volume create --name mongodata #先创建挂载卷，如果指定本机目录（win和os会出现启动时报权限问题）
