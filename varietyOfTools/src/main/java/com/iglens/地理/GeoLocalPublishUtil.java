@@ -18,6 +18,7 @@
 // import org.springframework.stereotype.Component;
 //
 // /**
+// 直接使用geoserver的发布shp文件
 //  * https://www.cnblogs.com/raorao1994/p/13397476.html
 //  * https://www.cnblogs.com/s313139232/p/14183748.html
 //  * https://blog.csdn.net/Xcong_Zhu/article/details/130510285

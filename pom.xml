@@ -16,6 +16,7 @@
     <module>fileparse</module>
     <module>websocket</module>
     <module>demo-upload</module>
+    <module>bingTranslation</module>
   </modules>
 
   <build>

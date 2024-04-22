@@ -1,5 +1,6 @@
 package com.iglens.图片;
 
+import cn.hutool.core.io.FileUtil;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
@@ -15,7 +16,9 @@ public class 图片提取线稿 {
   public static final int CUT_MODE_RIGHT = -30000;
   public static void main(String[] args) {
     // 读取图片到BufferedImage
-    BufferedImage bf = readImage("E:\\WorkSpace\\gitWorkSpace\\color-card\\o.png");
+    String imageFile = "C:\\Users\\12074\\Desktop\\灯光话\\原创手绘亲子头像全家福一家四口头像_2_小珠_来自小红书网页版.png";
+    String parent = FileUtil.getParent(imageFile, 1);
+    BufferedImage bf = readImage(imageFile);
     // 将图片转换为二维数组
     int width = bf.getWidth();
     int height = bf.getHeight();
@@ -29,7 +32,7 @@ public class 图片提取线稿 {
     System.out.println("结束");
 
     // 输出图片到指定文件
-    writeImageFromArray("线稿.png", "png", newArray, 2400, 3000,CUT_MODE_MIDDLE, CUT_MODE_MIDDLE);
+    writeImageFromArray(parent+File.separator+"线稿.png", "png", newArray, 2400, 3000,CUT_MODE_MIDDLE, CUT_MODE_MIDDLE);
     // 这里写你要输出的绝对路径+文件名
     System.out.println("图片输出完毕!");
   }

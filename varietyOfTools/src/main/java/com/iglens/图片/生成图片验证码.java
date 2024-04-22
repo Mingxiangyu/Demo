@@ -41,9 +41,8 @@ public class 生成图片验证码 {
    */
   public static Verify generateVerify() {
     int number1 = new Random().nextInt(10) + 1;
-    ;
     int number2 = new Random().nextInt(10) + 1;
-    ;
+
     Verify entity = new Verify();
     entity.setCode(number1 + " x " + number2);
     entity.setValue(number1 + number2);
