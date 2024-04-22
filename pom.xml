@@ -15,6 +15,7 @@
     <module>varietyOfTools</module>
     <module>fileparse</module>
     <module>websocket</module>
+    <module>demo-upload</module>
   </modules>
 
   <build>

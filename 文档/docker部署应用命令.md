@@ -17,6 +17,42 @@ nginx
 > -v $PWD:/usr/local/tomcat/webapps： 将主机中当前⽬录挂载到容器的webapps
 > 原文链接：https://blog.csdn.net/qq_58804301/article/details/123699684
 
+~~~
+mkdir -p /home/dockerdata/nginx/{log,conf,html}
+docker run --name nginx -d nginx
+docker cp nginx:/etc/nginx/nginx.conf /home/dockerdata/nginx/conf/
+docker cp nginx:/etc/nginx/conf.d/default.conf /home/dockerdata/nginx/conf
+
+docker run --privileged --name nginx -it -p 8081:80 -v /home/dockerdata/nginx/conf/nginx.conf:/etc/nginx/nginx.conf:ro -v /home/dockerdata/nginx/conf/default.conf:/etc/nginx/conf.d/default.conf:ro -v /home/dockerdata/nginx/html:/usr/share/nginx/html:rw -v /home/dockerdata/nginx/log:/var/log/nginx -d nginx
+~~~
+>--privileged
+>
+> 使用该参数，[container]内的root拥有真正的root权限。
+> 否则，container内的root只是外部的一个普通用户权限。
+> privileged启动的容器，可以看到很多host上的设备，并且可以执行mount。
+> 甚至允许你在docker容器中启动docker容器。
+>
+>--name
+>
+> 设置nginx容器的名称
+>
+>-p 8193:8193
+>
+> 设置访问端口和nginx容器的监听端口的映射关系
+>
+> 第一个8193是你访问的端口
+>
+> 第二个8193是docker的nginx配置文件监听端口
+>
+>-d 后台挂载运行nginx
+>
+>-v /home/dockers/nginx/conf/nginx.conf:/etc/nginx/nginx.conf:ro
+>-v /home/dockers/nginx/conf/default.conf:/etc/nginx/conf.d/default.conf:ro
+>-v /home/dockers/nginx/html:/usr/share/nginx/html:rw
+>-v /home/dockers/nginx/log:/var/log/nginx
+> 
+> 原文链接： https://www.cnblogs.com/jouncy/p/16166122.html
+
 ##### docker部署git(win)
 
 docker run -d  --hostname localhost  -p 10080:80  -p 10443:443  --name gitlab  --restart unless-stopped  -v "E:\gitlab/etc":/etc/gitlab  -v "E:\gitlab/log":/var/log/gitlab  -v "E:\gitlab/data":/var/data/gitlab  gitlab/gitlab-ce:latest
@@ -24,6 +60,24 @@ docker run -d  --hostname localhost  -p 10080:80  -p 10443:443  --name gitlab  -
 ##### docker部署git(linux)
 
 docker run -d  --hostname localhost  -p 10080:80  -p 10443:443  --name gitlab  --restart unless-stopped  -v "/home/gitlab/etc":/etc/gitlab  -v "/home/gitlab/log":/var/log/gitlab  -v "/home/gitlab/data":/var/data/gitlab  gitlab/gitlab-ce:latest
+
+##### docker部署mongo（linux）
+~~~
+docker run \
+-d \
+--name mongo \
+--restart=always \
+--privileged=true \
+-p 27017:27017 \
+-v /home//mongodb/data:/data/db \
+mongo:4.2 --auth
+
+–auth：需要密码才能访问容器服务。
+~~~
+参考链接：
+> https://cloud.tencent.com/developer/article/2347965
+> 
+> https://blog.csdn.net/liuyunshengsir/article/details/127924865
 
 ##### docker部署mongo（win）
 
