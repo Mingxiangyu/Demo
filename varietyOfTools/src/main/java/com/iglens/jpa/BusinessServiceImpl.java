@@ -4,11 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
@@ -37,15 +33,15 @@ public class BusinessServiceImpl {
 
     Specification<BusinessEntity> spec =
         (Specification<BusinessEntity>)
-            (root, query, criteriaBuilder) -> {
+            (root, query, cb) -> {
               List<Predicate> predicates = new ArrayList<>();
               if (StringUtils.isNotBlank(name)) {
-                predicates.add(criteriaBuilder.like(root.get("layerName"), "%" + name + "%"));
+                predicates.add(cb.like(root.get("layerName"), "%" + name + "%"));
               }
               if (StringUtils.isNotBlank(url)) {
-                predicates.add(criteriaBuilder.like(root.get("layerUrl"), "%" + url + "%"));
+                predicates.add(cb.like(root.get("layerUrl"), "%" + url + "%"));
               }
-              return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+              return cb.and(predicates.toArray(new Predicate[0]));
             };
     return repository.findAll(spec, pageable);
   }
@@ -172,36 +168,36 @@ public class BusinessServiceImpl {
   public List<String> 时间查询范围(BusinessEntity dto, Pageable pageable) {
     // 字段查询，模糊匹配
     Specification<BusinessEntity> specification =
-        (root, query, criteriaBuilder) -> {
+        (root, query, cb) -> {
           List<Predicate> predicates = new ArrayList<>();
           // 文件名称
           // root.get("fileName") 是实体字段属性，不是数据库字段
           String fileName = dto.getFileName();
           if (StringUtils.isNotBlank(fileName)) {
-            predicates.add(criteriaBuilder.like(root.get("fileName"), "%" + fileName + "%"));
+            predicates.add(cb.like(root.get("fileName"), "%" + fileName + "%"));
           }
 
           String dataType = dto.getDataType();
           if (StringUtils.isNotBlank(dataType)) {
-            predicates.add(criteriaBuilder.equal(root.get("dataType"), dataType));
+            predicates.add(cb.equal(root.get("dataType"), dataType));
           }
 
           // 解析时间 大于等于
           Instant createStamp = dto.getCreateStamp();
           if (null != createStamp) {
             predicates.add(
-                criteriaBuilder.greaterThanOrEqualTo(
+                cb.greaterThanOrEqualTo(
                     root.get("fileAnalysisTime").as(Instant.class), createStamp));
           }
           // 解析时间 小于等于
           // Date endFileAnalysisTime = dto.get();
           // if(null != endFileAnalysisTime){
           //
-          // predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("fileAnalysisTime").as(Date.class), endFileAnalysisTime));
+          // predicates.add(cb.lessThanOrEqualTo(root.get("fileAnalysisTime").as(Date.class), endFileAnalysisTime));
           // }
 
           // 返回查询条件
-          return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
+          return cb.and(predicates.toArray(new Predicate[predicates.size()]));
         };
     Page<BusinessEntity> fileEntitys = repository.findAll(specification, pageable);
     return null;
@@ -217,73 +213,66 @@ public class BusinessServiceImpl {
   public List<String> 条件查询(BusinessEntity dto) {
     String dataType = dto.getDataType();
     Specification<BusinessEntity> specification =
-        new Specification<BusinessEntity>() {
-          @Override
-          @SneakyThrows
-          public Predicate toPredicate(
-              Root<BusinessEntity> root,
-              CriteriaQuery<?> criteriaQuery,
-              CriteriaBuilder criteriaBuilder) {
-            List<Predicate> predicateList = new ArrayList<>();
+        (root, criteriaQuery, cb) -> {
+          List<Predicate> predicateList = new ArrayList<>();
 
-            /** 相等=== @参数 X @参数类型 */
-            if (StrUtil.isNotEmpty(dataType)) {
-              predicateList.add(criteriaBuilder.equal(root.get("dataType"), dataType));
-            }
-
-            /** not in @参数 XXXX @参数类型 List */
-            // if (CollUtil.isNotEmpty(dataType)) {
-            //   Predicate validDnaPredicate = root.get("dna").in(dataType).not();
-            //   predicateList.add(validDnaPredicate);
-            // }
-
-            /** in @参数 XXXX @参数类型 List */
-            // if (CollUtil.isNotEmpty(XXXX)) {
-            //   Predicate invalidDna = root.get("dna").in(XXXX);
-            //   predicateList.add(invalidDna);
-            // }
-
-            /** 大于等于>= @参数 XX @参数类型 数值 */
-            // if (CollUtil.isNotEmpty(XX)) {
-            //   predicateList.add(criteriaBuilder.greaterThanOrEqualTo(root.get("level"), XX));
-            // }
-
-            /** 小于等于<= @参数 XX @参数类型 数值 */
-            // if (CollUtil.isNotEmpty(XX)) {
-            //   predicateList.add(criteriaBuilder.lessThanOrEqualTo(root.get("level"), XX));
-            // }
-
-            /** betweeen @参数 XX_1 ; XX_2 @参数类型 数值 */
-            // if (CollUtil.isNotEmpty(XXX_1) && CollUtil.isNotEmpty(XXX_2)) {
-            //   predicateList.add(criteriaBuilder.between(root.get("level"), XX_1, XX_2));
-            // }
-
-            /** 大于等于>= @参数 XXX @参数类型 Date */
-            // if (CollUtil.isNotEmpty(XXX)) {
-            //
-            // predicateList.add(criteriaBuilder.greaterThanOrEqualTo(root.get("level").as(Date.class), XX));
-            // }
-
-            /** 小于等于<= @参数 XXX @参数类型 Date */
-            // if (CollUtil.isNotEmpty(XXX)) {
-            //
-            // predicateList.add(criteriaBuilder.lessThanOrEqualTo(root.get("level").as(Date.class),
-            // XX));
-            // }
-
-            /** betweeen @参数 XXX_1 ; XXX_2 @参数类型 Date */
-            // if (CollUtil.isNotEmpty(XXX_1) && CollUtil.isNotEmpty(XXX_2)) {
-            //   predicateList.add(criteriaBuilder.between(root.get("level").as(Date.class), XX_1,
-            // XX_2));
-            // }
-
-            /** 判断不为空 @参数 XXX_1 ; XXX_2 @参数类型 Date */
-            // predicateList.add(criteriaBuilder.isNotNull(root.get("type")));
-
-            Predicate[] pre = new Predicate[predicateList.size()];
-            pre = predicateList.toArray(pre);
-            return criteriaQuery.where(pre).getRestriction();
+          /** 相等=== @参数 X @参数类型 */
+          if (StrUtil.isNotEmpty(dataType)) {
+            predicateList.add(cb.equal(root.get("dataType"), dataType));
           }
+
+          /** not in @参数 XXXX @参数类型 List */
+          // if (CollUtil.isNotEmpty(dataType)) {
+          //   Predicate validDnaPredicate = root.get("dna").in(dataType).not();
+          //   predicateList.add(validDnaPredicate);
+          // }
+
+          /** in @参数 XXXX @参数类型 List */
+          // if (CollUtil.isNotEmpty(XXXX)) {
+          //   Predicate invalidDna = root.get("dna").in(XXXX);
+          //   predicateList.add(invalidDna);
+          // }
+
+          /** 大于等于>= @参数 XX @参数类型 数值 */
+          // if (CollUtil.isNotEmpty(XX)) {
+          //   predicateList.add(cb.greaterThanOrEqualTo(root.get("level"), XX));
+          // }
+
+          /** 小于等于<= @参数 XX @参数类型 数值 */
+          // if (CollUtil.isNotEmpty(XX)) {
+          //   predicateList.add(cb.lessThanOrEqualTo(root.get("level"), XX));
+          // }
+
+          /** betweeen @参数 XX_1 ; XX_2 @参数类型 数值 */
+          // if (CollUtil.isNotEmpty(XXX_1) && CollUtil.isNotEmpty(XXX_2)) {
+          //   predicateList.add(cb.between(root.get("level"), XX_1, XX_2));
+          // }
+
+          /** 大于等于>= @参数 XXX @参数类型 Date */
+          // if (CollUtil.isNotEmpty(XXX)) {
+          //
+          // predicateList.add(cb.greaterThanOrEqualTo(root.get("level").as(Date.class), XX));
+          // }
+
+          /** 小于等于<= @参数 XXX @参数类型 Date */
+          // if (CollUtil.isNotEmpty(XXX)) {
+          //
+          // predicateList.add(cb.lessThanOrEqualTo(root.get("level").as(Date.class),
+          // XX));
+          // }
+
+          /** betweeen @参数 XXX_1 ; XXX_2 @参数类型 Date */
+          // if (CollUtil.isNotEmpty(XXX_1) && CollUtil.isNotEmpty(XXX_2)) {
+          //   predicateList.add(cb.between(root.get("level").as(Date.class), XX_1,
+          // XX_2));
+          // }
+
+          /** 判断不为空 @参数 XXX_1 ; XXX_2 @参数类型 Date */
+          // predicateList.add(cb.isNotNull(root.get("type")));
+
+          Predicate[] pre = new Predicate[predicateList.size()];
+          pre = predicateList.toArray(pre);
+          return criteriaQuery.where(pre).getRestriction();
         };
     List<BusinessEntity> all = repository.findAll(specification);
     return null;

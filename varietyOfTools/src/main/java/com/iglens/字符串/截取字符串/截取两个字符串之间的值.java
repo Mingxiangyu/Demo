@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class 截取两个字符串之间的值 {
+
   public static void main(String[] args) {
     String str = "abc<icon>def</icon>deftfh<icon>a</icon>";
 
@@ -13,6 +14,8 @@ public class 截取两个字符串之间的值 {
     Matcher m = p.matcher(str);
     while (m.find()) {
       System.out.println(m.group(1));
+      //   def
+      // a
     }
   }
 }
