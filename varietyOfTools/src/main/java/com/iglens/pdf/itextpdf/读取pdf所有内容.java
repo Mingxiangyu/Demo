@@ -8,7 +8,7 @@ import java.net.URL;
 public class 读取pdf所有内容 {
   public static void main(String[] args) throws IOException {
 
-    String spec = "file:/C:\\Users\\zhouhuilin\\Desktop\\pdf.pdf";
+    String spec = "file:C:\\Users\\zhouhuilin\\Desktop\\测试小吃配方\\杨师傅烤猪蹄秘制教程.pdf";
     URL url=new URL(spec);
     readPdf(url);//直接读全PDF面
   }
