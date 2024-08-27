@@ -818,6 +818,14 @@
     </dependency>
     <!-- 读取 .nc、hdf5 文件 end -->
 
+    <!-- llm的token计算 -->
+       <dependency>
+            <groupId>com.knuddels</groupId>
+            <artifactId>jtokkit</artifactId>
+            <version>0.6.1</version>
+        </dependency>
+    <!-- llm的token计算 -->
+
     <!-- 实现图片验证码 start -->
     <dependency>
       <groupId>com.github.penggle</groupId>
