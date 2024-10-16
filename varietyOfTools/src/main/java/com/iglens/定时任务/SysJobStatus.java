@@ -12,11 +12,11 @@ public enum SysJobStatus {
     this.index = index;
   }
 
-  public String desc() {
+  public String getDesc() {
     return this.desc;
   }
 
-  public Integer index() {
+  public Integer getIndex() {
     return this.index;
   }
 }

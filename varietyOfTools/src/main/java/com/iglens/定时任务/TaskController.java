@@ -24,7 +24,7 @@ public class TaskController {
     if (!success) {
       return "新增失败";
     } else {
-      if (sysJob.getJobStatus().equals(SysJobStatus.NORMAL.index())) {
+      if (sysJob.getJobStatus().equals(SysJobStatus.NORMAL.getIndex())) {
         SchedulingRunnable task =
             new SchedulingRunnable(
                 sysJob.getBeanName(), sysJob.getMethodName(), sysJob.getMethodParams());
@@ -42,7 +42,7 @@ public class TaskController {
     if (!success) {
       return "删除失败";
     } else {
-      if (existJob.getJobStatus().equals(SysJobStatus.NORMAL.index())) {
+      if (existJob.getJobStatus().equals(SysJobStatus.NORMAL.getIndex())) {
         SchedulingRunnable task =
             new SchedulingRunnable(
                 existJob.getBeanName(), existJob.getMethodName(), existJob.getMethodParams());
@@ -66,14 +66,14 @@ public class TaskController {
     if (!success) return "修改成功";
     else {
       // 1. 先删除原来的定时任务（Map缓存）
-      if (existJob.getJobStatus().equals(SysJobStatus.NORMAL.index())) {
+      if (existJob.getJobStatus().equals(SysJobStatus.NORMAL.getIndex())) {
         SchedulingRunnable task =
             new SchedulingRunnable(
                 existJob.getBeanName(), existJob.getMethodName(), existJob.getMethodParams());
         cronTaskRegistrar.removeCronTask(task);
       }
       // 2. 新增定时任务（放到Map缓存中）
-      if (sysJob.getJobStatus().equals(SysJobStatus.NORMAL.index())) {
+      if (sysJob.getJobStatus().equals(SysJobStatus.NORMAL.getIndex())) {
         SchedulingRunnable task =
             new SchedulingRunnable(
                 sysJob.getBeanName(), sysJob.getMethodName(), sysJob.getMethodParams());
@@ -88,7 +88,7 @@ public class TaskController {
   public String triggerTaskJob(@PathVariable Integer jobId) {
     SysJobPO existJob = sysJobMapper.findTaskJobByJobId(jobId);
     // 1.如果原先是启动状态 ，那么就停止吧（从Map缓存中删除， 并将表中状态置为0）
-    if (existJob.getJobStatus().equals(SysJobStatus.NORMAL.index())) {
+    if (existJob.getJobStatus().equals(SysJobStatus.NORMAL.getIndex())) {
       SchedulingRunnable task =
           new SchedulingRunnable(
               existJob.getBeanName(), existJob.getMethodName(), existJob.getMethodParams());

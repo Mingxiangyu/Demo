@@ -114,4 +114,23 @@ public class MultipartFile与File互相转换 {
       System.out.println("删除失败");
     }
   }
+
+  public File 转换为临时文件(MultipartFile multipartFile) {
+    //选择用缓冲区来实现这个转换即使用java创建的临时文件使用 免费讲解 登录
+    File file = null;
+    try {
+      String originalFilename = multipartFile.getOriginalFilename();
+      String[] filename = originalFilename.split("\\.");
+      file = File.createTempFile(filename[0], filename[1] + ".");
+      multipartFile.transferTo(file);
+
+      //文件处理
+
+      // 程序退出后删除临时文件
+      file.deleteOnExit();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return file;
+  }
 }

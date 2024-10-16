@@ -21,7 +21,7 @@ public class SysJobRunner
 //  @Override
   public void run(String... args) {
     // 初始加载数据库里状态为正常的定时任务
-    List<SysJobPO> jobList = sysJobMapper.getSysJobListByStatus(SysJobStatus.NORMAL.index());
+    List<SysJobPO> jobList = sysJobMapper.getSysJobListByStatus(SysJobStatus.NORMAL.getIndex());
     if (!CollectionUtils.isEmpty(jobList)) {
       for (SysJobPO job : jobList) {
         SchedulingRunnable task =
