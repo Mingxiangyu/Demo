@@ -31,6 +31,9 @@ public class ParsingKmlUtil {
   private List<KmlPolygon> kmlPolygonList = new ArrayList<>();
   private KmlProperty kmlProperty = new KmlProperty();
 
+  public static void main(String[] args) {
+
+  }
   /**
    * 保存kml数据到临时表
    *
