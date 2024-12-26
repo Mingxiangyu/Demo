@@ -837,7 +837,27 @@
       <artifactId>easy-captcha</artifactId>
       <version>1.6.2</version>
     </dependency>
-    <!-- 实现图片验证码 start -->
+    <!-- 实现图片验证码 end -->
+
+    <!-- 算法部署 start -->
+<dependency>
+	<groupId>com.github.docker-java</groupId>
+	<artifactId>docker-java</artifactId>
+	<version>3.2.8</version>
+</dependency>
+<dependency>
+	<groupId>com.github.docker-java</groupId>
+	<artifactId>docker-java-transport-httpclient5</artifactId>
+	<version>3.2.8</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+<dependency>
+	<groupId>com.google.guava</groupId>
+	<artifactId>guava</artifactId>
+	<version>30.1.1-jre</version>
+</dependency>
+    <!-- 算法部署 end -->
   </dependencies>
 
   <repositories>
