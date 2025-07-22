@@ -866,7 +866,13 @@
     <version>21.0.1</version>
 </dependency>
     <!-- java操作K8s end -->
-
+    <!-- 繁简转换 start -->
+<dependency>
+    <groupId>com.github.houbb</groupId>
+    <artifactId>opencc4j</artifactId>
+    <version>1.13.1</version>
+</dependency>
+    <!-- 繁简转换 end -->
   </dependencies>
 
   <repositories>

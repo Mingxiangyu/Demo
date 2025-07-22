@@ -1,8 +1,9 @@
-package com.iglens.http.okhttp;
+package com.daosmos.jqtt.common.utils;
 
 import com.alibaba.fastjson.JSON;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.net.URLEncoder;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
@@ -28,7 +29,6 @@ import okhttp3.Response;
 
 /**
  * @author xming
- * @link https://blog.csdn.net/weixin_45203607/article/details/124204137
  */
 public class OkHttpUtils {
 
@@ -107,10 +107,33 @@ public class OkHttpUtils {
     if (paramMap == null) {
       paramMap = new LinkedHashMap<>(16);
     }
-    paramMap.put(key, value);
+    if (value != null) {
+      paramMap.put(key, value);
+    }
     return this;
   }
-
+  /**
+   * 添加参数
+   *
+   * @param values 参数值
+   */
+  public OkHttpUtils addObject(Object values) {
+    if (paramMap == null) {
+      paramMap = new LinkedHashMap<>(16);
+    }
+    Map<String, Object> map = new LinkedHashMap<>();
+    Class<?> clazz = values.getClass();
+    for (Field field : clazz.getDeclaredFields()) {
+      field.setAccessible(true);
+      try {
+        map.put(field.getName(), field.get(values));
+      } catch (IllegalAccessException e) {
+        throw new RuntimeException("请填写正确的参数：" + field.getName());
+      }
+    }
+    paramMap.putAll(map);
+    return this;
+  }
   /**
    * 添加请求头
    *
@@ -203,6 +226,15 @@ public class OkHttpUtils {
     request = new Request.Builder().post(requestBody).url(url);
     return this;
   }
+
+  public OkHttpUtils postJson(String jsonString) {
+    RequestBody requestBody = RequestBody.create(
+        MediaType.parse("application/json; charset=utf-8"),
+        jsonString
+    );
+    request = new Request.Builder().post(requestBody).url(url);
+    return this;
+}
 
   /** 初始化post方法 */
   public OkHttpUtils postForXml(String xmlStr) {
@@ -299,7 +331,10 @@ public class OkHttpUtils {
       return "请求失败：" + e.getMessage();
     }
   }
-
+  public Response sync1() throws IOException {
+    setHeader(request);
+    return okHttpClient.newCall(request.build()).execute();
+  }
   /** 异步请求，有返回值 */
   public String async() {
     StringBuilder buffer = new StringBuilder("");

@@ -9,14 +9,16 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class 图片提取线稿 {
+
   public static final int CUT_MODE_MIDDLE = -20000;
   public static final int CUT_MODE_BUTTOM = -30000;
   public static final int CUT_MODE_LEFT = 0;
   public static final int CUT_MODE_CENTER = -20000;
   public static final int CUT_MODE_RIGHT = -30000;
+
   public static void main(String[] args) {
     // 读取图片到BufferedImage
-    String imageFile = "C:\\Users\\12074\\Desktop\\灯光话\\原创手绘亲子头像全家福一家四口头像_2_小珠_来自小红书网页版.png";
+    String imageFile = "E:\\WorkSpace\\richWorkSpace\\Quick-Sketch\\temp\\ec8c786d-84bf-42ee-9b0c-be2fa9df76bc_霸总式舔狗，你爱了吗？#李宗恒 #搞笑 #霸道总裁 #内容过于真实 #shorts.mp4";
     String parent = FileUtil.getParent(imageFile, 1);
     BufferedImage bf = readImage(imageFile);
     // 将图片转换为二维数组
@@ -32,7 +34,8 @@ public class 图片提取线稿 {
     System.out.println("结束");
 
     // 输出图片到指定文件
-    writeImageFromArray(parent+File.separator+"线稿.png", "png", newArray, 2400, 3000,CUT_MODE_MIDDLE, CUT_MODE_MIDDLE);
+    writeImageFromArray(parent + File.separator + "线稿.png", "png", newArray, 2400, 3000, CUT_MODE_MIDDLE,
+        CUT_MODE_MIDDLE);
     // 这里写你要输出的绝对路径+文件名
     System.out.println("图片输出完毕!");
   }
@@ -232,9 +235,10 @@ public class 图片提取线稿 {
    * @param hCutMode 目标高度剪切模式, 可以设置常量, 如果设置为正整数则视为从0开始的偏移量. 这个参数不会和wCutMode同时应用.
    * 方法会自动判断应用哪个.
    */
-   private static void writeImageFromArray( String imageFile, String type, int[][] rgbArray, int targetWidth, int targetHeight,int wCutMode,
-      int hCutMode){
-     BufferedImage sourceImage = convertArrayToImage(rgbArray); // 装载图像
+  private static void writeImageFromArray(String imageFile, String type, int[][] rgbArray, int targetWidth,
+      int targetHeight, int wCutMode,
+      int hCutMode) {
+    BufferedImage sourceImage = convertArrayToImage(rgbArray); // 装载图像
 
     int height = sourceImage.getHeight();
     int width = sourceImage.getWidth();
@@ -282,12 +286,12 @@ public class 图片提取线稿 {
     BufferedImage croppedImage = resizedImage.getSubimage(x, y, targetWidth, targetHeight);
 
     // 保存图像
-     try {
-       ImageIO.write(croppedImage, type, new File(imageFile));
-     } catch (IOException e) {
-       throw new RuntimeException(e);
-     }
-   }
+    try {
+      ImageIO.write(croppedImage, type, new File(imageFile));
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
 
 
   public static BufferedImage convertArrayToImage(int[][] rgbArray) {
